@@ -119,12 +119,29 @@ The two pre-rewrite commits (`605869bee5e65a27062e4e46fd8d36b28b7c98ba` and `7a5
 
 If that stops being true, the Support route stays open and the ticket is small: 0 affected pull requests and the 2 commit IDs above.
 
+### Custom domain: bought, not yet connected
+Registered **joefazio.dev** through Cloudflare Registrar: about $12/yr plus ICANN's $0.18, at cost with no markup, free WHOIS redaction, and auto-renew left on. Registered 2026-09-16, expires 2027-09-16.
+
+Choices made along the way:
+
+- **`.dev` over the alternatives.** `joefazio.com` was already taken, as were `josephfazio.com` and `fazio.dev`. `.dev` reads as technical without claiming a specialty, which suits casting a wide net. It is also on the browsers' HSTS preload list, so every `.dev` domain is refused over plain HTTP and forced to HTTPS automatically.
+- **Registering at Cloudflare rather than elsewhere.** Buying from the same company that hosts the site means the domain arrives already on Cloudflare's nameservers with the zone created. Buying at Namecheap or GoDaddy would have added a manual nameserver change and a propagation wait.
+- **Apex canonical, `www` redirects to it.** `joefazio.dev` is the real address and `www.joefazio.dev` will 301 to it. Serving both directly would split the search ranking between two identical sites, and an apex is shorter to say out loud or print on a resume.
+- **`pages.dev` left working.** It stays useful as a fallback for telling apart "the domain is misconfigured" from "the site is broken." Setting `site` in `astro.config.mjs` will point canonical links at the real domain anyway.
+- **Single Redirect over Bulk Redirects** for the `www` rule. Cloudflare's own Pages guide suggests Bulk Redirects, but those are account-level and built for long lists across many domains; this is one rule on one zone. Both are free on the Free plan (10 single rules, 15 bulk rules), so this is a simplicity choice, not a cost one.
+
+Verified from outside the dashboard rather than trusting it: RDAP reports the domain `active` and delegated to `darwin.ns.cloudflare.com` and `reza.ns.cloudflare.com`, and Google's resolver at `8.8.8.8` returns those same nameservers. The apex has no address record yet, which is correct — Pages has not created one.
+
 ### What broke
-- Nothing. The upgrade needed no code or config changes and produced no build errors.
+- The Astro upgrade broke nothing. No code changes, no config changes, no build errors.
+- The custom domain stalled on navigation, not on anything technical. The **Custom domains** tab lives *inside* the Pages project (Workers & Pages → joefazio-portfolio → Custom domains), not under the top-level **Domains** section in the sidebar, which is where the newly bought domain also appears. Two different places, similar names.
 
 ### What is next
-1. Run `npm run dev` once to confirm the Astro 7 dev server starts and the page loads. The build and the dev server are different code paths, and only the build has been tested.
-2. Still pending from the last session: open the GitHub Actions and Cloudflare Pages build logs and confirm both used Node 24. The logs need a login.
-3. Custom domain through Cloudflare DNS (finishes the first milestone).
-4. Decide whether GitHub Actions should become a real deploy gate.
-5. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`.
+1. Attach the domain to Pages: **Workers & Pages → joefazio-portfolio → Custom domains → Set up a domain**, enter `joefazio.dev` with no `www` and no `https://`. Cloudflare creates the record itself, using CNAME flattening because the DNS standard forbids a plain CNAME at a bare domain. Add only the apex — adding `www` here would serve the site at both addresses instead of redirecting.
+2. Wait for the custom domain to show **Active** and the TLS certificate to issue, usually a few minutes. Then verify from outside: the apex resolves, the certificate matches the domain, and the site returns 200 with the Astro 7 markup.
+3. Set up the `www` redirect: a **proxied** A record for `www` pointing at `192.0.2.1` (a reserved address that deliberately routes nowhere, giving Cloudflare something proxied to attach a rule to), plus a Single Redirect rule under **Rules → Overview** sending `www.joefazio.dev` to `https://joefazio.dev` with a 301, preserving path and query string.
+4. Update `site` in `astro.config.mjs` to `https://joefazio.dev`, then push it together with the glossary commit currently held locally.
+5. Run `npm run dev` once to confirm the Astro 7 dev server starts and the page loads. The build and the dev server are different code paths, and only the build has been tested.
+6. Still pending from the last session: open the GitHub Actions and Cloudflare Pages build logs and confirm both used Node 24. The logs need a login.
+7. Decide whether GitHub Actions should become a real deploy gate.
+8. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`.
