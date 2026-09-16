@@ -67,6 +67,68 @@ A network of servers around the world that keeps copies of a site so visitors lo
 ### WAF (Web Application Firewall)
 A filter in front of a website that blocks malicious requests before they reach it.
 
+## Domains, DNS, and certificates
+
+### TLD (top-level domain)
+The last part of a domain name, like `.com` or `.dev`; each one is run by a registry.
+
+### Registry
+The organization that operates a TLD and keeps the master list of every domain under it.
+
+### Registrar
+The company you buy a domain from, which registers it with the registry on your behalf; Cloudflare is this project's registrar.
+
+### ICANN
+The nonprofit that coordinates domain names worldwide; it adds a small per-domain fee, about $0.18/yr.
+
+### At-cost pricing
+Charging only what the registry and ICANN charge, with no markup; it also means the renewal price matches the first-year price instead of jumping.
+
+### WHOIS / RDAP
+Public lookups showing whether a domain is registered and by whom; RDAP is the newer structured replacement for WHOIS and gives the authoritative answer on availability.
+
+### WHOIS redaction (privacy)
+Keeping your personal contact details out of those public records; Cloudflare does this for free.
+
+### Zone
+A domain's complete set of DNS records, managed together as one unit.
+
+### Nameserver
+The server that answers DNS questions for a domain; whoever controls it controls where the domain points.
+
+### DNS record
+A single entry in a zone saying what a name points to and what kind of pointer it is.
+
+### A record
+A record pointing a name straight at an IP address.
+
+### CNAME record
+A record pointing a name at another name rather than an address, so it follows wherever that name leads.
+
+### Apex (root) domain
+The bare domain with nothing in front, like `joefazio.dev`; the DNS standard does not allow an ordinary CNAME here.
+
+### CNAME flattening
+Cloudflare's workaround for that rule: it resolves the target to an address before answering, so the apex can behave like a CNAME.
+
+### Subdomain
+A name placed in front of the domain, like `www.joefazio.dev`, which can point somewhere different from the apex.
+
+### HTTPS
+HTTP with the traffic encrypted, so nobody in between can read or tamper with it.
+
+### TLS/SSL certificate
+The file proving a site really controls its domain, which is what lets browsers show HTTPS; Cloudflare issues and renews it automatically.
+
+### HSTS preload
+A list built into browsers naming domains that may only ever load over HTTPS; every `.dev` domain is on it automatically.
+
+### TTL (time to live)
+How long other servers are allowed to cache a DNS answer before asking again.
+
+### DNS propagation
+The wait while cached copies of an old DNS answer expire around the internet and the new one takes over.
+
 ## Git and GitHub
 
 ### Git
