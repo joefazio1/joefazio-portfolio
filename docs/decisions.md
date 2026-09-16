@@ -60,7 +60,9 @@ Cloudflare Pages build settings. These live in the Cloudflare dashboard, not in 
 - Added private notes, local secret files (`.env*`, `.dev.vars*`, `.wrangler/`), Terraform state and variable files, and `Thumbs.db` to `.gitignore`.
 - Corrected the session 1 entry: the Actions workflow is not a deploy gate, the Cloudflare build settings are now recorded, and the custom domain is part of the milestone. Expanded the glossary.
 - Set the PowerShell execution policy for my Windows user to `RemoteSigned` so `npm` runs in a normal PowerShell window. Confirmed the build works in a fresh window.
-- Not yet committed at the end of this session. The changes are saved on disk, not in a Git snapshot.
+- Committed and pushed the review fixes as `4423110`. GitHub Actions and Cloudflare Pages both passed, and the site still loads.
+- Deleted the old GitHub Actions run that linked to the pre-rewrite commit.
+- Set up a backup for `CLAUDE.md`: a copy in OneDrive, refreshed as the last step of every wrap-up.
 
 ### Why
 - The repo is public, and `CLAUDE.md` is working notes that aren't meant to be read raw.
@@ -70,6 +72,8 @@ Cloudflare Pages build settings. These live in the Cloudflare dashboard, not in 
 - Secret and Terraform state files are ignored before they exist, so they can't be committed by accident later.
 - `RemoteSigned` instead of typing `npm.cmd` every time: it's the common developer setting, it applies only to my Windows user, and scripts downloaded from the internet still need a signature.
 - The history rewrite ran in a separate copy of the repo, after making a full backup, so the uncommitted work in my project folder was never at risk. `--force-with-lease` meant the push would refuse if GitHub had changed unexpectedly.
+- Commit first, push second, as separate steps: committing is a zero-risk snapshot on my PC, while pushing triggers a deploy, so I did it when I could watch the builds.
+- The `CLAUDE.md` backup is a plain copy refreshed at wrap-up rather than a symbolic link. I rarely edit that file by hand, and a plain copy has nothing that can break.
 
 ### What broke
 - Running `npm ci` while the Astro dev server was running failed partway. Windows won't delete a file a running program has open, so `node_modules/` was left half-deleted. I fixed it by stopping the dev server and running `npm ci` again. Lesson: stop the dev server before reinstalling packages on Windows.
@@ -79,11 +83,10 @@ Cloudflare Pages build settings. These live in the Cloudflare dashboard, not in 
 - `npm audit` reports 3 known vulnerabilities (critical in Astro, high in sharp, low in esbuild). The fix requires a major upgrade from Astro 5 to 7. The esbuild issue lets someone read files through the dev server on Windows, which matters when the dev server is reachable from the network (`--host 0.0.0.0`).
 
 ### What is next
-1. Commit and push the review fixes, then confirm the GitHub Actions and Cloudflare build logs both show Node 24.
-2. Decide whether to fully purge the old commits from GitHub: ask GitHub Support to remove them, or delete and recreate the repo and reconnect Cloudflare Pages. At minimum, delete the old Actions run that links to the pre-rewrite commit (it still existed at the end of this session).
-3. Upgrade Astro from 5 to 7 as its own step. Until then, run the dev server without `--host 0.0.0.0`.
-4. Custom domain through Cloudflare DNS (finishes the first milestone).
-5. Decide whether GitHub Actions should become a real deploy gate.
-6. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`.
-
-Ongoing: keep a backup of `CLAUDE.md` off this PC, since GitHub no longer has a copy.
+1. Commit and push this wrap-up's doc updates (`decisions.md`, `glossary.md`).
+2. Open the build logs for `4423110` in GitHub Actions and Cloudflare Pages and confirm both used Node 24. The builds passed, but the version is only visible in the logs, which need a login.
+3. Decide whether to fully purge the old commits from GitHub: ask GitHub Support to remove them, or delete and recreate the repo and reconnect Cloudflare Pages.
+4. Upgrade Astro from 5 to 7 as its own step. Until then, run the dev server without `--host 0.0.0.0`.
+5. Custom domain through Cloudflare DNS (finishes the first milestone).
+6. Decide whether GitHub Actions should become a real deploy gate.
+7. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`.

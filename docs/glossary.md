@@ -230,6 +230,9 @@ An error code meaning "no such file or directory": the program looked for a file
 ### npm.ps1 vs npm.cmd
 Two launchers for npm on Windows; PowerShell picks the `.ps1` script first (blocked by the execution policy), while `npm.cmd` is not a PowerShell script and is not blocked.
 
+### Symbolic link
+A shortcut-like file that points to another file's real location, so programs opening the link actually open the target.
+
 ### Dev server
 A local preview server (`npm run dev`) that rebuilds the site instantly as you edit; for development only, never for the public.
 
