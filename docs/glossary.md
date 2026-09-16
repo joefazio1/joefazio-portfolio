@@ -19,6 +19,18 @@ The step that turns source code into the finished files a browser can load; here
 ### dist/
 The folder where Astro puts the finished site after a build; this is what gets published.
 
+### Bundler
+The part of a build tool that combines and shrinks source code into the few files a browser actually downloads; Astro 7 uses Vite 8 with the Rolldown bundler.
+
+### Minification
+Removing characters a browser does not need — spaces, line breaks, comments — so files download faster.
+
+### Block-level vs inline elements
+Block elements (`<p>`, `<main>`, `<div>`) stack vertically, and whitespace between them is ignored; inline elements (`<span>`, `<em>`) sit inside a line of text, where a space between them is visible and meaningful.
+
+### compressHTML (Astro config)
+Astro's setting for stripping whitespace out of the built HTML. Astro 7 changed the default to `'jsx'`, which also removes whitespace between inline elements that earlier versions kept as a single space.
+
 ### `site` (Astro config)
 The setting in `astro.config.mjs` that tells Astro the site's real public address, so it can generate full links like sitemaps and canonical URLs.
 
@@ -154,6 +166,30 @@ The folder where npm puts downloaded packages; it is regenerated from the lockfi
 
 ### npm install vs npm ci
 `npm install` can update the lockfile; `npm ci` installs exactly what the lockfile says and fails if it doesn't match `package.json`, which makes automated builds repeatable.
+
+### Dependency
+A package the project needs in order to work, listed in `package.json`.
+
+### Transitive dependency
+A package you never asked for directly; it got installed because one of your dependencies needs it.
+
+### Semantic versioning (semver)
+The `major.minor.patch` numbering scheme: a patch fixes bugs, a minor adds features without breaking anything, and a major may break existing code.
+
+### Caret range (^)
+A version rule like `^7.3.2` meaning "any 7.x release from this one up," so npm accepts compatible updates but never jumps to 8 on its own.
+
+### Breaking change
+A change in a new major version that can stop working code from working, which is why major upgrades are done deliberately and one at a time.
+
+### Install script (postinstall)
+Code a package runs automatically right after npm downloads it, often to fetch the compiled binary for your operating system; useful, but it is also code that arrived without being reviewed.
+
+### allowScripts (package.json)
+The field recording which packages are allowed to run install scripts, so `npm ci` runs them in automated builds instead of warning every time.
+
+### engines (package.json)
+A package's statement of which Node and npm versions it supports; Astro 7 requires Node 22.12.0 or newer.
 
 ## CI/CD and GitHub Actions
 
