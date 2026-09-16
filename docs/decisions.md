@@ -90,3 +90,41 @@ Cloudflare Pages build settings. These live in the Cloudflare dashboard, not in 
 5. Custom domain through Cloudflare DNS (finishes the first milestone).
 6. Decide whether GitHub Actions should become a real deploy gate.
 7. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`.
+
+## 2026-09-16
+
+### What changed
+- Pushed the previous session's doc updates (`6f1081c`).
+- Upgraded Astro from 5.18.2 to 7.3.2 in a single step (`7153150`). Read the v6 and v7 upgrade guides first and checked every breaking change against this repo. None applied: no integrations, no content collections, no adapters, no environment variables, and no `src/fetch.ts`, which v7 now reserves for routing. Node 24 already meets v7's minimum of 22.12.0, so `.node-version` and the workflow needed no change.
+- `npm audit` went from 3 known vulnerabilities (critical in Astro, high in sharp, low in esbuild) to 0.
+- Approved esbuild's install script, which npm recorded as a new `allowScripts` field in `package.json` (`ed12d5f`).
+- Verified with a clean `npm ci`, the same command CI runs, followed by a build, an audit, and a check for unreviewed install scripts. All clean.
+- Confirmed the deploy from the outside: the live site returns 200 and serves the Astro 7 markup.
+- Added the packaging and build terms from this session to the glossary (`8645575`).
+
+### Why
+- Upgrading while the site is still one unstyled page: this is the smallest the upgrade will ever be, and the real content then gets built on the version I intend to stay on.
+- Straight from 5 to 7 rather than stopping at 6, because the upgrade guides are cumulative and I checked both against the actual files in this repo.
+- Plain `npm install astro@^7` rather than `npx @astrojs/upgrade`, because that helper mainly exists to keep integration packages in version lockstep, and this project has no integrations. The plain install changed exactly one dependency.
+- Approving the install script rather than leaving it blocked: npm now holds install scripts until they are reviewed, and recording the approval means `npm ci` runs it in Actions and Cloudflare Pages instead of warning on every build.
+- The only difference in the built HTML comes from v7's new `compressHTML: 'jsx'` default, which strips whitespace between block-level tags. Browsers ignore that whitespace, so the rendered page is identical. It would matter for two inline elements side by side, which this page does not have.
+
+### The old commits: accepted, not purged
+The two pre-rewrite commits (`605869bee5e65a27062e4e46fd8d36b28b7c98ba` and `7a5b215ad87fe945e628f5d8e8f530e4f1263852`) still return 200 on GitHub, and `CLAUDE.md` is still readable raw at both. I looked at the options and chose to accept this rather than spend the time removing it:
+
+- Removing it properly requires a GitHub Support ticket. Only Support can run garbage collection server-side and clear cached views. Deleting and recreating the repo would also remove the objects, but it is not a documented remedy and it costs the Cloudflare Pages reconnection.
+- What is exposed is working notes, not credentials. There is nothing to rotate and nothing an attacker can use.
+- Nothing is holding the old objects alive: 0 forks, `network_count` of 0, 0 pull requests in any state, and all 5 workflow runs point at current commits.
+- The repo is two days old with 0 stars and 0 watchers, so the chance anyone fetched those exact SHAs is very low.
+
+If that stops being true, the Support route stays open and the ticket is small: 0 affected pull requests and the 2 commit IDs above.
+
+### What broke
+- Nothing. The upgrade needed no code or config changes and produced no build errors.
+
+### What is next
+1. Run `npm run dev` once to confirm the Astro 7 dev server starts and the page loads. The build and the dev server are different code paths, and only the build has been tested.
+2. Still pending from the last session: open the GitHub Actions and Cloudflare Pages build logs and confirm both used Node 24. The logs need a login.
+3. Custom domain through Cloudflare DNS (finishes the first milestone).
+4. Decide whether GitHub Actions should become a real deploy gate.
+5. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`.
