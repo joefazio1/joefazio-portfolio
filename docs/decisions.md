@@ -145,3 +145,31 @@ Verified from outside the dashboard rather than trusting it: RDAP reports the do
 6. Still pending from the last session: open the GitHub Actions and Cloudflare Pages build logs and confirm both used Node 24. The logs need a login.
 7. Decide whether GitHub Actions should become a real deploy gate.
 8. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`.
+
+## 2026-09-17
+
+### What changed
+- Attached **joefazio.dev** to the Pages project under Workers & Pages → joefazio-portfolio → Custom domains, apex only. Cloudflare created a proxied, flattened CNAME from the apex to `joefazio-portfolio.pages.dev` and issued a certificate from Google Trust Services.
+- Verified from outside the dashboard while it still said "Initializing": `1.1.1.1` resolved the apex to Cloudflare addresses, the certificate named `joefazio.dev`, and the site returned 200 with the Astro 7 markup.
+- Added the `www` redirect: a proxied A record for `www` at `192.0.2.1`, plus Cloudflare's **"Redirect from WWW to root"** template as a Single Redirect rule (wildcard `https://www.*`, 301, keeps path and query string).
+- Turned on **Always Use HTTPS** (SSL/TLS → Edge Certificates).
+- Changed `site` in `astro.config.mjs` to `https://joefazio.dev` (`795c6a5`) and added four glossary terms (`9dc299b`). Pushed both; GitHub Actions passed and Cloudflare Pages deployed `9dc299b`.
+- Ran `npm run dev` for the first time on Astro 7: the dev server started (v7.3.2) and served the page with a 200.
+
+### Why
+- The redirect template over a hand-written rule: it does the same thing as the rule I planned, with less to type wrong. The dangerous mistake here is swapping source and target, which would send the apex to a `www` that has no site.
+- Always Use HTTPS over widening the redirect rule: the rule only matched `https://www.*`, so a plain `http://www` request fell through to the placeholder origin. One zone-wide switch fixes that for every hostname, instead of patching one rule.
+- `site` changed now, even though nothing uses it yet, so canonical links and a future sitemap point at the real domain from the start.
+
+### What broke
+- **`http://www` returned 522** ("Cloudflare could not reach the origin") before Always Use HTTPS was on. The request did not match the `https://` rule, so Cloudflare passed it through to `192.0.2.1`, which deliberately answers nothing. Browsers never hit this, because `.dev` is HSTS-preloaded and upgrades to HTTPS before sending anything, but `curl` and scripts did. Now `http://www` → `https://www` → `https://joefazio.dev`, two 301s ending in 200.
+- **Google's resolver and this PC still said "no record"** for the apex for a while after Cloudflare's own resolver had it. They had looked the name up before the record existed and were remembering that empty answer (negative caching). Tested around it by pointing `curl` straight at Cloudflare's address with `--resolve`.
+- Not broken, but noticed: a path that does not exist (e.g. `/x`) returns 200 with the homepage rather than a 404. Cloudflare Pages does this when a site has no `404` page.
+
+### What is next
+1. Open the build log for deployment `9dc299b` (Deployments → Details) and confirm Cloudflare Pages built with Node 24. Do the same in a GitHub Actions run log. Still unconfirmed.
+2. Confirm `https://joefazio.dev` loads in a normal browser once the cached "no record" answer expires.
+3. Open VS Code on the `portfolio` folder rather than `portfolio\node_modules`. The terminal has been starting inside `node_modules`; npm still finds the project by walking up, but other tools may not.
+4. Decide whether GitHub Actions should become a real deploy gate.
+5. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`, plus a `404` page.
+6. Later: update the LinkedIn and resume links to `joefazio.dev`.
