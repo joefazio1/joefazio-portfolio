@@ -129,6 +129,18 @@ How long other servers are allowed to cache a DNS answer before asking again.
 ### DNS propagation
 The wait while cached copies of an old DNS answer expire around the internet and the new one takes over.
 
+### Negative caching
+A resolver remembering "this name has no record" for a while, so a record you just added can stay invisible to it until that memory expires.
+
+### Proxied record (orange cloud)
+A Cloudflare DNS record whose traffic passes through Cloudflare first, which is what lets Cloudflare's rules, redirects, and caching act on it.
+
+### Documentation address (192.0.2.1)
+An IP address reserved for examples that never belongs to a real server; used as a placeholder when a record only needs to exist.
+
+### 301 redirect
+A "moved permanently" response telling the browser, and search engines, to use a different URL from now on.
+
 ## Git and GitHub
 
 ### Git
