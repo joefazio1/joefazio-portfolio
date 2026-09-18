@@ -1,0 +1,193 @@
+---
+// The shared shell for every page. Pages supply a title, an optional
+// description, and their content; everything else lives here once.
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Joe Fazio — IT and infrastructure work.' } = Astro.props;
+
+// Every page in the nav, in order. Adding a page means adding one line here.
+const nav = [{ href: '/', label: 'Home' }];
+
+// Used to mark the current page for screen readers and styling.
+const path = Astro.url.pathname;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header>
+      <a class="wordmark" href="/">joe fazio</a>
+      <nav aria-label="Main">
+        <ul>
+          {
+            nav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={path === item.href ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer>
+      <ul>
+        <li><a href="mailto:joefazio512@gmail.com">email</a></li>
+        <li><a href="https://github.com/joefazio1">github</a></li>
+        <li><a href="https://linkedin.com/in/joefazio878">linkedin</a></li>
+      </ul>
+    </footer>
+
+    <style is:global>
+      :root {
+        --bg: #fbfaf7;
+        --fg: #1a1a1a;
+        --dim: #6b6b6b;
+        --rule: #e0ddd4;
+        --accent: #b4462a;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #14140f;
+          --fg: #e8e6df;
+          --dim: #8f8c82;
+          --rule: #2e2d26;
+          --accent: #e8794f;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0 1.5rem;
+        background: var(--bg);
+        color: var(--fg);
+        font: 16px/1.65 ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      header,
+      main,
+      footer {
+        width: 100%;
+        max-width: 42rem;
+        margin: 0 auto;
+      }
+
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: baseline;
+        justify-content: space-between;
+        padding: 2.5rem 0 1.25rem;
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .wordmark {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+        color: var(--fg);
+      }
+
+      .wordmark::before {
+        content: '~/';
+        color: var(--accent);
+      }
+
+      nav ul,
+      footer ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.25rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav a {
+        color: var(--dim);
+        text-decoration: none;
+      }
+
+      nav a:hover,
+      nav a[aria-current='page'] {
+        color: var(--fg);
+      }
+
+      nav a[aria-current='page']::before {
+        content: '*';
+        color: var(--accent);
+      }
+
+      main {
+        flex: 1;
+        padding: 3rem 0;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        letter-spacing: -0.02em;
+        margin: 0 0 1.5rem;
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      footer {
+        padding: 1.25rem 0 2.5rem;
+        border-top: 1px solid var(--rule);
+        color: var(--dim);
+      }
+
+      footer a {
+        color: var(--dim);
+      }
+
+      footer a:hover {
+        color: var(--fg);
+      }
+
+      .skip {
+        position: absolute;
+        left: -9999px;
+      }
+
+      .skip:focus {
+        left: 1rem;
+        top: 1rem;
+        background: var(--bg);
+        padding: 0.5rem;
+      }
+    </style>
+  </body>
+</html>
