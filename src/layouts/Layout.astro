@@ -14,8 +14,7 @@ const nav = [
   { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
   { href: '/now', label: 'Now' },
-  { href: '/movies', label: 'Movies' },
-  { href: '/games', label: 'Games' },
+  { href: '/records', label: 'The Record Store' },
 ];
 
 // Used to mark the current page for screen readers and styling.
@@ -164,19 +163,34 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         padding: 0;
       }
 
+      /* Nav tabs are boxed pills in the site palette. */
+      nav ul {
+        gap: 0.5rem;
+      }
+
       nav a {
         color: var(--dim);
         text-decoration: none;
+        border: 1px solid var(--rule);
+        border-radius: 7px;
+        padding: 0.32rem 0.7rem;
+        font-size: 0.9rem;
+        transition:
+          color 0.15s ease,
+          border-color 0.15s ease,
+          background 0.15s ease;
       }
 
-      nav a:hover,
-      nav a[aria-current='page'] {
+      nav a:hover {
         color: var(--fg);
+        border-color: var(--accent-2);
       }
 
       nav a[aria-current='page'] {
-        border-bottom: 2px solid var(--accent);
-        padding-bottom: 2px;
+        color: var(--bg);
+        background: var(--accent-2);
+        border-color: var(--accent-2);
+        font-weight: 600;
       }
 
       main {

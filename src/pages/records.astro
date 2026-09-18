@@ -1,0 +1,247 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// A crate of records: the things I could talk about for hours. Each is a side
+// of me and links to its own page. `href: null` marks one that is not built
+// yet, shown as a sleeve with no record in it.
+const records = [
+  { name: 'Movies', sub: 'top 25', href: '/movies', hue: 'rust' },
+  { name: 'Games', sub: 'top 25', href: '/games', hue: 'green' },
+  { name: 'Albums', sub: 'coming soon', href: null, hue: 'plum' },
+];
+---
+
+<Layout
+  title="The Record Store | Joe Fazio"
+  description="A crate of Joe Fazio's favorites: top 25 movies, top 25 games, and more to come. Pick a record."
+>
+  <h1>The Record Store</h1>
+  <p class="hi">Hi, I'm Joe. Pick a record.</p>
+
+  <section class="crate" aria-label="Pick a record">
+    <ul>
+      {
+        records.map((r) =>
+          r.href ? (
+            <li>
+              <a class="record" href={r.href}>
+                <span class={`disc ${r.hue}`} aria-hidden="true">
+                  <span class="label"><span class="label-name">{r.name}</span></span>
+                  <span class="hole" />
+                </span>
+                <span class="caption">
+                  <span class="cap-name">{r.name}</span>
+                  <span class="cap-sub">{r.sub}</span>
+                </span>
+              </a>
+            </li>
+          ) : (
+            <li>
+              <div class="record soon">
+                <span class="disc empty" aria-hidden="true">
+                  <span class="label"><span class="label-name">Soon</span></span>
+                  <span class="hole" />
+                </span>
+                <span class="caption">
+                  <span class="cap-name">{r.name}</span>
+                  <span class="cap-sub">{r.sub}</span>
+                </span>
+              </div>
+            </li>
+          )
+        )
+      }
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .hi {
+    font-size: 1.08rem;
+    color: var(--fg);
+    margin: 0 0 2.75rem;
+  }
+
+  /* THE CRATE */
+  .crate ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.75rem 1.25rem;
+  }
+
+  .record {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--fg);
+  }
+
+  /* THE DISC: concentric grooves, a coloured centre label, a spindle hole. */
+  .disc {
+    position: relative;
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background:
+      repeating-radial-gradient(
+        circle at center,
+        #16171b 0,
+        #16171b 1px,
+        #202127 2px,
+        #202127 3px
+      ),
+      radial-gradient(circle at 32% 28%, #33353d, #101116 60%);
+    box-shadow:
+      0 8px 20px rgba(13, 27, 42, 0.28),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  /* A soft sheen sweeping across the vinyl. */
+  .disc::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0) 32%,
+      rgba(255, 255, 255, 0) 68%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+  }
+
+  .disc.empty {
+    background: none;
+    border: 1.5px dashed var(--rule);
+    box-shadow: none;
+  }
+  .disc.empty::before {
+    display: none;
+  }
+
+  .label {
+    position: relative;
+    z-index: 1;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+  }
+
+  .disc.empty .label {
+    background: none;
+    box-shadow: none;
+  }
+
+  .label-name {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #10131a;
+    padding: 0 4px;
+    line-height: 1.1;
+  }
+
+  .disc.empty .label-name {
+    color: var(--dim);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.62rem;
+  }
+
+  .hole {
+    position: absolute;
+    z-index: 2;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  }
+
+  .disc.empty .hole {
+    box-shadow: 0 0 0 1px var(--rule);
+  }
+
+  /* Centre-label colours, one per record. */
+  .disc.rust .label {
+    background: radial-gradient(circle at 35% 30%, #e39a72, #c05f37);
+  }
+  .disc.green .label {
+    background: radial-gradient(circle at 35% 30%, #8bc48f, #4f9a57);
+  }
+  .disc.plum .label {
+    background: radial-gradient(circle at 35% 30%, #c99ac6, #9a5f97);
+  }
+
+  .caption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.85rem;
+  }
+
+  .cap-name {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .cap-sub {
+    font-size: 0.78rem;
+    color: var(--dim);
+    margin-top: 0.1rem;
+  }
+
+  .record.soon .cap-name {
+    color: var(--dim);
+  }
+
+  /* Pull the record out of the crate and spin it. */
+  .record:hover .disc:not(.empty),
+  .record:focus-visible .disc:not(.empty) {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.34);
+    animation: spin 3.5s linear infinite;
+  }
+
+  .record:hover .cap-name,
+  .record:focus-visible .cap-name {
+    color: var(--accent-2);
+  }
+
+  .record:focus-visible {
+    outline: none;
+  }
+
+  @keyframes spin {
+    to {
+      transform: translateY(-6px) rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .record:hover .disc,
+    .record:focus-visible .disc {
+      animation: none;
+    }
+  }
+</style>
