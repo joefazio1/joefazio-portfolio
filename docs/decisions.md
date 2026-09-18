@@ -242,3 +242,25 @@ frontend problem. Spotify's API needs a client ID and secret exchanged for a
 token that expires, so the credentials cannot sit in the page — that is exactly
 what a Worker is for, with KV caching the day's pick so the site is not calling
 Spotify on every visit. Free tiers cover it.
+
+### About page trimmed, projects page added, music gets its own home
+
+Feedback on the first About draft: the "How I work" and "Skills, honestly"
+sections both read as strained, and the interests did not belong on that page at
+all. Cut all three. About is now the opening, the wide-net paragraph, and "What
+I'm building" — shorter, and it stops trying to sell.
+
+**Music and vinyl move to their own tab** rather than living as a paragraph on
+About. The idea worth keeping, unbuilt for now: the menu or a page that behaves
+like a crate of records — you flip through sleeves rather than read a list. That
+is a real interaction to design, not a styling tweak, so it waits until the
+content pages are done. It is also the first thing on this site that would need
+meaningful client-side JavaScript, which is a deliberate departure from Astro's
+ship-almost-no-JS default and should be a conscious choice when it happens.
+
+**Projects page** built from what was already on the resume: ACC Timebank, the
+BRHS cybersecurity risk assessment, the Capsim simulation, and this site. Each
+entry says plainly what it was, including that three of the four were coursework
+and that the fictional healthcare org in the BRHS report was invented for the
+assignment. Claiming coursework as client work is the easiest way to lose an
+interview; labelling it costs nothing.

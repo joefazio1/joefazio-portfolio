@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Projects — Joe Fazio"
+  description="Work Joe Fazio has built: a time-banking system, a security risk assessment, and this site."
+>
+  <h1>Projects</h1>
+
+  <p>
+    Four things, with honest notes on what each one actually was. Most were
+    coursework. Coursework still counts, as long as I say so.
+  </p>
+
+  <h2>ACC Timebank</h2>
+  <p class="meta">Spring 2026 · lead developer · Google Apps Script, Google Sheets, Python</p>
+
+  <p>
+    A time-banking system for the Alachua Community Collective, a mutual-aid
+    group in Florida. Time banking means members trade hours of work instead of
+    money — an hour of yard work earns an hour of someone else's help. Somebody
+    has to keep the ledger, and that was the job.
+  </p>
+
+  <p>
+    ACC asked for two tracks: a fast, cheap version that worked with what they
+    already had, and a fuller custom build. I led the first one and did most of
+    the requirements gathering across both.
+  </p>
+
+  <p>
+    I started in AppSheet and abandoned it — it couldn't express the transaction
+    logic ACC needed without fighting it. I rebuilt on Google Apps Script with a
+    Google Sheet as the database. That sounds like a downgrade until you know
+    that ACC's member intake already ran through a Google Form: same ecosystem,
+    no migration, and nobody had to learn a new tool to keep using the thing
+    they were already using.
+  </p>
+
+  <p>What I built into it:</p>
+
+  <ul>
+    <li>Transaction logic for crediting and debiting hours between members</li>
+    <li>Admin reporting</li>
+    <li>
+      A burnout-risk flag that surfaces members who are hoarding hours or giving
+      away far more than they take, so an admin knows to check in on them
+    </li>
+    <li>
+      A Python script to migrate the existing form responses into the new system
+    </li>
+  </ul>
+
+  <p>
+    <strong>Status:</strong> the capstone ended and ACC no longer runs it. The
+    deployment still exists but sits behind a Google login, so there's no public
+    demo to link, and there's no public repository. A fuller writeup with code
+    excerpts is the next thing I'm adding here.
+  </p>
+
+  <h2>BRHS Cybersecurity Risk Assessment</h2>
+  <p class="meta">Spring 2026 · co-author · NIST CSF 2.0, CIS Controls v8</p>
+
+  <p>
+    A consulting report for a fictional healthcare organization: find the
+    weaknesses, rank them, and recommend hardening that a real budget could
+    absorb. We worked against NIST's Cybersecurity Framework and CIS Controls
+    v8 rather than inventing our own categories, which is most of what made the
+    findings defensible.
+  </p>
+
+  <p>
+    This was coursework, not a live engagement, and the organization was
+    invented for the assignment. The part I'd stand behind is the method:
+    mapping findings to a published framework so a reader can check the work.
+  </p>
+
+  <h2>Capsim Business Simulation</h2>
+  <p class="meta">Spring 2026 · strategic management</p>
+
+  <p>
+    A multi-round business simulation where a team runs a company against
+    competitors. We ran a niche differentiation strategy aimed at the high-tech
+    segments, making pricing, R&amp;D, marketing, and production calls each
+    round and living with them the next one.
+  </p>
+
+  <p>
+    Worth including for one reason: it's the closest thing in my coursework to
+    making decisions with incomplete information and a cost attached to being
+    wrong.
+  </p>
+
+  <h2>This site</h2>
+  <p class="meta">2026 · ongoing · Astro, Cloudflare Pages, GitHub Actions</p>
+
+  <p>
+    The one you can actually inspect. Static site on Astro, hosted on Cloudflare
+    Pages, DNS and TLS managed by me, built by GitHub Actions on every push,
+    with a branch rule that stops anything reaching production unless the build
+    passes.
+  </p>
+
+  <p>
+    The repository is public and includes a decision log explaining every choice
+    in it, including the reversals. Terraform for the Cloudflare configuration
+    and a small Cloudflare Worker are the next pieces.
+  </p>
+
+  <p>
+    <a href="https://github.com/joefazio1/joefazio-portfolio">Source on GitHub</a>
+  </p>
+</Layout>
