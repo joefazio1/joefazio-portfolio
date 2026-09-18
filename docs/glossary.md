@@ -204,13 +204,46 @@ A built-in Git command that rewrites every commit on a branch, for example to re
 A single file containing a repo's full history, useful as a backup before risky Git operations.
 
 ### Branch protection
-A GitHub rule that blocks changes to a branch unless conditions are met, like a passing check.
+A GitHub rule that blocks changes to a branch unless conditions are met, like a passing check. Enforced on GitHub's servers, so it holds no matter which computer or Git client the push comes from.
 
 ### Check run
 A pass/fail result GitHub shows on a commit, reported by a tool like GitHub Actions or Cloudflare Pages.
 
 ### Line endings (LF / CRLF)
 The invisible characters marking the end of a line: Linux/macOS use LF, Windows uses CRLF; Git can convert between them.
+
+### Ruleset
+GitHub's current system for branch rules, at Settings → Rules → Rulesets. It replaces the older "branch protection rule" screen and adds a bypass list, an `Evaluate` dry-run mode, and targeting by pattern rather than one branch at a time.
+
+### Bypass list (ruleset)
+The people or roles allowed to ignore a ruleset's rules. Left empty, the rules apply to everyone, including the repository owner.
+
+### Evaluate mode (ruleset)
+A dry run: GitHub records what a ruleset *would* have blocked without actually blocking it, so a rule can be tested before it starts refusing pushes.
+
+### Required status check
+A named check that must report success before a pull request can be merged. It is matched by **job** name (here `build`), not by the workflow's `name:` field.
+
+### Required approvals
+How many people must approve a pull request before it can merge. GitHub never lets you approve your own, so on a solo repo this has to be `0` or nothing is ever mergeable.
+
+### GH013 / remote rejected
+The error Git prints when GitHub's server refuses a push for violating a repository rule. `[remote rejected]` means the refusal came from GitHub, not from anything local.
+
+### Merge commit
+The commit GitHub creates when a pull request is merged, joining the branch's history into the target branch; it is what `main` advances to.
+
+### git reset --hard
+Moves the current branch to a given commit and discards everything after it, including uncommitted file changes. Used here as `git reset --hard origin/main` to drop a commit that the server had refused.
+
+### Remote-tracking branch
+Your local record of where a branch sat on the remote the last time you checked, shown as `origin/<name>`. It does not update by itself.
+
+### Deleting a branch: local vs remote
+`git branch -d <name>` deletes only your copy. The branch on GitHub survives until it is deleted there, with the button on the merged pull request or `git push origin --delete <name>`.
+
+### git fetch --prune
+Removes remote-tracking branches for branches that no longer exist on the remote, clearing stale `origin/<name>` entries.
 
 ## Node and npm
 
@@ -289,13 +322,22 @@ A job is a group of steps that runs on one runner; a step is a single command or
 A prepackaged step someone published, like `actions/checkout`, used with `uses:` and a version tag such as `@v7`.
 
 ### Deploy gate
-A check that must pass before code is allowed to go live; this project's Actions workflow is currently **not** one.
+A check that must pass before code is allowed to go live. Since 2026-09-18 this project's `build` workflow is one: nothing reaches `main` without it passing, and Cloudflare Pages deploys from `main`. Pages itself still does not wait for the check — the gate controls what enters the branch, not what Pages does with it.
 
 ### GITHUB_TOKEN
 A temporary access key GitHub automatically gives each workflow run so it can interact with the repo.
 
 ### Least privilege
 The security principle of giving a person or program only the access it needs and nothing more.
+
+### Queued (job status)
+A workflow run that GitHub has created but not yet started, because it is waiting for a runner. Normally clears in under a minute or two.
+
+### "Expected — Waiting for status to be reported"
+What a pull request shows for a required check that has not reported yet. The message is the same whether the job is simply queued or the required check name matches no real job — the Actions tab tells them apart: a run that exists means waiting, no run at all means a wrong name.
+
+### Preview deployment
+A build of a branch or pull request published at its own temporary URL, separate from production. Cloudflare Pages makes these automatically and does not wait for any check first.
 
 ## Security and infrastructure as code
 
