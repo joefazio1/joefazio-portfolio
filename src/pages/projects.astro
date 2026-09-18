@@ -19,38 +19,18 @@ import Layout from '../layouts/Layout.astro';
 
   <p>
     A time-banking system for the Alachua Community Collective, a mutual-aid
-    group in Florida whose members trade hours of work instead of money. ACC
-    asked for two tracks: a fast, low-cost version built on tools they already
-    had, and a fuller custom system. I was lead developer on the first and did
-    most of the requirements gathering across the whole engagement. It appears on
-    my resume as the Quick Hit Timebank System.
+    group in Florida whose members trade hours of work instead of money. I was
+    lead developer on the fast, low-cost track and did most of the requirements
+    gathering across the whole engagement. The build covered transaction logic
+    for crediting and debiting hours, admin reporting, a burnout-risk flag, and a
+    Python script to migrate existing member records into the new system. It
+    appears on my resume as the Quick Hit Timebank System.
   </p>
 
-  <p>What I built:</p>
-
-  <ul>
-    <li>Transaction logic for crediting and debiting hours between members</li>
-    <li>Admin reporting</li>
-    <li>
-      A burnout-risk flag that surfaces members who are hoarding hours or giving
-      away far more than they take, so an admin knows to check in on them
-    </li>
-    <li>A Python script to migrate existing member records into the new system</li>
-  </ul>
-
-  <p>
-    Two decisions shaped the build. I started in AppSheet and moved off it
-    because it could not express the transaction logic ACC needed. I rebuilt on
-    Google Apps Script with a Google Sheet as the database, because ACC's member
-    intake already ran through a Google Form: same ecosystem, no migration, and
-    no new tool for the people already using it.
-  </p>
-
-  <p>
-    <strong>Status:</strong> the capstone ended and ACC no longer runs the
-    system. The deployment sits behind a Google login and there is no public
-    repository, so there is no live demo to link. A fuller writeup with code
-    excerpts is the next thing I am adding here.
+  <p class="more">
+    <a href="/projects/acc-timebank"
+      >Read the case study, with code and a security review</a
+    >
   </p>
 
   <h2>BRHS Cybersecurity Risk Assessment</h2>
@@ -92,3 +72,22 @@ import Layout from '../layouts/Layout.astro';
     <a href="https://github.com/joefazio1/joefazio-portfolio">Source on GitHub</a>
   </p>
 </Layout>
+
+<style>
+  .more {
+    margin-top: -0.5rem;
+  }
+
+  .more a {
+    display: inline-block;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 1px;
+  }
+
+  .more a::after {
+    content: " \203A";
+  }
+</style>
