@@ -374,6 +374,15 @@ An npm command that checks installed packages against a public list of known sec
 ### Security advisory (vulnerability)
 A published notice that a specific version of a package has a security flaw, usually with the version that fixes it.
 
+### NIST Cybersecurity Framework (NIST CSF)
+A US government framework that sorts security work into five questions an organisation answers about itself: Identify (what do we have and what could go wrong), Protect (what stops it), Detect (how would we notice), Respond (what do we do when it happens), Recover (how do we get back). It describes outcomes, not products, so it suits an organisation assessing how mature it currently is.
+
+### CIS Controls v8
+A prioritised list of 18 specific safeguards, ordered so the first ones block the most common attacks. Where NIST CSF asks what outcomes you want, CIS Controls tells you what to go and do, in what order. It suits a team that already knows it is exposed and wants a to-do list.
+
+### Choosing between NIST CSF and CIS Controls
+They are not rivals and they overlap heavily. The practical split: NIST CSF is the better fit for assessing and communicating current posture to leadership, CIS Controls for sequencing the remediation work afterwards.
+
 ## Windows and local development
 
 ### PowerShell execution policy
