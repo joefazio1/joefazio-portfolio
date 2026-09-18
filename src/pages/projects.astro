@@ -4,13 +4,13 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="Projects | Joe Fazio"
-  description="Work Joe Fazio has built: a time-banking system, a security risk assessment, and this site."
+  description="Work Joe Fazio has built: a time-banking system, hands-on security labs, a risk assessment, and this site."
 >
   <h1>Projects</h1>
 
   <p>
-    Four projects. Three came out of my final year of coursework at James Madison
-    University, and the fourth is this site. The employers, dates and courses
+    Five projects. Four came out of my final year of coursework at James Madison
+    University, and the fifth is this site. The employers, dates and courses
     behind them are on my <a href="/resume.pdf">resume</a>.
   </p>
 
@@ -33,27 +33,53 @@ import Layout from '../layouts/Layout.astro';
     >
   </p>
 
+  <h2>Ethical Hacking Lab Course</h2>
+  <p class="meta">Spring 2026 · JMU · VirtualBox, Kali Linux, Metasploit, Nessus</p>
+
+  <p>
+    A semester of hands-on security labs run inside an isolated virtual network I
+    built for the purpose. It pairs a Kali Linux machine with a Windows victim on
+    a private, host-only adapter with no route to the outside, so every
+    experiment stays contained on my own computer and cannot touch anything real.
+    Setting that environment up and keeping the two machines talking to each
+    other, and only each other, was the first lab and the foundation for the
+    rest.
+  </p>
+
+  <p>
+    From there the labs worked through security principles like defense in depth,
+    a keylogger study focused on detection and remedies, social engineering and
+    how to counter it, PGP for encrypting communications, hash functions and the
+    integrity checks they support, and a Nessus vulnerability scan whose
+    deliverable was a triaged, prioritized set of fixes rather than the raw
+    findings. That last habit, deciding what to fix first, is the one that
+    carries straight into the BRHS assessment below.
+  </p>
+
   <h2>BRHS Cybersecurity Risk Assessment</h2>
   <p class="meta">Spring 2026 · co-author · NIST CSF 2.0, CIS Controls v8</p>
 
   <p>
-    A consulting report for a fictional healthcare organization: identify the
-    weaknesses, rank them, and recommend hardening a real budget could absorb.
-    We worked against NIST's Cybersecurity Framework and CIS Controls v8 rather
-    than inventing our own categories, so a reader can check every finding
-    against a published standard. This was coursework and the organization was
-    invented for the assignment. The method is the part that carries over.
+    A consulting report for Blue Ridge Health Services, a fictional healthcare
+    provider written for the assignment: identify the weaknesses, rank them, and
+    recommend hardening a real budget could absorb. We assessed the organization
+    against NIST's Cybersecurity Framework rather than inventing our own
+    categories, so a reader can check every finding against a published
+    standard. This was coursework. The method is the part that carries over.
   </p>
 
   <h2>Capsim Business Simulation</h2>
   <p class="meta">Spring 2026 · strategic management</p>
 
   <p>
-    A multi-round simulation in which a team runs a company against competitors.
-    We ran a niche differentiation strategy aimed at the high-tech segments,
+    A multi-round simulation in which a team runs a company against competitors,
     making pricing, R&amp;D, marketing and production decisions each round and
-    carrying the results into the next. It is the closest thing in my coursework
-    to deciding with incomplete information and a cost attached to being wrong.
+    carrying the results into the next. I ran the R&amp;D side, revising our
+    product designs each round to keep them inside the shifting buying criteria
+    for our segments. It was the closest thing in my coursework to deciding with
+    incomplete information and a real cost attached to being wrong, and the
+    clearest lesson was that a strategy is only worth as much as the
+    follow-through behind it each round.
   </p>
 
   <h2>This site</h2>
