@@ -242,3 +242,106 @@ frontend problem. Spotify's API needs a client ID and secret exchanged for a
 token that expires, so the credentials cannot sit in the page — that is exactly
 what a Worker is for, with KV caching the day's pick so the site is not calling
 Spotify on every visit. Free tiers cover it.
+
+### About page trimmed, projects page added, music gets its own home
+
+Feedback on the first About draft: the "How I work" and "Skills, honestly"
+sections both read as strained, and the interests did not belong on that page at
+all. Cut all three. About is now the opening, the wide-net paragraph, and "What
+I'm building" — shorter, and it stops trying to sell.
+
+**Music and vinyl move to their own tab** rather than living as a paragraph on
+About. The idea worth keeping, unbuilt for now: the menu or a page that behaves
+like a crate of records — you flip through sleeves rather than read a list. That
+is a real interaction to design, not a styling tweak, so it waits until the
+content pages are done. It is also the first thing on this site that would need
+meaningful client-side JavaScript, which is a deliberate departure from Astro's
+ship-almost-no-JS default and should be a conscious choice when it happens.
+
+**Projects page** built from what was already on the resume: ACC Timebank, the
+BRHS cybersecurity risk assessment, the Capsim simulation, and this site. Each
+entry says plainly what it was, including that three of the four were coursework
+and that the fictional healthcare org in the BRHS report was invented for the
+assignment. Claiming coursework as client work is the easiest way to lose an
+interview; labelling it costs nothing.
+
+### Resume published as-is, with the phone number on it
+
+The resume PDF carries a header line with home city, email, phone, and LinkedIn.
+CLAUDE.md's constraint said no phone number on the site, so this was raised
+before publishing: a PDF at a public URL is public display, and scrapers harvest
+phone numbers out of public PDFs as a matter of course.
+
+Decided to **publish it as-is**. The convenience to a recruiter who wants the
+document in one click outweighed the spam risk. That supersedes the earlier
+no-phone-on-the-site rule, which was written before there was a resume link to
+argue about; the CLAUDE.md constraint should be updated to match rather than
+left contradicting the site.
+
+Mechanics: the file is copied into `public/` as `resume.pdf`, which Astro passes
+through to the site root, so it is served at `https://joefazio.dev/resume.pdf`.
+The stable filename is the point — updating the resume means replacing that one
+file, and every link that was ever shared keeps working. Archived dated copies
+stay out of the repo.
+
+One consequence to be aware of, given this repo is public: once a commit
+containing `resume.pdf` is pushed, that exact file stays retrievable from GitHub
+history even if a later commit removes or replaces it. The same property already
+came up with CLAUDE.md in the 2026-09-16 entry. If the resume ever needs to
+change for privacy reasons rather than for content, removing it from the current
+commit is not enough on its own.
+
+### Session wrap-up, 2026-09-18
+
+**Where the site ended the day.** Live and merged: the navy palette, the
+sans-serif type, the shared layout, the 404 page, and the branch protection
+ruleset. Built but **not merged**: pull request #6, holding the about page, the
+projects page, the resume, and `.gitattributes`. It was opened but the merge
+never went through, so `/about`, `/projects`, and `/resume.pdf` still return 404
+on the live site. The branch `add-about-page` is pushed and intact, so nothing
+is lost. Merging #6 is the first task next session.
+
+**Writing rules set at the end of the day**, to apply to everything on the site
+from here:
+
+1. **No em dashes anywhere on the site, for any reason.** Use commas, colons,
+   parentheses, or two sentences instead. The current copy violates this in
+   seven places: three in about, three in projects, one in the layout. All are
+   on the unmerged branch, so the fix goes in right after #6 merges.
+2. **The projects page reads too snarky.** Lines like "Coursework still counts,
+   as long as I say so" and the aside about Capsim were written for personality
+   and land as a young adult being clever. Rewrite in a professional register.
+   The honesty about what was coursework stays, stated plainly rather than
+   wryly.
+3. **Explain each project quickly and concisely**, then stop. The current ACC
+   entry runs six paragraphs before it reaches what was built. Short first pass,
+   then fill in detail from what gets supplied per project.
+4. **Give each project context and callbacks to the resume.** The resume lists
+   employers and coursework the projects grew out of, and the projects page
+   currently reads as though it exists in isolation from that history.
+
+**Keeping the resume current.** The site serves `public/resume.pdf` at
+`https://joefazio.dev/resume.pdf`. That URL is fixed and never needs to change.
+The source file lives at
+`C:\Users\jdfaz\OneDrive\Documents\Job Application Documents\Resume_Joe_Fazio.pdf`.
+Updating the site resume means copying that file over `public/resume.pdf` and
+committing it. Nothing about the link, the filename on the site, or anything
+already shared changes. Keeping the OneDrive filename stable is what makes this
+a one-command update rather than a hunt each time.
+
+### What is next
+1. **Merge pull request #6.** Everything below assumes it is in.
+2. Strip the em dashes from all site copy.
+3. Rewrite the projects page in a professional register: concise entries, resume
+   context, no snark. Supply detail per project to fill it out.
+4. Confirm `https://joefazio.dev/resume.pdf` downloads once #6 is live.
+5. Delete the six stale branches on GitHub left over from merged pull requests.
+6. Still carried over: confirm Node 24 in the Cloudflare Pages and GitHub Actions
+   build logs. Both need a login.
+7. Still carried over: open VS Code on the `portfolio` folder rather than
+   `portfolio\node_modules`.
+8. The ACC Timebank deep case study, and the `/now` page.
+9. The music and vinyl tab, including the record crate interaction idea.
+10. Later: option C, deploying from Actions with Wrangler; Terraform for the
+    Cloudflare configuration; updating the LinkedIn and resume links to
+    joefazio.dev.

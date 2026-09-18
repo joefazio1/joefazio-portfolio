@@ -9,10 +9,17 @@ interface Props {
 const { title, description = 'Joe Fazio — IT and infrastructure work.' } = Astro.props;
 
 // Every page in the nav, in order. Adding a page means adding one line here.
-const nav = [{ href: '/', label: 'Home' }];
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+];
 
 // Used to mark the current page for screen readers and styling.
-const path = Astro.url.pathname;
+// Astro serves pages with a trailing slash ('/about/'), while the nav
+// hrefs have none, so both sides get normalised before comparing.
+const strip = (p: string) => (p.length > 1 ? p.replace(/\/$/, '') : p);
+const path = strip(Astro.url.pathname);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -36,7 +43,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
               <li>
                 <a
                   href={item.href}
-                  aria-current={path === item.href ? 'page' : undefined}
+                  aria-current={path === strip(item.href) ? 'page' : undefined}
                 >
                   {item.label}
                 </a>
@@ -56,6 +63,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <li><a href="mailto:joefazio512@gmail.com">email</a></li>
         <li><a href="https://github.com/joefazio1">github</a></li>
         <li><a href="https://linkedin.com/in/joefazio878">linkedin</a></li>
+        <li><a href="/resume.pdf">resume</a></li>
       </ul>
     </footer>
 
@@ -184,6 +192,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         font-size: 1.25rem;
         letter-spacing: -0.01em;
         margin: 2.5rem 0 0.75rem;
+      }
+
+      .meta {
+        color: var(--dim);
+        font-size: 0.9rem;
+        margin: -0.5rem 0 1rem;
+      }
+
+      ul {
+        padding-left: 1.2rem;
+      }
+
+      li {
+        margin-bottom: 0.4rem;
       }
 
       main a {

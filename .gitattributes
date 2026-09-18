@@ -1,0 +1,11 @@
+# Never apply line-ending conversion to binaries. Git usually detects these
+# on its own, but saying so removes the chance of a silent corruption.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
