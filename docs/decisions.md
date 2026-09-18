@@ -345,3 +345,213 @@ a one-command update rather than a hunt each time.
 10. Later: option C, deploying from Actions with Wrangler; Terraform for the
     Cloudflare configuration; updating the LinkedIn and resume links to
     joefazio.dev.
+
+## 2026-09-18 (second session)
+
+### What shipped
+
+Six pull requests merged, #6 through #11. The site went from three pages to
+nine.
+
+**Merged the backlog (#6).** The about page, the projects page, `resume.pdf`
+and `.gitattributes` had been sitting unmerged on `add-about-page` since the
+last session, so `/about`, `/projects` and `/resume.pdf` were all returning 404
+on the live site. Merging it was the first task. Verified afterwards by
+downloading the live PDF and byte-comparing it against `public/resume.pdf`:
+identical.
+
+**Stripped every em dash (#7).** Seven of them, across the layout, the about
+page and the projects page. A grep for both em and en dashes across `src/` now
+returns nothing, and that check gets run before every commit.
+
+**Rewrote the projects page in a professional register (#7).** Cut the dry
+asides ("Coursework still counts, as long as I say so", the Capsim quip). The
+ACC entry dropped from six paragraphs of setup to one, plus the build list and
+the two decisions that actually shaped it. Added resume callbacks throughout,
+grounded in the real resume rather than guessed: the intro links `/resume.pdf`
+and the ACC entry names the line it corresponds to.
+
+**Added `/now` (#8).** Studying for Security+, PowerShell automation as the next
+project, and the remaining infrastructure work here. Carries a visible "last
+updated" date, because a stale `/now` page is worse than none.
+
+**Built the ACC Timebank case study (#9).** Its own page at
+`/projects/acc-timebank` rather than a tab, so it has a URL that can be sent to
+someone on its own. Covers the constraints, why AppSheet was abandoned, why a
+Google Sheet was the right database for this client, the five-state request
+lifecycle, and the guardian authorisation path for youth members. Three code
+excerpts, highlighted with Astro's built-in Shiki, no plugin and no cost.
+
+**Added the client handover section and corrected the framework claim (#10).**
+See the two subsections below.
+
+**Rebuilt the home page and added the personal side (#11).** See below.
+
+### Why a separate case study page instead of tabs
+
+Tabs were the original request. Separate pages won for three reasons: Ctrl+F
+stops finding text that is hidden behind a tab, search engines index less of it,
+and you cannot send a recruiter a link to one specific tab. Tabs still earn
+their place inside a single project page, splitting Overview from Code, and that
+option stays open.
+
+### Reading the source documents
+
+Joe's coursework lives in Word, PowerPoint and PDF files that Claude Code cannot
+read directly. Set up a drop folder at `C:\Users\jdfaz\dev\source-material\`
+holding `read_docs.py`, which unzips the XML out of Office files with nothing but
+the Python standard library and writes a `.txt` twin beside each one. `pypdf`
+handles the PDFs. Joe drops files in and says so; the conversion happens on his
+behalf.
+
+**That folder deliberately sits outside the repo.** It holds client notes,
+stakeholder interviews and personal data, and anything committed to a public
+repo stays retrievable from history forever. The same property that trapped
+CLAUDE.md in the 2026-09-16 entry.
+
+### Three findings from the ACC source code
+
+Joe supplied the full Apps Script backend and front end, which changed the case
+study from description into evidence.
+
+**Passwords are stored in plaintext.** There is a SHA-256 function in the code,
+but registration writes the raw password to the sheet and login accepts either
+value, so the plaintext comparison is the one that matches. Worse, the admin CSV
+export passes a flag that deliberately keeps the password column, so credentials
+leave the system in a downloadable file. The decision was to name this openly in
+a "What I would do differently" section rather than stay quiet, because a case
+study that identifies a flaw in its author's own work is stronger evidence of
+review skill than one that does not, and it supports the Security+ and junior
+security direction.
+
+**No excerpt may carry the real identifiers.** The spreadsheet ID, the password
+salt and the deployment URL are redacted from everything published. Verified by
+grepping the built `dist/` output, not just the source, for each token
+individually.
+
+**There is no real usage data.** `ACC Timebank Data.pdf` contains two test
+members, one request and one transaction. The system was built, tested and
+handed over but never populated with real ACC members, so the case study claims
+no membership or volume figures. That PDF also contains a working admin password
+in plain text, which is the flaw above demonstrating itself sixteen months
+later. Joe confirmed the password is not reused anywhere.
+
+### The handover document is the strongest artifact
+
+The ACC deliverable included a written runbook for administrators who had never
+opened Apps Script: standing the system up from an empty Google account, the
+exact tab and column schema the code reads by name, deployment, a pre-launch
+test script, routine administration, and a troubleshooting list anticipating the
+failures a volunteer would hit. It now has its own section, because writing
+documentation a non-technical person can follow is closer to the help desk and
+systems administration work being applied for than the code is.
+
+### Corrected an overstated framework claim
+
+The site and the resume both said the BRHS assessment used NIST CSF and CIS
+Controls v8. The assignment rubric required choosing one, and the report's
+Framework Selection section explicitly picks NIST CSF and argues for it. Asked
+about the difference, Joe said he could not remember one from the other or why
+one was chosen. Since skills on this site have to be defensible in conversation,
+the site now says NIST CSF only.
+
+The glossary picked up NIST CSF, CIS Controls v8 and how to choose between them.
+The short version: NIST CSF describes outcomes across Identify, Protect, Detect,
+Respond and Recover, and suits assessing and explaining current posture; CIS
+Controls v8 is a prioritised list of 18 safeguards and suits sequencing the
+remediation. The report's own reasoning, now available as an interview answer,
+was that BRHS had to keep its existing EHR and minimise disruption, and its
+weaknesses were in policy, monitoring, access management and incident
+preparedness rather than missing technology.
+
+**The resume still claims both.** Updating it is Joe's call and was left undone.
+
+### Added the ethical hacking lab course
+
+A fifth project. Leads with the isolated lab Joe built, a Kali Linux machine and
+a Windows victim on a private host-only adapter with no route to the outside,
+then covers the breadth: defence in depth, keylogger detection, social
+engineering, PGP, hash functions, and a Nessus scan whose deliverable was a
+triaged, prioritised set of fixes rather than raw findings. Written at portfolio
+altitude, defensively framed, no step-by-step technique.
+
+### Capsim: kept broad on purpose
+
+The round reports show team Digby finishing last in the industry on nearly every
+measure, with sales collapsing from above the industry average in round one to
+roughly a third of it by round four while the fixed cost base stayed put. That is
+a genuinely strong diagnosis, and telling it straight was recommended.
+
+**Joe chose to keep the entry broad and lesson-focused instead**, matching the
+resume, and to note that his own role was R&D. That decision stands. The numbers
+are not published. The lesson stated on the page, that a strategy is only worth
+the follow-through behind it each round, is true and is the honest core of it.
+
+### What broke, and the design reversal
+
+**The terminal hero was built and thrown away.** The first home page led with a
+console window running `whoami`, `cat now.txt` and `git push`. Joe called it
+cringe and it was removed the same session. The direction correction is the
+important part and is worth keeping: the site should read as a well-rounded
+person with character who happens to love computers, not as a computer nerd. No
+terminal, matrix or hacker aesthetics on the personal-facing pages.
+
+**The stale branch count was wrong twice.** Reported as four, then five, then
+six, because branches kept becoming stale mid-conversation as pull requests
+merged. Fixed properly by turning on the repository's "Automatically delete head
+branches" setting, which has worked on every merge since.
+
+**A shell heredoc failed twice** while writing large files with mixed quoting,
+including this log. The lesson: large multi-line content with nested quotes and
+apostrophes should be written with the editor tool, not piped through a bash
+heredoc.
+
+### The personal side: The Record Store
+
+The site now has a second function alongside the portfolio. `/records`, "The
+Record Store", is a crate of album sleeves standing upright, each jacket naming
+its subject, with a record peeking out of the top that slides the rest of the
+way out when clicked before redirecting to the list. Two sleeves are live, Top
+25 Movies and Top 25 Games, both read off screenshots Joe supplied. Two are
+dimmed and marked coming soon, Top 25 Albums and My Record Collection.
+
+The slide is progressive enhancement. The sleeves are ordinary links underneath,
+so with JavaScript off, reduced motion on, or a modified click to open a new
+tab, they navigate normally. The animation is never a dependency.
+
+The lists are set typographically with no cover art, which keeps the pages light
+and avoids poster licensing questions entirely. Each entry has a slot for a
+one-line note, rendered only when filled, so the pages look finished now and
+become Joe's writing space later.
+
+**The home page went back to a placeholder** because Joe is considering making
+the about page the landing page instead. The nav settled at five boxed tabs:
+Home, About, Projects, Now, The Record Store. Movies and Games left the nav and
+live inside the store.
+
+### What is next
+1. Delete the stale `home-page` branch on GitHub, left over from the abandoned
+   terminal hero. It was never merged and never will be.
+2. Merge the pull request holding this session log.
+3. Decide whether the about page replaces the home page as the landing page.
+4. Give the portfolio pages the same UI care the record store got. Joe was
+   explicit that the portfolio is still the site's main function.
+5. Fill in the one-line notes on the movies and games lists, which is the start
+   of the "writeups gushing about things I like" idea.
+6. Build `/albums` from a top 25 albums list, and `My Record Collection` as a
+   data file Joe edits whenever he buys a record. Then flip both sleeves live.
+7. Decide between inline notes and a real blog at `/writing`. The recommendation
+   was to fill in notes first and build the blog when there is a first real post,
+   rather than standing up an empty shell.
+8. Update the resume: drop CIS Controls v8 from the BRHS bullet, or move it to
+   the skills list where "familiar with" is fair.
+9. Wire up the parked Letterboxd, Steam and Spotify links once Joe supplies the
+   profile URLs.
+10. Still carried over: confirm Node 24 in the Cloudflare Pages build log. The
+    repo has a `.node-version` file containing `24` and the workflow reads it
+    via `node-version-file`, so Actions provably uses 24 and Pages reads the
+    same file. That is config-level evidence, not a log.
+11. Still carried over: open VS Code on the `portfolio` folder rather than
+    `portfolio\node_modules`.
+12. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
+    configuration; updating the LinkedIn and resume links to joefazio.dev.
