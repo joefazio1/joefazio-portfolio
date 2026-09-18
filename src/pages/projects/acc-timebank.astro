@@ -62,6 +62,10 @@ if (dupe.length > 0) {
       <dd>Lead developer on the quick hit track, requirements gathering across both tracks</dd>
     </div>
     <div>
+      <dt>Team</dt>
+      <dd>Purple Peak Consulting, a student consulting team</dd>
+    </div>
+    <div>
       <dt>Built with</dt>
       <dd>Google Apps Script, Google Sheets, Python</dd>
     </div>
@@ -187,10 +191,12 @@ if (dupe.length > 0) {
       transactions and voiding bad rows without deleting history.
     </li>
     <li>
-      <strong>A burnout-risk flag</strong> surfacing members who give far more
-      than they receive, and members who hoard hours without spending them. Both
-      patterns predict someone quietly dropping out, so an administrator gets
-      told to check in.
+      <strong>A burnout-risk flag</strong> that scores every active member on
+      the ratio of hours given to hours received. Five or more hours earned
+      without ever spending any flags as high risk, as does a ratio of 4:1 or
+      worse; 2:1 flags as medium. Each flagged member carries the reason with
+      it, so an administrator knows who to contact and why. Both patterns
+      predict someone quietly dropping out of the time bank.
     </li>
     <li>
       <strong>A Python migration script</strong> that moved existing Google Form
@@ -202,6 +208,33 @@ if (dupe.length > 0) {
       categories, so requests could be matched to members offering that skill.
     </li>
   </ul>
+
+  <h2>Handing it over</h2>
+
+  <p>
+    The system had to outlive my involvement, so the deliverable included a
+    written handover for administrators who had never opened Apps Script. It
+    covers standing the whole thing up from an empty Google account: creating
+    the spreadsheet, the exact six tabs and the column headers the code reads by
+    name, pasting in the script, deploying the web app, and working through the
+    authorisation warnings Google shows for an unverified app.
+  </p>
+
+  <p>
+    It also carries a test script to run before anyone real touches the system
+    (register a member, approve them, post a request, claim it, log hours,
+    confirm them, then check that both balances moved), the routine
+    administration tasks such as adding an admin or restoring a deleted row from
+    version history, and a troubleshooting list of the failures I expected them
+    to hit. The most likely one: code changes do not go live until the
+    deployment is republished as a new version.
+  </p>
+
+  <p>
+    Writing that document was the part of this project closest to the IT support
+    work I am applying for. A system a volunteer cannot operate or recover
+    without calling the person who built it is not finished.
+  </p>
 
   <h2>What I would do differently</h2>
 
