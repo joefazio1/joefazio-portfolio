@@ -173,3 +173,39 @@ Verified from outside the dashboard rather than trusting it: RDAP reports the do
 4. Decide whether GitHub Actions should become a real deploy gate.
 5. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`, plus a `404` page.
 6. Later: update the LinkedIn and resume links to `joefazio.dev`.
+
+## 2026-09-18
+
+### What changed
+- Confirmed the apex now resolves everywhere. `8.8.8.8` returns Cloudflare addresses for `joefazio.dev` and the site returns 200. The negative cache from the last session expired on its own, as expected.
+- **Made GitHub Actions a real deploy gate, via branch protection.** Created a repository ruleset named `main protection` targeting the default branch, with an empty bypass list, and four rules: restrict deletions, block force pushes, require a pull request before merging (required approvals `0`), and require the `build` status check to pass.
+- Tested it in both directions rather than trusting the settings page. A direct push to `main` was refused by the server with `GH013: Repository rule violations found for refs/heads/main`, naming both the pull-request rule and the missing `build` check. A pull request from `test-gate` ran `build`, went green, and merged cleanly (`d5b3bd2`).
+- This was the repo's first ever `pull_request` workflow run; every prior run had been a `push` on `main`.
+- Left the Cloudflare Pages Git integration deploying from `main` unchanged.
+
+### Why
+- **Branch protection (option B) now, moving deploys into Actions (option C) later.** B took one sitting, needs no secrets, and is free on a public repo. C — disconnecting the Pages Git integration and deploying from Actions with Wrangler and a scoped API token — is the stronger story but introduces an API token to scope, store and rotate, and it drops the automatic preview deployments unless those get rebuilt too. B is not throwaway work: branch protection still applies on top of C whenever C happens.
+- **Required approvals set to `0`.** GitHub does not let anyone approve their own pull request, so any non-zero value would make every PR on a solo repo permanently unmergeable. Zero still forces the PR to exist; it just does not demand a second person.
+- **Empty bypass list**, so the rules apply to the repo owner too. A gate with a personal exemption does not prove much, and the ruleset can be set to `Disabled` from its own settings page if it ever genuinely blocks something.
+- **"Require branches to be up to date before merging" left off.** It earns its keep when two people touch the same file; with one committer it is pure friction.
+- The required check is spelled `build`, lowercase — the **job** id in `build.yml`, not the workflow's `name: Build`. GitHub reports status checks by job name.
+
+### A correction to the record
+CLAUDE.md has said "a broken build breaks the deploy." That is not quite how Cloudflare Pages behaves: a failed build is marked failed and **the last successful deployment stays live**, so the site does not go down. The actual risks were that `main` could hold a commit that does not build, discoverable only by reading logs in two places, and that anything which builds but is wrong went straight to production unreviewed. Branch protection addresses both.
+
+### What broke
+- **Nothing broke.** One false alarm worth recording, because it will recur.
+- The PR sat on `build — Expected — Waiting for status to be reported` with no visible run. That message is ambiguous: it reads identically whether the job is merely queued waiting for a runner (normal, clears in a minute or two) or the required check name matches no real job (never clears). Checking the Actions tab distinguishes them — a run that exists means waiting, no run at all means a wrong name. This one was queued, and it passed at 16:22 without intervention. The GitHub REST API also served a stale listing during that window, showing zero `pull_request` runs after one had already been created, which made it briefly look like the trigger was not firing.
+- The rejected push left its commit sitting on local `main`, one ahead of `origin/main`. Cleared with `git reset --hard origin/main`.
+- `git branch -d test-gate` deleted only the local branch; the branch on GitHub survived it and needed deleting separately.
+
+### The gap that remains
+Cloudflare Pages reported `Deployed successfully` on the test commit **before the Actions build had even started**. Pages watches the repo directly and waits for nobody. So the accurate description of this setup is: branch protection controls what is allowed to enter `main`, and therefore what reaches production — it does not make Pages wait for a check. Preview deployments on feature branches stay ungated, which is fine; they are throwaway URLs. Closing the gap properly is option C.
+
+### What is next
+1. Open the Cloudflare Pages build log (Deployments → Details) and a GitHub Actions run log, and confirm both build with Node 24. Carried over two sessions now; both need a login.
+2. Open VS Code on the `portfolio` folder rather than `portfolio\node_modules`. Still opening in the wrong place.
+3. A `404` page (`src/pages/404.astro`). Nonexistent paths currently return 200 with the homepage.
+4. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`.
+5. Option C, as its own session: deploy from Actions with Wrangler and a scoped API token, and disconnect the Pages Git integration so the two do not both deploy.
+6. Later: update the LinkedIn and resume links to `joefazio.dev`.
