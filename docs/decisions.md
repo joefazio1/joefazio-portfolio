@@ -209,3 +209,36 @@ Cloudflare Pages reported `Deployed successfully` on the test commit **before th
 4. Real site content: homepage, about, ACC Timebank case study, resume, contact, `/now`.
 5. Option C, as its own session: deploy from Actions with Wrangler and a scoped API token, and disconnect the Pages Git integration so the two do not both deploy.
 6. Later: update the LinkedIn and resume links to `joefazio.dev`.
+
+### Design direction: navy, and a site with interests in it
+
+Two changes to the look, decided after seeing the first styled pass:
+
+- **Navy as the anchor colour**, with brass (`--accent`) as the warm note and a
+  muted sea green (`--accent-2`) as the quieter second voice for links. Light
+  mode is the same palette on paper rather than a different scheme. Checked
+  every pair against the WCAG contrast formula rather than eyeballing it:
+  everything clears AA, most clears AAA.
+- **Sans-serif instead of monospace.** The monospace read as generic-developer,
+  which is the wrong signal for a wide IT net. Now a system sans stack, which
+  lands on Segoe UI on Windows, Helvetica/Arial elsewhere. The two other
+  terminal-ish touches went with it: the `~/` wordmark prefix became a small
+  brass square, and the `*` marking the active nav item became an underline.
+
+**The larger intent, recorded now and built later.** This should not read as a
+resume in HTML. The plan is to put actual interests on it and let them carry the
+personality. Unfiltered ideas so far:
+
+- **Vinyl record collection** — some view of what is on the shelf.
+- **Song of the day**, pulled from a Spotify playlist that stays vetted, so the
+  site shows something current without being a live feed of everything played.
+
+Neither is built. **Content comes first**: about, the ACC Timebank case study,
+`/now`. These are a deliberate second pass, once there is something to decorate.
+
+Worth noting for when that pass happens: song-of-the-day is a genuinely good fit
+for the Cloudflare Workers + KV track already in the stack plan, and not a
+frontend problem. Spotify's API needs a client ID and secret exchanged for a
+token that expires, so the credentials cannot sit in the page — that is exactly
+what a Worker is for, with KV caching the day's pick so the site is not calling
+Spotify on every visit. Free tiers cover it.

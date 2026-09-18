@@ -60,21 +60,27 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </footer>
 
     <style is:global>
+      /* Navy is the anchor. Brass warms it, sea green is the quiet
+         second voice. Light mode is the same palette on paper. */
       :root {
-        --bg: #fbfaf7;
-        --fg: #1a1a1a;
-        --dim: #6b6b6b;
-        --rule: #e0ddd4;
-        --accent: #b4462a;
+        --bg: #f4f7fb;
+        --surface: #e8eef6;
+        --fg: #0d1b2a;
+        --dim: #4d6076;
+        --rule: #cfdae8;
+        --accent: #9a5f10;
+        --accent-2: #1f6f74;
       }
 
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg: #14140f;
-          --fg: #e8e6df;
-          --dim: #8f8c82;
-          --rule: #2e2d26;
-          --accent: #e8794f;
+          --bg: #0d1b2a;
+          --surface: #142639;
+          --fg: #e7eef6;
+          --dim: #93a8c0;
+          --rule: #23394f;
+          --accent: #e3a85c;
+          --accent-2: #6fb5ba;
         }
       }
 
@@ -87,7 +93,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         padding: 0 1.5rem;
         background: var(--bg);
         color: var(--fg);
-        font: 16px/1.65 ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, monospace;
+        font:
+          17px/1.7 system-ui,
+          -apple-system,
+          'Segoe UI',
+          Helvetica,
+          Arial,
+          sans-serif;
         display: flex;
         flex-direction: column;
         min-height: 100vh;
@@ -112,15 +124,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       }
 
       .wordmark {
-        font-weight: 700;
-        letter-spacing: -0.02em;
+        font-weight: 600;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
         text-decoration: none;
         color: var(--fg);
+        display: inline-flex;
+        align-items: center;
       }
 
       .wordmark::before {
-        content: '~/';
-        color: var(--accent);
+        content: '';
+        display: inline-block;
+        width: 0.55rem;
+        height: 0.55rem;
+        margin-right: 0.5rem;
+        border-radius: 2px;
+        background: var(--accent);
       }
 
       nav ul,
@@ -143,9 +163,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         color: var(--fg);
       }
 
-      nav a[aria-current='page']::before {
-        content: '*';
-        color: var(--accent);
+      nav a[aria-current='page'] {
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 2px;
       }
 
       main {
@@ -154,12 +174,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       }
 
       h1 {
-        font-size: 1.6rem;
+        font-size: 2rem;
+        line-height: 1.2;
         letter-spacing: -0.02em;
         margin: 0 0 1.5rem;
       }
 
-      a {
+      h2 {
+        font-size: 1.25rem;
+        letter-spacing: -0.01em;
+        margin: 2.5rem 0 0.75rem;
+      }
+
+      main a {
+        color: var(--accent-2);
+        text-underline-offset: 3px;
+      }
+
+      main a:hover {
         color: var(--accent);
       }
 
