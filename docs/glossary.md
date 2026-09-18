@@ -67,6 +67,9 @@ A network of servers around the world that keeps copies of a site so visitors lo
 ### WAF (Web Application Firewall)
 A filter in front of a website that blocks malicious requests before they reach it.
 
+### /now page
+A short page saying what someone is currently working on and learning, dated so a reader can tell how current it is. A small convention on personal sites.
+
 ## Domains, DNS, and certificates
 
 ### TLD (top-level domain)
@@ -244,6 +247,12 @@ Your local record of where a branch sat on the remote the last time you checked,
 
 ### git fetch --prune
 Removes remote-tracking branches for branches that no longer exist on the remote, clearing stale `origin/<name>` entries.
+
+### Stale branch
+A branch whose commits are already merged into `main`, so it holds no unique work. Deleting it removes the label only; the commits stay in `main`'s history through the merge commit.
+
+### Automatically delete head branches
+A GitHub repository setting that deletes a pull request's source branch as soon as the pull request merges, so merged branches never pile up.
 
 ## Node and npm
 
