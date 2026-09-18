@@ -9,10 +9,16 @@ interface Props {
 const { title, description = 'Joe Fazio — IT and infrastructure work.' } = Astro.props;
 
 // Every page in the nav, in order. Adding a page means adding one line here.
-const nav = [{ href: '/', label: 'Home' }];
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+];
 
 // Used to mark the current page for screen readers and styling.
-const path = Astro.url.pathname;
+// Astro serves pages with a trailing slash ('/about/'), while the nav
+// hrefs have none, so both sides get normalised before comparing.
+const strip = (p: string) => (p.length > 1 ? p.replace(/\/$/, '') : p);
+const path = strip(Astro.url.pathname);
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -36,7 +42,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
               <li>
                 <a
                   href={item.href}
-                  aria-current={path === item.href ? 'page' : undefined}
+                  aria-current={path === strip(item.href) ? 'page' : undefined}
                 >
                   {item.label}
                 </a>
