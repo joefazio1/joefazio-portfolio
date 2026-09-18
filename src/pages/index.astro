@@ -1,8 +1,314 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Featured work shown on the home page. Each links out to the fuller writeup.
+const featured = [
+  {
+    title: 'ACC Timebank',
+    href: '/projects/acc-timebank',
+    blurb:
+      'A time-banking system for a Florida mutual-aid group, built on Google Apps Script. Full case study with code and a security review.',
+    tag: 'Case study',
+  },
+  {
+    title: 'Ethical Hacking Labs',
+    href: '/projects#labs',
+    blurb:
+      'A semester of security labs run inside an isolated Kali and Windows network I built and kept contained on my own machine.',
+    tag: 'Security',
+  },
+  {
+    title: 'This site',
+    href: '/projects#this-site',
+    blurb:
+      'Astro on Cloudflare Pages, built and gated by GitHub Actions, DNS I manage myself, and a public decision log for every choice.',
+    tag: 'Infrastructure',
+  },
+];
 ---
 
-<Layout title="Joe Fazio">
-  <h1>Joe Fazio Portfolio</h1>
-  <p>Work in progress.</p>
+<Layout
+  title="Joe Fazio"
+  description="Joe Fazio: recent JMU Computer Information Systems graduate casting a wide net across IT."
+>
+  <section class="hero">
+    <p class="eyebrow">Recent JMU CIS graduate</p>
+    <h1>Joe Fazio<span class="dot">.</span></h1>
+
+    <div
+      class="term"
+      role="img"
+      aria-label="A terminal introducing Joe Fazio: a recent JMU Computer Information Systems graduate casting a wide net across IT, currently studying for Security+ and writing PowerShell for systems administration tasks."
+    >
+      <div class="term-bar" aria-hidden="true">
+        <span class="tl tl-r"></span><span class="tl tl-y"></span><span class="tl tl-g"></span>
+        <span class="term-title">joe@portfolio: ~</span>
+      </div>
+      <pre class="term-body" aria-hidden="true"><span class="pr">joe@portfolio:~$</span> whoami
+<span class="out">Joe Fazio. Recent JMU Computer Information Systems grad,
+casting a wide net across IT.</span>
+<span class="pr">joe@portfolio:~$</span> cat now.txt
+<span class="out">Studying for Security+. Writing PowerShell that does
+real systems administration work.</span>
+<span class="pr">joe@portfolio:~$</span> git push origin main
+<span class="ok">✓ build passed   ✓ deployed to Cloudflare Pages</span>
+<span class="pr">joe@portfolio:~$</span> <span class="cursor" aria-hidden="true">▊</span></pre>
+    </div>
+
+    <p class="lede">
+      I like the parts of IT you can take apart and explain: how a site gets
+      built, deployed and served, how a system fails, and how you keep it from
+      failing again. Reliable and persistent are the traits I lead with.
+    </p>
+
+    <div class="cta">
+      <a class="btn btn-primary" href="/projects">See the work</a>
+      <a class="btn" href="/resume.pdf">Resume</a>
+      <a class="btn" href="/now">What I'm doing now</a>
+    </div>
+  </section>
+
+  <section class="featured" aria-labelledby="featured-h">
+    <h2 id="featured-h">Featured work</h2>
+    <div class="cards">
+      {
+        featured.map((item) => (
+          <a class="card" href={item.href}>
+            <span class="card-tag">{item.tag}</span>
+            <span class="card-title">{item.title}</span>
+            <span class="card-blurb">{item.blurb}</span>
+            <span class="card-go" aria-hidden="true">Read more ›</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
 </Layout>
+
+<style>
+  /* HERO */
+  .hero {
+    padding-bottom: 1rem;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--accent-2);
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 8vw, 3.4rem);
+    margin: 0 0 1.5rem;
+  }
+
+  .dot {
+    color: var(--accent);
+  }
+
+  /* TERMINAL: a self-contained dark window, the same in both themes so it
+     always reads like a console. Colours are fixed rather than tokenised. */
+  .term {
+    background: #0c1826;
+    border: 1px solid #22384e;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+    margin: 0 0 1.75rem;
+  }
+
+  .term-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.85rem;
+    background: #142639;
+    border-bottom: 1px solid #22384e;
+  }
+
+  .tl {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .tl-r {
+    background: #e06c6c;
+  }
+  .tl-y {
+    background: #e3a85c;
+  }
+  .tl-g {
+    background: #6fb5ba;
+  }
+
+  .term-title {
+    margin-left: 0.5rem;
+    font-size: 0.72rem;
+    color: #6f8299;
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  }
+
+  .term-body {
+    margin: 0;
+    padding: 1.1rem 1.15rem 1.25rem;
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    font-size: 0.86rem;
+    line-height: 1.75;
+    color: #cbd8e8;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+  }
+
+  .term-body .pr {
+    color: #6fb5ba;
+    font-weight: 600;
+  }
+  .term-body .out {
+    color: #9fb2c8;
+  }
+  .term-body .ok {
+    color: #e3a85c;
+  }
+
+  .cursor {
+    color: #cbd8e8;
+    animation: blink 1.1s steps(1) infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .lede {
+    font-size: 1.05rem;
+    color: var(--fg);
+    max-width: 34rem;
+    margin: 0 0 1.5rem;
+  }
+
+  /* CTA BUTTONS */
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    border: 1px solid var(--rule);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--fg);
+    transition:
+      transform 0.15s ease,
+      border-color 0.15s ease,
+      background 0.15s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-2);
+  }
+
+  .btn-primary {
+    background: var(--accent-2);
+    border-color: var(--accent-2);
+    color: var(--bg);
+    font-weight: 600;
+  }
+
+  .btn-primary:hover {
+    color: var(--bg);
+    border-color: var(--accent-2);
+  }
+
+  /* FEATURED CARDS */
+  .featured {
+    margin-top: 3.5rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 2rem;
+  }
+
+  .featured h2 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+    margin: 0 0 1.25rem;
+  }
+
+  .cards {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.15rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    text-decoration: none;
+    color: var(--fg);
+    transition:
+      transform 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(13, 27, 42, 0.16);
+    border-left-color: var(--accent-2);
+  }
+
+  .card-tag {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-2);
+    font-weight: 700;
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .card-blurb {
+    font-size: 0.9rem;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+
+  .card-go {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-2);
+    margin-top: 0.15rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor {
+      animation: none;
+    }
+    .btn:hover,
+    .card:hover {
+      transform: none;
+    }
+  }
+</style>
