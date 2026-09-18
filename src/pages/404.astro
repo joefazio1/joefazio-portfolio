@@ -1,22 +1,13 @@
 ---
-const title = 'Not found';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-  </head>
-  <body>
-    <main>
-      <h1>404</h1>
-      <p>There is nothing at this address.</p>
-      <p>
-        Either the link was wrong, or I moved something and did not leave a
-        forwarding note. Both have happened.
-      </p>
-      <p><a href="/">Back to the homepage</a></p>
-    </main>
-  </body>
-</html>
+<Layout title="Not found">
+  <h1>404</h1>
+  <p>There is nothing at this address.</p>
+  <p>
+    Either the link was wrong, or I moved something and did not leave a
+    forwarding note. Both have happened.
+  </p>
+  <p><a href="/">Back to the homepage</a></p>
+</Layout>
