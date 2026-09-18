@@ -290,3 +290,58 @@ history even if a later commit removes or replaces it. The same property already
 came up with CLAUDE.md in the 2026-09-16 entry. If the resume ever needs to
 change for privacy reasons rather than for content, removing it from the current
 commit is not enough on its own.
+
+### Session wrap-up, 2026-09-18
+
+**Where the site ended the day.** Live and merged: the navy palette, the
+sans-serif type, the shared layout, the 404 page, and the branch protection
+ruleset. Built but **not merged**: pull request #6, holding the about page, the
+projects page, the resume, and `.gitattributes`. It was opened but the merge
+never went through, so `/about`, `/projects`, and `/resume.pdf` still return 404
+on the live site. The branch `add-about-page` is pushed and intact, so nothing
+is lost. Merging #6 is the first task next session.
+
+**Writing rules set at the end of the day**, to apply to everything on the site
+from here:
+
+1. **No em dashes anywhere on the site, for any reason.** Use commas, colons,
+   parentheses, or two sentences instead. The current copy violates this in
+   seven places: three in about, three in projects, one in the layout. All are
+   on the unmerged branch, so the fix goes in right after #6 merges.
+2. **The projects page reads too snarky.** Lines like "Coursework still counts,
+   as long as I say so" and the aside about Capsim were written for personality
+   and land as a young adult being clever. Rewrite in a professional register.
+   The honesty about what was coursework stays, stated plainly rather than
+   wryly.
+3. **Explain each project quickly and concisely**, then stop. The current ACC
+   entry runs six paragraphs before it reaches what was built. Short first pass,
+   then fill in detail from what gets supplied per project.
+4. **Give each project context and callbacks to the resume.** The resume lists
+   employers and coursework the projects grew out of, and the projects page
+   currently reads as though it exists in isolation from that history.
+
+**Keeping the resume current.** The site serves `public/resume.pdf` at
+`https://joefazio.dev/resume.pdf`. That URL is fixed and never needs to change.
+The source file lives at
+`C:\Users\jdfaz\OneDrive\Documents\Job Application Documents\Resume_Joe_Fazio.pdf`.
+Updating the site resume means copying that file over `public/resume.pdf` and
+committing it. Nothing about the link, the filename on the site, or anything
+already shared changes. Keeping the OneDrive filename stable is what makes this
+a one-command update rather than a hunt each time.
+
+### What is next
+1. **Merge pull request #6.** Everything below assumes it is in.
+2. Strip the em dashes from all site copy.
+3. Rewrite the projects page in a professional register: concise entries, resume
+   context, no snark. Supply detail per project to fill it out.
+4. Confirm `https://joefazio.dev/resume.pdf` downloads once #6 is live.
+5. Delete the six stale branches on GitHub left over from merged pull requests.
+6. Still carried over: confirm Node 24 in the Cloudflare Pages and GitHub Actions
+   build logs. Both need a login.
+7. Still carried over: open VS Code on the `portfolio` folder rather than
+   `portfolio\node_modules`.
+8. The ACC Timebank deep case study, and the `/now` page.
+9. The music and vinyl tab, including the record crate interaction idea.
+10. Later: option C, deploying from Actions with Wrangler; Terraform for the
+    Cloudflare configuration; updating the LinkedIn and resume links to
+    joefazio.dev.
