@@ -1,8 +1,227 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// The home page is a crate of records. Each one is a side of me and links to
+// its own page, so any single record can be handed to someone on its own.
+// `hue` sets the centre-label colour so the crate reads as a set of different
+// records rather than one repeated.
+const records = [
+  { name: 'Work', sub: 'what I have built', href: '/projects', hue: 'brass' },
+  { name: 'About', sub: 'who I am', href: '/about', hue: 'teal' },
+  { name: 'Now', sub: 'what I am on', href: '/now', hue: 'plum' },
+  { name: 'Movies', sub: 'top 25', href: '/movies', hue: 'rust' },
+  { name: 'Games', sub: 'top 25', href: '/games', hue: 'green' },
+];
 ---
 
-<Layout title="Joe Fazio">
-  <h1>Joe Fazio Portfolio</h1>
-  <p>Work in progress.</p>
+<Layout
+  title="Joe Fazio"
+  description="Joe Fazio: an IT person who likes taking things apart to understand them, plus the movies and games he keeps coming back to."
+>
+  <section class="intro">
+    <h1>Joe Fazio<span class="dot">.</span></h1>
+    <p class="hi">
+      Hi, I'm Joe. I work in IT because I like taking a thing apart, figuring out
+      why it does what it does, and then explaining it plainly to someone else.
+      Off the clock I am usually deep in a film, a video game, or a good stubborn
+      problem. Pick a record.
+    </p>
+  </section>
+
+  <section class="crate" aria-label="Sections of this site">
+    <ul>
+      {
+        records.map((r) => (
+          <li>
+            <a class="record" href={r.href}>
+              <span class={`disc ${r.hue}`} aria-hidden="true">
+                <span class="label">
+                  <span class="label-name">{r.name}</span>
+                </span>
+                <span class="hole" />
+              </span>
+              <span class="caption">
+                <span class="cap-name">{r.name}</span>
+                <span class="cap-sub">{r.sub}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 </Layout>
+
+<style>
+  h1 {
+    font-size: clamp(2.4rem, 8vw, 3.4rem);
+    margin: 0 0 1rem;
+  }
+
+  .dot {
+    color: var(--accent);
+  }
+
+  .hi {
+    font-size: 1.08rem;
+    line-height: 1.75;
+    color: var(--fg);
+    max-width: 34rem;
+    margin: 0 0 2.75rem;
+  }
+
+  /* THE CRATE */
+  .crate ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.75rem 1.25rem;
+  }
+
+  .record {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--fg);
+  }
+
+  /* THE DISC: concentric grooves, a coloured centre label, a spindle hole. */
+  .disc {
+    position: relative;
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background:
+      repeating-radial-gradient(
+        circle at center,
+        #16171b 0,
+        #16171b 1px,
+        #202127 2px,
+        #202127 3px
+      ),
+      radial-gradient(circle at 32% 28%, #33353d, #101116 60%);
+    box-shadow:
+      0 8px 20px rgba(13, 27, 42, 0.28),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  /* A soft sheen sweeping across the vinyl. */
+  .disc::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0) 32%,
+      rgba(255, 255, 255, 0) 68%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+  }
+
+  .label {
+    position: relative;
+    z-index: 1;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+  }
+
+  .label-name {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #10131a;
+    padding: 0 4px;
+    line-height: 1.1;
+  }
+
+  .hole {
+    position: absolute;
+    z-index: 2;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Centre-label colours, one per record. */
+  .disc.brass .label {
+    background: radial-gradient(circle at 35% 30%, #f0bd77, #d69a3f);
+  }
+  .disc.teal .label {
+    background: radial-gradient(circle at 35% 30%, #6fc0c4, #2f9296);
+  }
+  .disc.plum .label {
+    background: radial-gradient(circle at 35% 30%, #c99ac6, #9a5f97);
+  }
+  .disc.rust .label {
+    background: radial-gradient(circle at 35% 30%, #e39a72, #c05f37);
+  }
+  .disc.green .label {
+    background: radial-gradient(circle at 35% 30%, #8bc48f, #4f9a57);
+  }
+
+  .caption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0.85rem;
+  }
+
+  .cap-name {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .cap-sub {
+    font-size: 0.78rem;
+    color: var(--dim);
+    margin-top: 0.1rem;
+  }
+
+  /* Pull the record out of the crate and spin it. */
+  .record:hover .disc,
+  .record:focus-visible .disc {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(13, 27, 42, 0.34);
+    animation: spin 3.5s linear infinite;
+  }
+
+  .record:hover .cap-name,
+  .record:focus-visible .cap-name {
+    color: var(--accent-2);
+  }
+
+  .record:focus-visible {
+    outline: none;
+  }
+
+  @keyframes spin {
+    to {
+      transform: translateY(-6px) rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .record:hover .disc,
+    .record:focus-visible .disc {
+      animation: none;
+    }
+  }
+</style>

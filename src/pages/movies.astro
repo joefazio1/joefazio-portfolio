@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// My top 25, in rough order. `note` is a one-line reason, filled in over time.
+// Leave a note empty and the row simply renders without one.
+const films = [
+  { title: 'Memento', note: '' },
+  { title: 'The Dark Knight', note: '' },
+  { title: 'Harry Potter and the Prisoner of Azkaban', note: '' },
+  { title: 'WALL-E', note: '' },
+  { title: 'Inception', note: '' },
+  { title: 'Jurassic Park', note: '' },
+  { title: 'Knives Out', note: '' },
+  { title: 'The Godfather', note: '' },
+  { title: 'The Empire Strikes Back', note: '' },
+  { title: 'The Batman', note: '' },
+  { title: 'Dead Poets Society', note: '' },
+  { title: 'Avengers: Infinity War', note: '' },
+  { title: 'Avengers: Endgame', note: '' },
+  { title: '12 Angry Men', note: '' },
+  { title: 'Harry Potter and the Deathly Hallows: Part 2', note: '' },
+  { title: 'Inglourious Basterds', note: '' },
+  { title: "Pirates of the Caribbean: At World's End", note: '' },
+  { title: "Pirates of the Caribbean: Dead Man's Chest", note: '' },
+  { title: 'The Hateful Eight', note: '' },
+  { title: 'My Cousin Vinny', note: '' },
+  { title: 'GoodFellas', note: '' },
+  { title: 'Uncut Gems', note: '' },
+  { title: 'Fargo', note: '' },
+  { title: 'Rocky', note: '' },
+  { title: 'Rango', note: '' },
+];
+---
+
+<Layout
+  title="Top 25 Movies | Joe Fazio"
+  description="Joe Fazio's twenty-five favorite movies, in rough order."
+>
+  <p class="back"><a href="/">Back to the crate</a></p>
+
+  <h1>Top 25 Movies</h1>
+  <p class="lede">
+    The twenty-five I keep coming back to, in rough order. Ask me about any of
+    them and I will not stop talking. Notes are getting added as I write them.
+  </p>
+
+  <ol class="ranked">
+    {
+      films.map((f, i) => (
+        <li>
+          <span class="rank">{String(i + 1).padStart(2, '0')}</span>
+          <span class="body">
+            <span class="title">{f.title}</span>
+            {f.note && <span class="note">{f.note}</span>}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="back"><a href="/">Back to the crate</a></p>
+</Layout>
+
+<style>
+  .back {
+    font-size: 0.9rem;
+    margin: 0 0 1.25rem;
+  }
+
+  h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .lede {
+    color: var(--dim);
+    max-width: 34rem;
+    margin: 0 0 2rem;
+  }
+
+  .ranked {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    counter-reset: none;
+  }
+
+  .ranked li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ranked li:last-child {
+    border-bottom: none;
+  }
+
+  .rank {
+    flex: 0 0 2.1rem;
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    padding-top: 0.1rem;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .title {
+    font-size: 1.02rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .note {
+    font-size: 0.85rem;
+    color: var(--dim);
+    line-height: 1.55;
+  }
+</style>
