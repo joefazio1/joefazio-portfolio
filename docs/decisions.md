@@ -264,3 +264,29 @@ entry says plainly what it was, including that three of the four were coursework
 and that the fictional healthcare org in the BRHS report was invented for the
 assignment. Claiming coursework as client work is the easiest way to lose an
 interview; labelling it costs nothing.
+
+### Resume published as-is, with the phone number on it
+
+The resume PDF carries a header line with home city, email, phone, and LinkedIn.
+CLAUDE.md's constraint said no phone number on the site, so this was raised
+before publishing: a PDF at a public URL is public display, and scrapers harvest
+phone numbers out of public PDFs as a matter of course.
+
+Decided to **publish it as-is**. The convenience to a recruiter who wants the
+document in one click outweighed the spam risk. That supersedes the earlier
+no-phone-on-the-site rule, which was written before there was a resume link to
+argue about; the CLAUDE.md constraint should be updated to match rather than
+left contradicting the site.
+
+Mechanics: the file is copied into `public/` as `resume.pdf`, which Astro passes
+through to the site root, so it is served at `https://joefazio.dev/resume.pdf`.
+The stable filename is the point — updating the resume means replacing that one
+file, and every link that was ever shared keeps working. Archived dated copies
+stay out of the repo.
+
+One consequence to be aware of, given this repo is public: once a commit
+containing `resume.pdf` is pushed, that exact file stays retrievable from GitHub
+history even if a later commit removes or replaces it. The same property already
+came up with CLAUDE.md in the 2026-09-16 entry. If the resume ever needs to
+change for privacy reasons rather than for content, removing it from the current
+commit is not enough on its own.
