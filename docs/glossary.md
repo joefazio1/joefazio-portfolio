@@ -408,3 +408,38 @@ A local preview server (`npm run dev`) that rebuilds the site instantly as you e
 
 ### localhost vs 0.0.0.0
 `localhost` means "only this computer can connect"; `0.0.0.0` means "accept connections from any device on the network."
+
+## Fonts and images on the web
+
+### Web font
+A font file the browser downloads with the page, so text renders in a typeface the visitor does not already have installed.
+
+### Self-hosted font
+A web font served from your own domain instead of a third party's CDN; it avoids an extra connection to someone else's server and tells that third party nothing about your visitors.
+
+### Astro Fonts API
+Astro's built-in font handling: it downloads the font files at build time, writes the `@font-face` rules for you, and serves the files from your own site.
+
+### woff2
+The standard compressed file format for web fonts; smaller than the formats it replaced and supported by every current browser.
+
+### Preload
+A hint in the page `<head>` telling the browser to start downloading a file immediately rather than waiting until it discovers the need for it.
+
+### Variable font
+One font file that contains a whole range of weights or styles, adjustable by number, instead of a separate file per weight.
+
+### Fallback font
+The typeface a browser uses if the web font has not arrived yet or fails to load; listed after the web font in the CSS `font-family` line.
+
+### WebP
+A modern image format that produces noticeably smaller files than JPEG at the same visual quality.
+
+### Responsive images
+Publishing several sizes of one image and letting the browser pick the smallest one that still looks sharp on that screen, so phones do not download desktop-sized files.
+
+### sharp
+The image-processing library Astro uses under the hood to crop, resize and convert images during the build.
+
+### Runbook
+A written procedure for operating and recovering a system, aimed at whoever has to run it later rather than at the person who built it.

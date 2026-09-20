@@ -1,46 +1,5 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { Code } from 'astro:components';
-
-// Excerpts are trimmed for readability and redacted: the real spreadsheet ID,
-// the credential handling and the deployment URL are not published here.
-
-const balanceFormula = `// A member's hours balance is a formula written into the sheet at signup,
-// not a number stored and updated by hand. Hours given minus hours received,
-// counting only rows that both sides have verified.
-sheet.getRange(newRow, 21).setFormula(
-  '=IF(A' + newRow + '="", 0, ' +
-    'SUMIFS(Transactions!J:J, Transactions!D:D, A' + newRow + ', Transactions!L:L, "Yes") - ' +
-    'SUMIFS(Transactions!J:J, Transactions!G:G, A' + newRow + ', Transactions!L:L, "Yes"))'
-);`;
-
-const guardianAuth = `// A match can be accepted by the member who made the request, or by that
-// member's guardian. Anyone else is refused.
-var isAuth = (reqMemberId === String(me['MemberID']));
-
-if (!isAuth) {
-  var child = members.filter(function (m) {
-    return String(m['MemberID'])   === reqMemberId &&
-           String(m['GuardianID']) === String(me['MemberID']);
-  });
-  if (child.length > 0) isAuth = true;
-}
-
-if (!isAuth) {
-  return { success: false, error: 'Only the requester or their guardian can accept a match.' };
-}`;
-
-const dupeGuard = `// One set of hours per job per helper. A rejected submission can be corrected
-// and resent, so rejected rows are excluded from the duplicate check.
-var dupe = existing.filter(function (t) {
-  return String(t['RequestID']) === String(data.requestId) &&
-         String(t['GiverID'])   === String(giverId) &&
-         t['TransactionVerified?'] !== 'Rejected';
-});
-
-if (dupe.length > 0) {
-  return { success: false, error: 'Hours have already been logged for this job.' };
-}`;
 ---
 
 <Layout
@@ -58,225 +17,118 @@ if (dupe.length > 0) {
       <dd>Alachua Community Collective, a mutual-aid group in Florida</dd>
     </div>
     <div>
-      <dt>Role</dt>
-      <dd>Lead developer on the quick hit track, requirements gathering across both tracks</dd>
+      <dt>Team</dt>
+      <dd>Purple Peak Consulting, advised by Professor Shawn Lough</dd>
     </div>
     <div>
-      <dt>Team</dt>
-      <dd>Purple Peak Consulting, a student consulting team</dd>
+      <dt>Role</dt>
+      <dd>Lead developer on the quick hit track, requirements gathering across both tracks</dd>
     </div>
     <div>
       <dt>Built with</dt>
       <dd>Google Apps Script, Google Sheets, Python</dd>
     </div>
     <div>
-      <dt>Status</dt>
-      <dd>Capstone complete, no longer operated by ACC</dd>
+      <dt>Recognition</dt>
+      <dd>KPMG Choice Award, Best Overall System</dd>
+    </div>
+    <div>
+      <dt>Running cost</dt>
+      <dd>$0</dd>
     </div>
   </dl>
 
-  <h2>The problem</h2>
+  <h2>What ACC needed</h2>
 
   <p>
-    ACC runs a time bank. Members trade hours of work rather than money: an hour
-    of yard care earns an hour of somebody else's help later. Someone has to keep
-    that ledger, and keeping it by hand stops working as soon as the group grows.
-    ACC asked for two tracks, a fast low-cost version built on tools they already
-    had and a fuller custom system. I led the first and did most of the
-    requirements gathering across the whole engagement.
+    ACC runs a time bank. Members trade hours of work rather than money, so an
+    hour of yard care earns an hour of someone else's help later. Tracking that
+    by hand stops working as soon as the group grows, and a wrong balance is a
+    real dispute between neighbors. They came to us with no budget, volunteer
+    administrators rather than technical staff, and member intake already running
+    through a Google Form.
   </p>
 
-  <h2>Constraints</h2>
+  <h2>How we solved it</h2>
 
   <p>
-    The constraints shaped this build more than the technology did. Five
-    mattered:
-  </p>
-
-  <ul>
-    <li>No budget. Anything with a monthly bill was out.</li>
-    <li>Administrators were volunteers, not technical staff.</li>
-    <li>Member intake already ran through a Google Form, and members were used to it.</li>
-    <li>Minors participate, which means guardian consent and guardian oversight.</li>
-    <li>Hours are the currency, so a wrong balance is a real dispute between neighbors.</li>
-  </ul>
-
-  <h2>Why not AppSheet</h2>
-
-  <p>
-    I started in AppSheet and moved off it. It handled forms and lists well, but
-    the ledger needed conditional multi-step logic: one action writing to several
-    tables, a verification step performed by a second party, and a balance
-    derived from rows rather than stored. Expressing that in AppSheet meant
-    fighting the tool on every change. Abandoning it was the right call and it
-    was mine to make.
-  </p>
-
-  <h2>Why a Google Sheet as the database</h2>
-
-  <p>
-    Intake already ran through a Google Form, and a Form writes to a Sheet.
-    Building on that Sheet meant no data migration, no new accounts, no new tool
-    for members, and administrators who could inspect the raw data in something
-    they already understood. A real database would have been technically cleaner
-    and would have been the wrong recommendation for this client.
-  </p>
-
-  <h2>How the ledger works</h2>
-
-  <p>
-    A balance is never stored. It is a formula written into each member's row at
-    signup, summing verified hours given and subtracting verified hours received.
-    Nothing can drift out of sync, because there is no second copy of the number
-    to drift.
-  </p>
-
-  <Code code={balanceFormula} lang="js" theme="github-dark" />
-
-  <p>
-    The <code>"Yes"</code> condition is the important part. Hours count only once
-    the receiving side has confirmed them, so nobody can credit themselves by
-    filing a transaction alone.
-  </p>
-
-  <h2>The request lifecycle</h2>
-
-  <p>
-    Every job moves through five states, and each transition needs an action from
-    a specific person:
-  </p>
-
-  <ol class="states">
-    <li><strong>Open.</strong> Posted, waiting for a volunteer.</li>
-    <li><strong>PendingMatch.</strong> A volunteer claimed it, the requester has not agreed yet.</li>
-    <li><strong>Matched.</strong> The requester accepted, and both sides now see contact details.</li>
-    <li><strong>PendingVerification.</strong> The helper logged hours, the requester has not confirmed.</li>
-    <li><strong>Completed.</strong> Confirmed, and the hours count toward both balances.</li>
-  </ol>
-
-  <p>
-    Contact details are withheld until <strong>Matched</strong> on purpose.
-    Requesters can decline a volunteer before any personal information changes
-    hands, which came directly out of requirements gathering with ACC.
+    ACC asked for two options: something fast built on tools they already had,
+    and a fuller custom system. I led the first and did most of the requirements
+    gathering across both.
   </p>
 
   <p>
-    Hours can be submitted once per job per helper, and a rejected submission can
-    be corrected and resent:
+    I started in AppSheet and moved off it once it became clear the ledger needed
+    multi-step logic the tool fought me on at every change. The rebuild used
+    Google Apps Script with a Google Sheet as the database. That choice was about
+    the client rather than the technology: intake already wrote to a Sheet, so
+    there was no migration, no new accounts, and no new tool for members to
+    learn. Administrators could open their own data in something they already
+    understood. A real database would have been cleaner and would have been the
+    wrong recommendation.
   </p>
 
-  <Code code={dupeGuard} lang="js" theme="github-dark" />
-
-  <h2>Youth accounts and guardians</h2>
-
-  <p>
-    Minors participate in the time bank, so a youth member has a guardian linked
-    to their record and no login of their own. Guardians claim jobs on a child's
-    behalf, accept matches for them, and receive the contact details in place of
-    the child. Every action on a youth record checks that relationship first.
-  </p>
-
-  <Code code={guardianAuth} lang="js" theme="github-dark" />
-
-  <p>
-    This was not in the original brief. It came out of asking who actually uses
-    the system, which is the part of this project I would point to first.
-  </p>
-
-  <h2>The rest of the build</h2>
+  <h2>What it does</h2>
 
   <ul>
     <li>
-      <strong>Admin reporting</strong> for verifying members, resolving disputed
-      transactions and voiding bad rows without deleting history.
+      <strong>A verified ledger.</strong> Hours count only once both sides
+      confirm them, so nobody can credit themselves by filing alone.
     </li>
     <li>
-      <strong>A burnout-risk flag</strong> that scores every active member on
-      the ratio of hours given to hours received. Five or more hours earned
-      without ever spending any flags as high risk, as does a ratio of 4:1 or
-      worse; 2:1 flags as medium. Each flagged member carries the reason with
-      it, so an administrator knows who to contact and why. Both patterns
-      predict someone quietly dropping out of the time bank.
+      <strong>A request lifecycle</strong> from posted through to completed, with
+      contact details withheld until both people agree to the match. That came
+      straight out of requirements gathering with ACC.
+    </li>
+    <li>
+      <strong>Youth accounts.</strong> Minors participate, so a guardian is
+      linked to the record and acts on the child's behalf. This was not in the
+      original brief. It came from asking who actually uses the system.
+    </li>
+    <li>
+      <strong>Admin reporting</strong> for verifying members, resolving disputed
+      transactions and voiding bad rows without destroying history.
+    </li>
+    <li>
+      <strong>A burnout-risk flag</strong> that surfaces members giving far more
+      than they receive, because that pattern predicts someone quietly dropping
+      out of the time bank.
     </li>
     <li>
       <strong>A Python migration script</strong> that moved existing Google Form
-      responses into the new schema, so the system launched with the real
+      responses into the new structure, so the system launched with the real
       membership already in it.
-    </li>
-    <li>
-      <strong>A skills taxonomy</strong> of eighteen services across six
-      categories, so requests could be matched to members offering that skill.
     </li>
   </ul>
 
   <h2>Handing it over</h2>
 
   <p>
-    The system had to outlive my involvement, so the deliverable included a
-    written handover for administrators who had never opened Apps Script. It
-    covers standing the whole thing up from an empty Google account: creating
-    the spreadsheet, the exact six tabs and the column headers the code reads by
-    name, pasting in the script, deploying the web app, and working through the
-    authorisation warnings Google shows for an unverified app.
+    The system had to outlive the semester, so the deliverable included a written
+    runbook for administrators who had never opened Apps Script: standing the
+    whole thing up from an empty Google account, a test script to run before
+    anyone real touches it, the routine administration tasks, and a
+    troubleshooting list of the failures I expected them to hit.
   </p>
 
   <p>
-    It also carries a test script to run before anyone real touches the system
-    (register a member, approve them, post a request, claim it, log hours,
-    confirm them, then check that both balances moved), the routine
-    administration tasks such as adding an admin or restoring a deleted row from
-    version history, and a troubleshooting list of the failures I expected them
-    to hit. The most likely one: code changes do not go live until the
-    deployment is republished as a new version.
+    That document is the part of this project closest to the IT work I am
+    applying for. A system a volunteer cannot operate or recover without calling
+    the person who built it is not finished.
+  </p>
+
+  <h2>Where it stands</h2>
+
+  <p>
+    Purple Peak Consulting received the KPMG Choice Award for Best Overall System
+    at the capstone showcase. The engagement has since ended and ACC no longer
+    runs the system, so there is no public demo and no public repository.
   </p>
 
   <p>
-    Writing that document was the part of this project closest to the IT support
-    work I am applying for. A system a volunteer cannot operate or recover
-    without calling the person who built it is not finished.
-  </p>
-
-  <h2>What I would do differently</h2>
-
-  <p>
-    Two things, and the first is a security problem I can identify now and could
-    not identify then.
-  </p>
-
-  <p>
-    <strong>Passwords are stored in plaintext.</strong> There is a SHA-256
-    hashing function in the code, but registration writes the raw password to the
-    sheet and the login check accepts either value, so the plaintext comparison
-    is the one that matches. Anyone who can open the spreadsheet can read every
-    member's password. The correct approach is a slow hash designed for
-    passwords, bcrypt or Argon2, with a unique random salt per user rather than
-    one shared constant, and never writing the raw value at all. Apps Script
-    makes that awkward, which is an argument for handing authentication to Google
-    sign-in rather than building it, not an argument for storing plaintext.
-  </p>
-
-  <p>
-    <strong>Business logic is split between the sheet and the script.</strong>
-    Balances live in spreadsheet formulas while every other rule lives in Apps
-    Script. That was a deliberate trade for administrator visibility and I would
-    make it again for this client, but it means the rules sit in two places and a
-    reader has to know both to follow them.
-  </p>
-
-  <h2>Status</h2>
-
-  <p>
-    The capstone ended and ACC no longer runs the system. The deployment still
-    exists behind a Google login, so there is no public demo, and there is no
-    public repository. The excerpts above are redacted: the spreadsheet
-    identifier, the credential handling and the deployment URL are not reproduced
-    here.
-  </p>
-
-  <p>
-    The second track, a fuller system on ASP.NET Core and Azure SQL, was built by
-    a teammate. My contact with it was confirming that CSV exports from my side
-    imported cleanly into theirs. They did.
+    The second track, a fuller build on ASP.NET Core and Azure SQL, was a
+    teammate's work. My contact with it was confirming that CSV exports from my
+    side imported cleanly into theirs. They did.
   </p>
 
   <p class="back"><a href="/projects">Back to projects</a></p>
@@ -317,51 +169,5 @@ if (dupe.length > 0) {
     flex: 1;
     min-width: 12rem;
     margin: 0;
-  }
-
-  .states {
-    counter-reset: state;
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .states li {
-    position: relative;
-    padding-left: 2.25rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .states li::before {
-    counter-increment: state;
-    content: counter(state);
-    position: absolute;
-    left: 0;
-    top: 0.2rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    display: grid;
-    place-items: center;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--bg);
-    background: var(--accent-2);
-    border-radius: 50%;
-  }
-
-  code {
-    font-size: 0.9em;
-    background: var(--surface);
-    padding: 0.1rem 0.3rem;
-    border-radius: 3px;
-  }
-
-  :global(pre.astro-code) {
-    padding: 1rem 1.15rem;
-    border-radius: 6px;
-    border: 1px solid var(--rule);
-    overflow-x: auto;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    margin: 0 0 1.75rem;
   }
 </style>
