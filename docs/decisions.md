@@ -591,7 +591,7 @@ live in `src/assets/` rather than `public/` so that Astro processes them.
   page and stacks below it on a phone.
 - The graduation photograph, cropped square and tight enough to keep the
   pointing hand in frame, is pinned to the board.
-- The Purple Peak Consulting team photograph, cropped to 3:2 with the ceiling
+- The capstone team photograph, cropped to 3:2 with the ceiling
   trimmed away, is pinned to the board and links into the ACC case study.
 
 Cropping was done with `sharp`, which ships with Astro, rather than by hand. The
@@ -657,12 +657,10 @@ section. The contradiction was raised explicitly before anything was deleted
 rather than actioned silently, because "do not quietly remove it" was the point
 of that note. Joe confirmed.
 
-His reason: he used Claude to write essentially all of the Apps Script, so he
-cannot walk a reader through it line by line. That reason is stronger than
-stylistic preference. It matches the standing constraint that skills on the site
-must be defensible in conversation. Code on a portfolio invites exactly the
-question he could not answer, so publishing it was a liability rather than
-evidence.
+The reason is stronger than stylistic preference. It matches the standing
+constraint that everything on the site must be defensible in conversation.
+Published code invites line-by-line questions, and the case study makes a better
+argument without it: what the client needed, and what was built to meet it.
 
 With no code on the page, the redaction rule has nothing left to act on, though
 the `dist/` grep still runs.
@@ -675,27 +673,20 @@ abandoned, why a Google Sheet was the right recommendation for this client even
 though a real database would have been cleaner, and why the handover runbook is
 the part closest to the IT work Joe is applying for.
 
-### The KPMG award, found in a teammate's LinkedIn post
+### The KPMG award
 
-Joe supplied two posts from Jamaree, the only other person who wrote code on the
-quick hit track. They surfaced facts that had never been captured:
+Two facts about the capstone surfaced this session that had never been captured:
+the team, Purple Peak Consulting, received the **KPMG Choice Award for Best
+Overall System**, and the system runs at a cost of **$0**, which is worth
+stating plainly for a nonprofit client.
 
-- The team was **Purple Peak Consulting**, advised by **Professor Shawn Lough**.
-- The team received the **KPMG Choice Award for Best Overall System**.
-- The system runs at a cost of **$0**, which is worth stating plainly for a
-  nonprofit client.
+The award is now in the case study spec box and on the projects page, phrased as
+the team receiving it rather than claimed personally, because that is what
+happened and because claiming it personally is the kind of thing an interviewer
+unpicks in one question.
 
-The award is now in the case study spec box and on the projects page. It is
-phrased as "Purple Peak Consulting received the KPMG Choice Award," because the
-award went to the group. Claiming it personally is the kind of thing an
-interviewer unpicks in one question, and naming the team is accurate while still
-being entirely to Joe's credit.
-
-**Jamaree is not named on the site yet.** His last name was not in any source to
-hand and guessing at it was not acceptable. Joe can supply it.
-
-This is the strongest third-party credential in the whole project and it is not
-on the resume. Flagged as Joe's call.
+Adding it to the resume was raised and declined for now: there is no obvious
+place it fits. Revisit only if Joe raises it.
 
 ### Capsim, reframed
 
@@ -745,9 +736,9 @@ written with the editor tool, and none of it failed.
    not hand-written markup.
 3. Decide whether to cut the projects page further. It came down only a fifth
    this session and is the longest page that is not the case study.
-4. Supply Jamaree's last name to credit him on the ACC case study.
-5. Add the KPMG Choice Award to the resume, and decide on CIS Controls v8 in the
-   BRHS bullet.
+4. Decide whether to credit the other developer on the ACC case study.
+5. Decide on CIS Controls v8 in the
+   BRHS bullet. The KPMG award was considered for the resume and declined.
 6. Delete the stale `home-page` branch on GitHub. Raised twice now and still
    unanswered; it was never merged and never will be.
 7. Decide between inline notes and a real blog at `/writing`. The standing
@@ -760,3 +751,31 @@ written with the editor tool, and none of it failed.
     `portfolio\node_modules`.
 11. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
     configuration; updating the LinkedIn and resume links to joefazio.dev.
+
+## 2026-09-20 (cleanup after pull request 13)
+
+### What changed
+- Deleted the stale `home-page` branch on GitHub. Only `main` remains.
+- Removed individual people's names from the decision log and the case study
+  spec box. The team name stays; individuals do not.
+- Removed a line from the decision log that described private reasoning about
+  how the capstone code was written.
+- Added three standing rules to CLAUDE.md: keep commit and pull request text
+  short, never name other people in anything public, and never publish the
+  internal authorship note.
+
+### Why
+Commit messages, pull request descriptions and this log are all public. They
+should record what changed, not narrate private reasoning or name people who
+did not choose to be listed.
+
+### What broke
+Pull request 13 was merged before these corrections were written, so the
+original commit message and the pre-fix file content are still reachable from
+`main`'s history. The working files are correct now, but history is not.
+Removing it needs a history rewrite, which is Joe's call and has not been done.
+The same tradeoff was faced and accepted once before, in the 2026-09-16 entry.
+
+### What is next
+Unchanged from the entry above, minus the stale branch and the resume item,
+both now closed.
