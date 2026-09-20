@@ -9,89 +9,74 @@ import Layout from '../layouts/Layout.astro';
   <h1>Projects</h1>
 
   <p>
-    Five projects. Four came out of my final year of coursework at James Madison
-    University, and the fifth is this site. The employers, dates and courses
-    behind them are on my <a href="/resume.pdf">resume</a>.
+    Five projects. Four grew out of my final year at James Madison University,
+    and the fifth is this site. The employers, dates and courses behind them are
+    on my <a href="/resume.pdf">resume</a>.
   </p>
 
   <h2>ACC Timebank</h2>
   <p class="meta">Spring 2026 · lead developer · Google Apps Script, Google Sheets, Python</p>
 
   <p>
-    A time-banking system for the Alachua Community Collective, a mutual-aid
-    group in Florida whose members trade hours of work instead of money. I was
+    A time-banking system for the Alachua Community Collective, a Florida
+    mutual-aid group whose members trade hours of work instead of money. I was
     lead developer on the fast, low-cost track and did most of the requirements
-    gathering across the whole engagement. The build covered transaction logic
-    for crediting and debiting hours, admin reporting, a burnout-risk flag, and a
-    Python script to migrate existing member records into the new system. It
-    appears on my resume as the Quick Hit Timebank System.
+    gathering across the engagement. Our team, Purple Peak Consulting, received
+    the KPMG Choice Award for Best Overall System. It appears on my resume as the
+    Quick Hit Timebank System.
   </p>
 
   <p class="more">
-    <a href="/projects/acc-timebank"
-      >Read the case study, with code and a security review</a
-    >
+    <a href="/projects/acc-timebank">Read the case study</a>
   </p>
 
   <h2>Ethical Hacking Lab Course</h2>
   <p class="meta">Spring 2026 · JMU · VirtualBox, Kali Linux, Metasploit, Nessus</p>
 
   <p>
-    A semester of hands-on security labs run inside an isolated virtual network I
-    built for the purpose. It pairs a Kali Linux machine with a Windows victim on
-    a private, host-only adapter with no route to the outside, so every
-    experiment stays contained on my own computer and cannot touch anything real.
-    Setting that environment up and keeping the two machines talking to each
-    other, and only each other, was the first lab and the foundation for the
-    rest.
-  </p>
-
-  <p>
-    From there the labs worked through security principles like defense in depth,
-    a keylogger study focused on detection and remedies, social engineering and
-    how to counter it, PGP for encrypting communications, hash functions and the
-    integrity checks they support, and a Nessus vulnerability scan whose
-    deliverable was a triaged, prioritized set of fixes rather than the raw
-    findings. That last habit, deciding what to fix first, is the one that
-    carries straight into the BRHS assessment below.
+    A semester of hands-on security labs inside an isolated virtual network I
+    built for the purpose: a Kali Linux machine and a Windows target on a private
+    adapter with no route to the outside, so nothing could touch anything real.
+    The labs covered defense in depth, keylogger detection, social engineering,
+    PGP, hash-based integrity checks, and a Nessus vulnerability scan whose
+    deliverable was a triaged, prioritized set of fixes rather than raw findings.
   </p>
 
   <h2>BRHS Cybersecurity Risk Assessment</h2>
-  <p class="meta">Spring 2026 · co-author · NIST CSF 2.0, CIS Controls v8</p>
+  <p class="meta">Spring 2026 · co-author · NIST CSF 2.0</p>
 
   <p>
     A consulting report for Blue Ridge Health Services, a fictional healthcare
     provider written for the assignment: identify the weaknesses, rank them, and
-    recommend hardening a real budget could absorb. We assessed the organization
-    against NIST's Cybersecurity Framework rather than inventing our own
-    categories, so a reader can check every finding against a published
-    standard. This was coursework. The method is the part that carries over.
+    recommend hardening a real budget could absorb. We assessed against NIST's
+    Cybersecurity Framework rather than inventing our own categories, so every
+    finding can be checked against a published standard. This was coursework, and
+    the method is the part that carries over.
   </p>
 
   <h2>Capsim Business Simulation</h2>
-  <p class="meta">Spring 2026 · strategic management</p>
+  <p class="meta">Spring 2026 · strategic management · R&amp;D</p>
 
   <p>
-    A multi-round simulation in which a team runs a company against competitors,
-    making pricing, R&amp;D, marketing and production decisions each round and
-    carrying the results into the next. I ran the R&amp;D side, revising our
-    product designs each round to keep them inside the shifting buying criteria
-    for our segments. It was the closest thing in my coursework to deciding with
-    incomplete information and a real cost attached to being wrong, and the
-    clearest lesson was that a strategy is only worth as much as the
-    follow-through behind it each round.
+    A College of Business simulation in which a cross-functional team runs a
+    company over multiple rounds, setting pricing, R&amp;D, marketing and
+    production each round and carrying the results into the next. My teammates
+    were marketing, management and accounting majors, and I ran R&amp;D, revising
+    our product designs each round to keep them inside the shifting buying
+    criteria for our segments. Working alongside three other disciplines was the
+    point: it taught me how a technical decision reads to the people who have to
+    sell, staff and account for it.
   </p>
 
   <h2>This site</h2>
   <p class="meta">2026 · ongoing · Astro, Cloudflare Pages, GitHub Actions</p>
 
   <p>
-    A static site built with Astro and hosted on Cloudflare Pages, with DNS and
-    TLS I manage myself. Every push runs a build in GitHub Actions, and a branch
-    rule blocks anything from reaching the main branch unless that build passes.
-    The repository is public and includes a decision log with a written reason
-    for every choice in it, including the ones I reversed. Terraform for the
-    Cloudflare configuration and a small Cloudflare Worker are the next pieces.
+    A static site on Astro, hosted on Cloudflare Pages, with DNS and TLS I manage
+    myself. Every push runs a build in GitHub Actions, and a branch rule blocks
+    anything from reaching the main branch unless that build passes. The
+    repository is public and carries a decision log with a written reason for
+    every choice in it, including the ones I reversed.
   </p>
 
   <p>

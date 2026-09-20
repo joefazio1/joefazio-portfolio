@@ -1,4 +1,6 @@
 ---
+import { Font } from 'astro:assets';
+
 // The shared shell for every page. Pages supply a title, an optional
 // description, and their content; everything else lives here once.
 interface Props {
@@ -32,6 +34,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -104,7 +108,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         background: var(--bg);
         color: var(--fg);
         font:
-          17px/1.7 system-ui,
+          17px/1.7 var(--font-body),
+          system-ui,
           -apple-system,
           'Segoe UI',
           Helvetica,
@@ -134,8 +139,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       }
 
       .wordmark {
-        font-weight: 600;
-        font-size: 1.05rem;
+        font-family: var(--font-display), system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 1.15rem;
         letter-spacing: -0.01em;
         text-decoration: none;
         color: var(--fg);
@@ -198,15 +204,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         padding: 3rem 0;
       }
 
+      /* Headings carry the character. Body text stays out of the way. */
+      h1,
+      h2,
+      h3 {
+        font-family: var(--font-display), system-ui, sans-serif;
+      }
+
       h1 {
-        font-size: 2rem;
-        line-height: 1.2;
-        letter-spacing: -0.02em;
+        font-size: 2.4rem;
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.015em;
         margin: 0 0 1.5rem;
       }
 
       h2 {
-        font-size: 1.25rem;
+        font-size: 1.45rem;
+        font-weight: 600;
         letter-spacing: -0.01em;
         margin: 2.5rem 0 0.75rem;
       }

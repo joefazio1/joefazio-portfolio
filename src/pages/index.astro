@@ -1,11 +1,221 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import graduation from '../assets/graduation.jpg';
+import accTeam from '../assets/acc-team.jpg';
+
+// The board is pinned paper. Every item is a real link, tilted a little and
+// straightening on hover. Nothing is hidden behind an interaction.
+const cards = [
+  { href: '/projects', label: 'Projects', note: 'Five builds' },
+  { href: '/about', label: 'About', note: 'Who I am' },
+  { href: '/resume.pdf', label: 'Resume', note: 'One page, PDF' },
+  { href: '/records', label: 'The Record Store', note: 'Movies, games, music' },
+];
 ---
 
 <Layout
   title="Joe Fazio"
-  description="Joe Fazio: recent JMU Computer Information Systems graduate casting a wide net across IT."
+  description="Joe Fazio: JMU Computer Information Systems graduate looking for IT work in support, systems, cloud and security."
 >
-  <h1>Joe Fazio</h1>
-  <p>Work in progress. Poke around the tabs up top.</p>
+  <div class="board">
+    <div class="pinned card-note" style="--tilt: -1.2deg">
+      <span class="pin"></span>
+      <h1>Joe Fazio</h1>
+      <p>
+        Computer Information Systems, James Madison University, 2026.
+        Looking for IT work: support, systems, cloud, security.
+      </p>
+    </div>
+
+    <a class="pinned polaroid" href="/projects/acc-timebank" style="--tilt: 1.8deg">
+      <span class="pin"></span>
+      <Image
+        src={accTeam}
+        alt="The Purple Peak Consulting team with their ACC Timebank poster at JMU."
+        widths={[400, 700]}
+        sizes="(max-width: 40rem) 90vw, 22rem"
+        loading="eager"
+      />
+      <span class="caption">Purple Peak Consulting, ACC Timebank</span>
+    </a>
+
+    <div class="pinned polaroid" style="--tilt: -2.4deg">
+      <span class="pin"></span>
+      <Image
+        src={graduation}
+        alt="Joe Fazio in cap and gown at JMU graduation, pointing toward the crowd."
+        widths={[320, 560]}
+        sizes="(max-width: 40rem) 60vw, 15rem"
+        loading="eager"
+      />
+      <span class="caption">JMU, May 2026</span>
+    </div>
+
+    {
+      cards.map((c, i) => (
+        <a class="pinned card-link" href={c.href} style={`--tilt: ${i % 2 ? 1.5 : -1.6}deg`}>
+          <span class="pin"></span>
+          <span class="label">{c.label}</span>
+          <span class="note">{c.note}</span>
+        </a>
+      ))
+    }
+  </div>
 </Layout>
+
+<style>
+  /* Cork: a warm base with two speckle layers scattered over it. */
+  .board {
+    --cork: #b8874e;
+    --cork-dark: #9a6d3a;
+    --paper: #fdfaf2;
+    --paper-edge: #e6dfcd;
+    --paper-ink: #2f2a20;
+    --paper-dim: #6d6455;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 1.75rem;
+    align-items: start;
+    margin: 1rem 0 3rem;
+    padding: 2.25rem 1.75rem 2.75rem;
+    border-radius: 6px;
+    background-color: var(--cork);
+    background-image:
+      radial-gradient(circle at 50% 50%, var(--cork-dark) 0.7px, transparent 0.8px),
+      radial-gradient(circle at 50% 50%, rgb(255 255 255 / 0.13) 0.6px, transparent 0.7px);
+    background-size:
+      13px 13px,
+      19px 21px;
+    background-position:
+      0 0,
+      6px 9px;
+    box-shadow:
+      inset 0 0 3rem rgb(90 55 20 / 0.35),
+      0 3px 12px rgb(0 0 0 / 0.25);
+  }
+
+  .card-note {
+    grid-column: 1 / -1;
+  }
+
+  /* Every pinned thing shares the tilt, the lift and the pin. */
+  .pinned {
+    position: relative;
+    display: block;
+    padding: 1.25rem 1.35rem 1.1rem;
+    background: var(--paper);
+    color: var(--paper-ink);
+    text-decoration: none;
+    box-shadow: 0 3px 7px rgb(60 35 10 / 0.4);
+    transform: rotate(var(--tilt, 0deg));
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  a.pinned:hover,
+  a.pinned:focus-visible {
+    transform: rotate(0deg) translateY(-4px) scale(1.015);
+    box-shadow: 0 9px 18px rgb(60 35 10 / 0.45);
+    z-index: 3;
+  }
+
+  .pin {
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    margin-left: -7.5px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 34% 30%, #ff9a8b, #c6382a 62%, #8d1f14);
+    box-shadow: 0 2px 3px rgb(0 0 0 / 0.45);
+    z-index: 2;
+  }
+
+  .card-note h1 {
+    margin: 0.25rem 0 0.4rem;
+    font-size: clamp(2rem, 6vw, 2.9rem);
+    line-height: 1.05;
+    color: var(--paper-ink);
+  }
+
+  .card-note p {
+    margin: 0;
+    max-width: 34rem;
+    color: var(--paper-dim);
+    font-size: 0.97rem;
+    line-height: 1.55;
+  }
+
+  /* Photos sit in a white frame with a caption below, polaroid style. */
+  .polaroid {
+    padding: 0.7rem 0.7rem 0.3rem;
+  }
+
+  .polaroid :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: var(--paper-edge);
+  }
+
+  .caption {
+    display: block;
+    padding: 0.6rem 0.15rem 0.5rem;
+    color: var(--paper-dim);
+    font-size: 0.82rem;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .card-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 1.1rem 1.2rem 1rem;
+  }
+
+  .card-link .label {
+    font-size: 1.12rem;
+    font-weight: 600;
+  }
+
+  .card-link .label::after {
+    content: ' \203A';
+    color: var(--paper-dim);
+  }
+
+  .card-link .note {
+    color: var(--paper-dim);
+    font-size: 0.85rem;
+  }
+
+  a.pinned:hover .label,
+  a.pinned:focus-visible .label {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Tilting and lifting is decoration. Switch it off when asked. */
+  @media (prefers-reduced-motion: reduce) {
+    .pinned {
+      transform: none;
+      transition: none;
+    }
+
+    a.pinned:hover,
+    a.pinned:focus-visible {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .board {
+      padding: 1.75rem 1rem 2rem;
+      gap: 1.5rem;
+    }
+  }
+</style>

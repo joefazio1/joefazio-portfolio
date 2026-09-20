@@ -555,3 +555,208 @@ live inside the store.
     `portfolio\node_modules`.
 12. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
     configuration; updating the LinkedIn and resume links to joefazio.dev.
+
+## 2026-09-20
+
+### Two home pages built, one kept
+
+The session opened on the question of what the landing page should be, and the
+answer took two attempts.
+
+**A manila folder was built and rejected.** The idea was a personnel file: a
+tabbed folder reading "Fazio, Joe" with the contents visible on the paper
+inside. It built and worked, and Joe did not like it. That is now two home-page
+concepts rejected, after the terminal hero of 2026-09-18. The lesson taken from
+it: Joe reacts to built pages rather than to descriptions, so for anything
+subjective the cheapest path is to build a throwaway comparison and let him
+pick, rather than to argue for one option in prose.
+
+**The bulletin board replaced it and stayed.** A cork panel with a speckle
+texture, holding pinned paper: an index card with the name and the one-line
+pitch, two polaroid photographs, and four link cards for Projects, About,
+Resume and The Record Store. Each item sits at a slight tilt and straightens and
+lifts on hover.
+
+The interaction is pure CSS, works on keyboard focus as well as mouse hover, and
+switches itself off under `prefers-reduced-motion`. Every pinned item is an
+ordinary link. Nothing on the board is hidden behind a click, which was the one
+firm rule: a recruiter with twenty seconds should not have to open anything.
+
+### Photographs
+
+Joe supplied three photographs, which are the first images on the site. They
+live in `src/assets/` rather than `public/` so that Astro processes them.
+
+- The professional headshot, cropped to 4:5, sits beside the intro on the about
+  page and stacks below it on a phone.
+- The graduation photograph, cropped square and tight enough to keep the
+  pointing hand in frame, is pinned to the board.
+- The Purple Peak Consulting team photograph, cropped to 3:2 with the ceiling
+  trimmed away, is pinned to the board and links into the ACC case study.
+
+Cropping was done with `sharp`, which ships with Astro, rather than by hand. The
+originals total roughly 12MB and stay untouched in `dev/source-material/`. Astro
+generates three WebP sizes of each at build time, so a phone downloads about
+30KB and a desktop about 60KB.
+
+The team photograph shows eight other people. Joe confirmed a teammate had
+already posted it publicly on LinkedIn, so consent was not an open question. The
+poster in the shot lists teammate names in small print and carries a QR code;
+both were checked and are far too small at the rendered size to be read or
+scanned.
+
+### Fonts, and why the first choice failed
+
+Joe asked for distinctive headings with readable body text. Fraunces was fitted
+first and rejected for one specific reason: its J descends below the baseline
+and curls, and J is the first letter of his name, so it appears everywhere.
+
+Rather than guess again, a throwaway page at `/font-test` rendered "Joe Fazio"
+in five candidates at full size with a line of bare J's under each. Joe picked
+**Gabarito**. The test page and the four losing families were deleted
+immediately afterwards.
+
+The typography is now Gabarito for headings and the wordmark, Inter for body
+text.
+
+**The infrastructure piece here is worth recording.** Astro 7 has a stable Fonts
+API, configured with a `fonts` array in `astro.config.mjs`. It downloads the
+font files at build time and serves them from joefazio.dev. The alternative, a
+`<link>` to Google's CDN, means every visitor's browser opens a connection to
+Google before the text can render. Self-hosting removes a DNS lookup and a TLS
+handshake from the critical path and tells Google nothing about who visits the
+site. Verified after the build: two `woff2` files under `dist/_astro/fonts/`,
+both preloaded, and no `fonts.googleapis.com` or `fonts.gstatic.com` string
+anywhere in `dist/`.
+
+### The word slop cut
+
+Joe's words: "not a single person is reading through all of that word slop."
+Measured on the built HTML, including about 40 words of nav and footer
+boilerplate on every page:
+
+| Page | Before | After |
+| --- | --- | --- |
+| ACC case study | ~1,440 | 673 |
+| Projects | ~640 | 513 |
+| About | 272 | 277 |
+| Home | 45 | 176 |
+
+The case study came down by more than half. The projects page came down by only
+about a fifth, which was reported as falling short rather than presented as a
+win; cutting it further means dropping entries or going to two sentences each,
+and that is Joe's call. About and home went up slightly, but both gained a
+photograph and real content in exchange.
+
+### The ACC case study, rewritten
+
+**All code excerpts are gone, and so is the security self-critique.** This
+reverses the 2026-09-18 decision to name the plaintext-password flaw openly, and
+it contradicts the standing note in CLAUDE.md that said not to remove that
+section. The contradiction was raised explicitly before anything was deleted
+rather than actioned silently, because "do not quietly remove it" was the point
+of that note. Joe confirmed.
+
+His reason: he used Claude to write essentially all of the Apps Script, so he
+cannot walk a reader through it line by line. That reason is stronger than
+stylistic preference. It matches the standing constraint that skills on the site
+must be defensible in conversation. Code on a portfolio invites exactly the
+question he could not answer, so publishing it was a liability rather than
+evidence.
+
+With no code on the page, the redaction rule has nothing left to act on, though
+the `dist/` grep still runs.
+
+The page is now five sections: what ACC needed, how we solved it, what it does,
+handing it over, where it stands. The ledger-mechanics walkthrough, the
+five-state request lifecycle and the guardian-authorisation detail were all cut
+as mechanism nobody asked for. What survived is the reasoning: why AppSheet was
+abandoned, why a Google Sheet was the right recommendation for this client even
+though a real database would have been cleaner, and why the handover runbook is
+the part closest to the IT work Joe is applying for.
+
+### The KPMG award, found in a teammate's LinkedIn post
+
+Joe supplied two posts from Jamaree, the only other person who wrote code on the
+quick hit track. They surfaced facts that had never been captured:
+
+- The team was **Purple Peak Consulting**, advised by **Professor Shawn Lough**.
+- The team received the **KPMG Choice Award for Best Overall System**.
+- The system runs at a cost of **$0**, which is worth stating plainly for a
+  nonprofit client.
+
+The award is now in the case study spec box and on the projects page. It is
+phrased as "Purple Peak Consulting received the KPMG Choice Award," because the
+award went to the group. Claiming it personally is the kind of thing an
+interviewer unpicks in one question, and naming the team is accurate while still
+being entirely to Joe's credit.
+
+**Jamaree is not named on the site yet.** His last name was not in any source to
+hand and guessing at it was not acceptable. Joe can supply it.
+
+This is the strongest third-party credential in the whole project and it is not
+on the resume. Flagged as Joe's call.
+
+### Capsim, reframed
+
+The old entry was built around deciding under incomplete information and
+strategy needing follow-through, which read as a lesson learned from doing
+badly. Joe asked for the opposite emphasis.
+
+The entry now leads with the cross-functional angle. It was a College of
+Business simulation, his teammates were marketing, management and accounting
+majors, and he ran R&D, revising product designs each round against shifting
+segment buying criteria. It closes on what that taught him about how a technical
+decision reads to the people who have to sell, staff and account for it. No
+outcomes, no numbers. The 2026-09-18 decision to keep the entry broad and
+lesson-focused still holds; only the lesson changed.
+
+### Other honesty fixes
+
+The BRHS entry's byline still listed "NIST CSF 2.0, CIS Controls v8" even though
+the 2026-09-18 session had corrected the body text to NIST only. The byline now
+matches the body. The resume still claims both, which remains Joe's call.
+
+The about page gained the reliable-and-persistent line. Those two traits were
+supposed to lead and were not on the page at all.
+
+### What broke
+
+Nothing broke. Two things needed correcting mid-session:
+
+- Removing Fraunces from the config left `--font-display` undefined while the
+  layout still referenced it, which would have silently dropped headings to the
+  browser default. Caught by reading the layout rather than by the build, since
+  an undefined CSS variable is not a build error. Fixed with an explicit
+  fallback chain while the font was undecided.
+- A config change does not hot-reload. The dev server was restarted after each
+  `astro.config.mjs` edit.
+
+The heredoc lesson from 2026-09-18 held: all large page content this session was
+written with the editor tool, and none of it failed.
+
+### What is next
+
+1. Joe is writing record store content: the Top 25 Albums list, the list of
+   records he owns, the one-line notes for the movies and games pages, and
+   further UI ideas. Those land next session.
+2. Build `/albums` and `My Record Collection`, then flip both dimmed sleeves
+   live. The collection should be a data file Joe edits when he buys a record,
+   not hand-written markup.
+3. Decide whether to cut the projects page further. It came down only a fifth
+   this session and is the longest page that is not the case study.
+4. Supply Jamaree's last name to credit him on the ACC case study.
+5. Add the KPMG Choice Award to the resume, and decide on CIS Controls v8 in the
+   BRHS bullet.
+6. Delete the stale `home-page` branch on GitHub. Raised twice now and still
+   unanswered; it was never merged and never will be.
+7. Decide between inline notes and a real blog at `/writing`. The standing
+   recommendation is to fill in notes first and build the blog when there is a
+   first real post.
+8. Wire up the parked Letterboxd, Steam and Spotify links once Joe supplies the
+   profile URLs.
+9. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
+10. Still carried over: open VS Code on the `portfolio` folder rather than
+    `portfolio\node_modules`.
+11. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
+    configuration; updating the LinkedIn and resume links to joefazio.dev.

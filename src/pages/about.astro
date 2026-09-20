@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import headshot from '../assets/headshot.jpg';
 ---
 
 <Layout
@@ -8,34 +10,81 @@ import Layout from '../layouts/Layout.astro';
 >
   <h1>About</h1>
 
-  <p>
-    I'm Joe. I graduated from James Madison University with a degree in Computer
-    Information Systems, taken through the College of Business, which mostly
-    meant learning to ask what a system is <em>for</em> before arguing about how
-    to build it.
-  </p>
+  <div class="intro">
+    <Image
+      class="portrait"
+      src={headshot}
+      alt="Joe Fazio."
+      widths={[260, 520]}
+      sizes="(max-width: 34rem) 45vw, 13rem"
+      loading="eager"
+    />
+
+    <div>
+      <p>
+        I'm Joe. I graduated from James Madison University with a degree in
+        Computer Information Systems, taken through the College of Business,
+        which mostly meant learning to ask what a system is <em>for</em> before
+        arguing about how to build it.
+      </p>
+
+      <p>
+        I'm looking for work across IT: help desk, systems administration, cloud
+        support, IT analyst, junior security. That is a wide net and it is
+        deliberate. I would rather land somewhere I can be useful early than pick
+        a title now and pretend I have been walking toward it the whole time.
+      </p>
+    </div>
+  </div>
 
   <p>
-    I'm looking for work across IT: help desk, systems administration, cloud
-    support, IT analyst, junior security. That is a wide net and it is
-    deliberate. I would rather land somewhere I can be useful early and grow
-    sideways than pick a title now and pretend I have been walking toward it the
-    whole time.
+    The two things worth knowing about how I work: I am reliable and I am
+    persistent. I finish what I pick up, and I stay on a problem past the point
+    where it stops being interesting.
   </p>
 
   <h2>What I'm building</h2>
 
   <p>
-    This site, mostly. It's a static site built with Astro, hosted on Cloudflare
-    Pages, on a domain whose DNS I manage myself. Every push runs a build in
-    GitHub Actions, and nothing reaches the main branch unless that build
-    passes. The repository is public, and the decision log is part of it: every
-    choice here has a written reason attached, including the ones I got wrong
-    the first time and had to go back and fix.
-  </p>
-
-  <p>
-    I built it this way on purpose. I wanted infrastructure I could explain out
-    loud, line by line, rather than a template I clicked into existence.
+    This site. The infrastructure is the point: Astro, Cloudflare Pages, DNS I
+    manage myself, and a build in GitHub Actions that has to pass before anything
+    reaches the main branch. The repository is public and every choice in it has
+    a written reason attached, including the ones I got wrong and went back to
+    fix. I wanted infrastructure I could explain out loud rather than a template
+    I clicked into existence.
   </p>
 </Layout>
+
+<style>
+  .intro {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .intro > div {
+    flex: 1 1 18rem;
+  }
+
+  .intro p:first-child {
+    margin-top: 0;
+  }
+
+  .portrait {
+    flex: 0 0 13rem;
+    width: 13rem;
+    max-width: 45%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.22);
+  }
+
+  @media (max-width: 26rem) {
+    .portrait {
+      max-width: 60%;
+      margin: 0 auto;
+    }
+  }
+</style>
