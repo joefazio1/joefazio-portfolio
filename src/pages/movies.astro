@@ -4,44 +4,45 @@ import Layout from '../layouts/Layout.astro';
 // My top 25, in rough order. `note` is a one-line reason, filled in over time.
 // Leave a note empty and the row simply renders without one.
 const films = [
-  { title: 'Memento', note: '' },
-  { title: 'The Dark Knight', note: '' },
-  { title: 'Harry Potter and the Prisoner of Azkaban', note: '' },
-  { title: 'WALL-E', note: '' },
-  { title: 'Inception', note: '' },
-  { title: 'Jurassic Park', note: '' },
-  { title: 'Knives Out', note: '' },
-  { title: 'The Godfather', note: '' },
-  { title: 'The Empire Strikes Back', note: '' },
-  { title: 'The Batman', note: '' },
-  { title: 'Dead Poets Society', note: '' },
-  { title: 'Avengers: Infinity War', note: '' },
-  { title: 'Avengers: Endgame', note: '' },
-  { title: '12 Angry Men', note: '' },
-  { title: 'Harry Potter and the Deathly Hallows: Part 2', note: '' },
-  { title: 'Inglourious Basterds', note: '' },
-  { title: "Pirates of the Caribbean: At World's End", note: '' },
-  { title: "Pirates of the Caribbean: Dead Man's Chest", note: '' },
-  { title: 'The Hateful Eight', note: '' },
-  { title: 'My Cousin Vinny', note: '' },
-  { title: 'GoodFellas', note: '' },
-  { title: 'Uncut Gems', note: '' },
-  { title: 'Fargo', note: '' },
-  { title: 'Rocky', note: '' },
-  { title: 'Rango', note: '' },
+  { title: 'Memento', year: 2000, note: '' },
+  { title: 'The Dark Knight', year: 2008, note: '' },
+  { title: 'Harry Potter and the Prisoner of Azkaban', year: 2004, note: '' },
+  { title: 'WALL-E', year: 2008, note: '' },
+  { title: 'Inception', year: 2010, note: '' },
+  { title: 'Jurassic Park', year: 1993, note: '' },
+  { title: 'Knives Out', year: 2019, note: '' },
+  { title: 'The Godfather', year: 1972, note: '' },
+  { title: 'The Empire Strikes Back', year: 1980, note: '' },
+  { title: 'The Batman', year: 2022, note: '' },
+  { title: 'Dead Poets Society', year: 1989, note: '' },
+  { title: 'Avengers: Infinity War', year: 2018, note: '' },
+  { title: 'Avengers: Endgame', year: 2019, note: '' },
+  { title: '12 Angry Men', year: 1957, note: '' },
+  { title: 'Harry Potter and the Deathly Hallows: Part 2', year: 2011, note: '' },
+  { title: 'Inglourious Basterds', year: 2009, note: '' },
+  { title: "Pirates of the Caribbean: At World's End", year: 2007, note: '' },
+  { title: "Pirates of the Caribbean: Dead Man's Chest", year: 2006, note: '' },
+  { title: 'The Hateful Eight', year: 2015, note: '' },
+  { title: 'My Cousin Vinny', year: 1992, note: '' },
+  { title: 'GoodFellas', year: 1990, note: '' },
+  { title: 'Uncut Gems', year: 2019, note: '' },
+  { title: 'Fargo', year: 1996, note: '' },
+  { title: 'Rocky', year: 1976, note: '' },
+  { title: 'Rango', year: 2011, note: '' },
 ];
 ---
 
 <Layout
   title="Top 25 Movies | Joe Fazio"
-  description="Joe Fazio's twenty-five favorite movies, in rough order."
+  description="Joe Fazio's twenty-five favorite movies of all time."
 >
   <p class="back"><a href="/records">Back to The Record Store</a></p>
 
-  <h1>Top 25 Movies</h1>
+  <h1>Joe's Top 25 Movies</h1>
   <p class="lede">
-    The twenty-five I keep coming back to, in rough order. Ask me about any of
-    them and I will not stop talking. Notes are getting added as I write them.
+    My twenty-five favorite movies of all time. Subjective, and ranked on more
+    than just the story: how they look, how they hold up on a rewatch, and the
+    nostalgia they carry. Notes are getting added as I write them.
   </p>
 
   <ol class="ranked">
@@ -50,7 +51,9 @@ const films = [
         <li>
           <span class="rank">{String(i + 1).padStart(2, '0')}</span>
           <span class="body">
-            <span class="title">{f.title}</span>
+            <span class="title">
+              {f.title} <span class="year">({f.year})</span>
+            </span>
             {f.note && <span class="note">{f.note}</span>}
           </span>
         </li>
@@ -115,6 +118,12 @@ const films = [
     font-size: 1.02rem;
     font-weight: 500;
     letter-spacing: -0.01em;
+  }
+
+  /* The year sits quietly beside the title. */
+  .year {
+    font-weight: 400;
+    color: var(--dim);
   }
 
   .note {

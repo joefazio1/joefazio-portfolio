@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// My top 25. `note` is a one-line reason, filled in over time.
+// Leave a note empty and the row simply renders without one.
+const albums = [
+  { title: 'Drip or Drown 2', artist: 'Gunna', year: 2019, note: '' },
+  { title: 'Rodeo', artist: 'Travis Scott', year: 2015, note: '' },
+  { title: 'good kid, m.A.A.d city', artist: 'Kendrick Lamar', year: 2012, note: '' },
+  { title: 'The Life of Pablo', artist: 'Kanye West', year: 2016, note: '' },
+  { title: 'So Much Fun (Deluxe)', artist: 'Young Thug', year: 2019, note: '' },
+  { title: 'Late Registration', artist: 'Kanye West', year: 2005, note: '' },
+  { title: 'WUNNA (Deluxe)', artist: 'Gunna', year: 2020, note: '' },
+  { title: 'ASTROWORLD', artist: 'Travis Scott', year: 2018, note: '' },
+  { title: 'Culture', artist: 'Migos', year: 2017, note: '' },
+  { title: 'Slime Season 3', artist: 'Young Thug', year: 2016, note: '' },
+  { title: 'Die Lit', artist: 'Playboi Carti', year: 2018, note: '' },
+  { title: 'HEROES & VILLAINS', artist: 'Metro Boomin', year: 2022, note: '' },
+  { title: 'To Pimp a Butterfly', artist: 'Kendrick Lamar', year: 2015, note: '' },
+  { title: 'At. Long. Last. ASAP', artist: 'A$AP Rocky', year: 2015, note: '' },
+  { title: 'The Last Rocket', artist: 'Takeoff', year: 2018, note: '' },
+  { title: 'A Great Chaos (Deluxe)', artist: 'Ken Carson', year: 2023, note: '' },
+  { title: 'Jeffery', artist: 'Young Thug', year: 2016, note: '' },
+  { title: 'untitled unmastered.', artist: 'Kendrick Lamar', year: 2016, note: '' },
+  { title: 'IGOR', artist: 'Tyler, The Creator', year: 2019, note: '' },
+  { title: 'Yeezus', artist: 'Kanye West', year: 2013, note: '' },
+  { title: 'MUSIC - SORRY 4 DA WAIT', artist: 'Playboi Carti', year: 2025, note: '' },
+  { title: 'Alfredo', artist: 'Freddie Gibbs', year: 2020, note: '' },
+  { title: 'Osama Season', artist: 'OsamaSon', year: 2024, note: '' },
+  { title: '2 Alivë (Geëk Pack)', artist: 'Yeat', year: 2022, note: '' },
+  { title: 'Whole Lotta Red', artist: 'Playboi Carti', year: 2020, note: '' },
+];
+---
+
+<Layout
+  title="Top 25 Albums | Joe Fazio"
+  description="Joe Fazio's twenty-five favorite albums, front to back."
+>
+  <p class="back"><a href="/records">Back to The Record Store</a></p>
+
+  <h1>Joe's Top 25 Albums</h1>
+  <p class="lede">
+    My twenty-five favorite albums of all time. The ones I never get tired of,
+    ranked on more than just how catchy they are: the production, the
+    narrative, the vibe, the nostalgia, and what they mean to me. Notes are
+    getting added as I write them.
+  </p>
+
+  <ol class="ranked">
+    {
+      albums.map((a, i) => (
+        <li>
+          <span class="rank">{String(i + 1).padStart(2, '0')}</span>
+          <span class="body">
+            <span class="title">
+              {a.title} <span class="year">({a.year})</span>
+            </span>
+            <span class="artist">{a.artist}</span>
+            {a.note && <span class="note">{a.note}</span>}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="back"><a href="/records">Back to The Record Store</a></p>
+</Layout>
+
+<style>
+  .back {
+    font-size: 0.9rem;
+    margin: 0 0 1.25rem;
+  }
+
+  h1 {
+    margin-bottom: 0.75rem;
+  }
+
+  .lede {
+    color: var(--dim);
+    max-width: 34rem;
+    margin: 0 0 2rem;
+  }
+
+  .ranked {
+    list-style: none;
+    margin: 0 0 2rem;
+    padding: 0;
+  }
+
+  .ranked li {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .ranked li:last-child {
+    border-bottom: none;
+  }
+
+  .rank {
+    flex: 0 0 2.1rem;
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    padding-top: 0.1rem;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .title {
+    font-size: 1.02rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* The year sits quietly beside the title. */
+  .year {
+    font-weight: 400;
+    color: var(--dim);
+  }
+
+  /* The artist sits under the title like a subheading, never italic. */
+  .artist {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: 0.01em;
+    color: var(--fg);
+  }
+
+  .note {
+    font-size: 0.85rem;
+    color: var(--dim);
+    line-height: 1.55;
+  }
+</style>
