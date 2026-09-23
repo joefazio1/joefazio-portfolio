@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 
 // My top 25, in rough order. `note` is a one-line reason, filled in over time.
 // Leave a note empty and the row simply renders without one.
+// `year` prints as written, so a collection can carry more than one year.
 const games = [
   { title: 'The Legend of Zelda: Breath of the Wild', year: 2017, note: '' },
   { title: 'Red Dead Redemption 2', year: 2018, note: '' },
@@ -22,9 +23,9 @@ const games = [
   { title: 'Metroid Dread', year: 2021, note: '' },
   { title: 'Minecraft', year: 2011, note: '' },
   { title: 'Terraria', year: 2011, note: '' },
-  { title: 'BioShock Infinite: The Complete Edition', year: 2014, note: '' },
+  { title: 'BioShock Infinite: The Complete Edition', year: '2013-2014', note: '' },
   { title: "Marvel's Spider-Man: Miles Morales", year: 2020, note: '' },
-  { title: 'Batman: Arkham Trilogy', year: 2023, note: '' },
+  { title: 'Batman: Arkham Trilogy', year: '2009, 2011, 2015', note: '' },
   { title: 'Bloons TD 6', year: 2018, note: '' },
   { title: 'Before Your Eyes', year: 2021, note: '' },
   { title: "BioShock 2: Minerva's Den", year: 2010, note: '' },

@@ -6,9 +6,11 @@ import accTeam from '../assets/acc-team.jpg';
 
 // The board is pinned paper. Every item is a real link, tilted a little and
 // straightening on hover. Nothing is hidden behind an interaction.
-// The items are written out one by one below, in board order: name card,
-// graduation photo, about, resume, projects, the team photo next to projects,
-// record store. To reorder the board, move a block.
+// Each item carries an `i-` class that names its slot in the grid. The wide
+// layout is two columns: the graduation photo on the left beside about,
+// resume and now, then projects and the record store on the left with the
+// team photo beside them. Narrow screens drop to one column in the order
+// written below.
 ---
 
 <Layout
@@ -16,7 +18,7 @@ import accTeam from '../assets/acc-team.jpg';
   description="Joe Fazio: JMU Computer Information Systems graduate looking for IT work in support, systems, cloud and security."
 >
   <div class="board">
-    <div class="pinned card-note" style="--tilt: -1.2deg">
+    <div class="pinned card-note i-note" style="--tilt: -1.2deg">
       <span class="pin"></span>
       <h1>Joe Fazio</h1>
       <p>
@@ -25,7 +27,7 @@ import accTeam from '../assets/acc-team.jpg';
       </p>
     </div>
 
-    <div class="pinned polaroid" style="--tilt: -2.4deg">
+    <div class="pinned polaroid i-photo" style="--tilt: -2.4deg">
       <span class="pin"></span>
       <Image
         src={graduation}
@@ -37,25 +39,37 @@ import accTeam from '../assets/acc-team.jpg';
       <span class="caption">JMU, May 2026</span>
     </div>
 
-    <a class="pinned card-link" href="/about" style="--tilt: 1.5deg">
+    <a class="pinned card-link i-about" href="/about" style="--tilt: 1.5deg">
       <span class="pin"></span>
       <span class="label">About</span>
       <span class="note">Who I am</span>
     </a>
 
-    <a class="pinned card-link" href="/resume.pdf" style="--tilt: -1.6deg">
+    <a class="pinned card-link i-resume" href="/resume.pdf" style="--tilt: -1.6deg">
       <span class="pin"></span>
       <span class="label">Resume</span>
       <span class="note">One page, PDF</span>
     </a>
 
-    <a class="pinned card-link" href="/projects" style="--tilt: 1.5deg">
+    <a class="pinned card-link i-now" href="/now" style="--tilt: 1.5deg">
+      <span class="pin"></span>
+      <span class="label">Now</span>
+      <span class="note">What I am learning</span>
+    </a>
+
+    <a class="pinned card-link i-projects" href="/projects" style="--tilt: -1.6deg">
       <span class="pin"></span>
       <span class="label">Projects</span>
       <span class="note">Five builds</span>
     </a>
 
-    <a class="pinned polaroid" href="/projects/acc-timebank" style="--tilt: 1.8deg">
+    <a class="pinned card-link i-records" href="/records" style="--tilt: 1.5deg">
+      <span class="pin"></span>
+      <span class="label">The Record Store</span>
+      <span class="note">Movies, games, music</span>
+    </a>
+
+    <a class="pinned polaroid i-acc" href="/projects/acc-timebank" style="--tilt: 1.8deg">
       <span class="pin"></span>
       <Image
         src={accTeam}
@@ -65,12 +79,6 @@ import accTeam from '../assets/acc-team.jpg';
         loading="eager"
       />
       <span class="caption">Purple Peak Consulting, ACC Timebank</span>
-    </a>
-
-    <a class="pinned card-link" href="/records" style="--tilt: -1.6deg">
-      <span class="pin"></span>
-      <span class="label">The Record Store</span>
-      <span class="note">Movies, games, music</span>
     </a>
   </div>
 </Layout>
@@ -86,7 +94,7 @@ import accTeam from '../assets/acc-team.jpg';
     --paper-dim: #6d6455;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    grid-template-columns: 1fr;
     gap: 1.75rem;
     align-items: start;
     margin: 1rem 0 3rem;
@@ -107,8 +115,45 @@ import accTeam from '../assets/acc-team.jpg';
       0 3px 12px rgb(0 0 0 / 0.25);
   }
 
-  .card-note {
-    grid-column: 1 / -1;
+  /* Wide enough for two columns: the grid gets named slots, one per item.
+     Reading down the left is photo, projects, record store; down the right
+     is about, resume, now, team photo. */
+  @media (min-width: 46rem) {
+    .board {
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas:
+        'note note'
+        'photo about'
+        'photo resume'
+        'photo now'
+        'projects acc'
+        'records acc';
+    }
+
+    .i-note {
+      grid-area: note;
+    }
+    .i-photo {
+      grid-area: photo;
+    }
+    .i-about {
+      grid-area: about;
+    }
+    .i-resume {
+      grid-area: resume;
+    }
+    .i-now {
+      grid-area: now;
+    }
+    .i-projects {
+      grid-area: projects;
+    }
+    .i-records {
+      grid-area: records;
+    }
+    .i-acc {
+      grid-area: acc;
+    }
   }
 
   /* Every pinned thing shares the tilt, the lift and the pin. */
