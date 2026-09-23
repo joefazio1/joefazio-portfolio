@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// My top 25, in rough order. `note` is a one-line reason, filled in over time.
+// My top 25. `note` is a one-line reason, filled in over time.
 // Leave a note empty and the row simply renders without one.
 const albums = [
   { title: 'Drip or Drown 2', artist: 'Gunna', year: 2019, note: '' },
@@ -34,14 +34,16 @@ const albums = [
 
 <Layout
   title="Top 25 Albums | Joe Fazio"
-  description="Joe Fazio's twenty-five favorite albums, in rough order."
+  description="Joe Fazio's twenty-five favorite albums, front to back."
 >
   <p class="back"><a href="/records">Back to The Record Store</a></p>
 
   <h1>Top 25 Albums</h1>
   <p class="lede">
-    The twenty-five I keep coming back to, in rough order. Mostly rap, and the
-    order changes depending on the week. Notes are getting added as I write
+    My twenty-five favorite albums, the ones I keep coming back to. Some are
+    here because they hold a few of my favorite songs ever. Others are here
+    because the vibe is so curated, or the tracklist so tight, that they became
+    the records I listen to front to back. Notes are getting added as I write
     them.
   </p>
 
@@ -52,7 +54,7 @@ const albums = [
           <span class="rank">{String(i + 1).padStart(2, '0')}</span>
           <span class="body">
             <span class="title">
-              <em>{a.title}</em> <span class="year">({a.year})</span>
+              {a.title} <span class="year">({a.year})</span>
             </span>
             <span class="artist">{a.artist}</span>
             {a.note && <span class="note">{a.note}</span>}
@@ -120,9 +122,8 @@ const albums = [
     letter-spacing: -0.01em;
   }
 
-  /* The album title is italic, the year beside it is not. */
+  /* The year sits quietly beside the title. */
   .year {
-    font-style: normal;
     font-weight: 400;
     color: var(--dim);
   }

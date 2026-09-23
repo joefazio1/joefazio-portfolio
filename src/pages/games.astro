@@ -35,15 +35,15 @@ const games = [
 
 <Layout
   title="Top 25 Games | Joe Fazio"
-  description="Joe Fazio's twenty-five favorite video games, in rough order."
+  description="Joe Fazio's twenty-five favorite video games of all time."
 >
   <p class="back"><a href="/records">Back to The Record Store</a></p>
 
   <h1>Top 25 Games</h1>
   <p class="lede">
-    The twenty-five I keep coming back to, in rough order. A mix of the huge and
-    the tiny, which is most of what I look for. Notes are getting added as I
-    write them.
+    My twenty-five favorite games of all time. A subjective list, ranked on
+    nothing but how much I liked playing them, and a mix of the huge and the
+    tiny. Notes are getting added as I write them.
   </p>
 
   <ol class="ranked">
@@ -53,7 +53,7 @@ const games = [
           <span class="rank">{String(i + 1).padStart(2, '0')}</span>
           <span class="body">
             <span class="title">
-              <em>{g.title}</em> <span class="year">({g.year})</span>
+              {g.title} <span class="year">({g.year})</span>
             </span>
             {g.note && <span class="note">{g.note}</span>}
           </span>
@@ -120,9 +120,8 @@ const games = [
     letter-spacing: -0.01em;
   }
 
-  /* The title is italic, the year beside it is not. */
+  /* The year sits quietly beside the title. */
   .year {
-    font-style: normal;
     font-weight: 400;
     color: var(--dim);
   }

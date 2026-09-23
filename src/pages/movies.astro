@@ -34,14 +34,14 @@ const films = [
 
 <Layout
   title="Top 25 Movies | Joe Fazio"
-  description="Joe Fazio's twenty-five favorite movies, in rough order."
+  description="Joe Fazio's twenty-five favorite movies of all time."
 >
   <p class="back"><a href="/records">Back to The Record Store</a></p>
 
   <h1>Top 25 Movies</h1>
   <p class="lede">
-    The twenty-five I keep coming back to, in rough order. Ask me about any of
-    them and I will not stop talking. Notes are getting added as I write them.
+    My twenty-five favorite movies of all time. Ask me about any of them and I
+    will not stop talking. Notes are getting added as I write them.
   </p>
 
   <ol class="ranked">
@@ -51,7 +51,7 @@ const films = [
           <span class="rank">{String(i + 1).padStart(2, '0')}</span>
           <span class="body">
             <span class="title">
-              <em>{f.title}</em> <span class="year">({f.year})</span>
+              {f.title} <span class="year">({f.year})</span>
             </span>
             {f.note && <span class="note">{f.note}</span>}
           </span>
@@ -119,9 +119,8 @@ const films = [
     letter-spacing: -0.01em;
   }
 
-  /* The title is italic, the year beside it is not. */
+  /* The year sits quietly beside the title. */
   .year {
-    font-style: normal;
     font-weight: 400;
     color: var(--dim);
   }
