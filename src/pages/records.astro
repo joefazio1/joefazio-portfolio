@@ -7,14 +7,14 @@ import Layout from '../layouts/Layout.astro';
 const sleeves = [
   { title: "Joe's Top 25 Movies", kicker: 'Top 25', href: '/movies', hue: 'rust' },
   { title: "Joe's Top 25 Games", kicker: 'Top 25', href: '/games', hue: 'green' },
-  { title: "Joe's Top 25 Albums", kicker: 'Coming soon', href: null, hue: 'plum' },
+  { title: "Joe's Top 25 Albums", kicker: 'Top 25', href: '/albums', hue: 'plum' },
   { title: 'My Record Collection', kicker: 'Coming soon', href: null, hue: 'teal' },
 ];
 ---
 
 <Layout
   title="The Record Store | Joe Fazio"
-  description="A crate of Joe Fazio's favorites: top 25 movies, top 25 games, and more to come. Pick a record."
+  description="A crate of Joe Fazio's favorites: top 25 movies, games and albums, with more to come. Pick a record."
 >
   <h1>The Record Store</h1>
   <p class="hi">Pick a record.</p>

@@ -4,31 +4,31 @@ import Layout from '../layouts/Layout.astro';
 // My top 25, in rough order. `note` is a one-line reason, filled in over time.
 // Leave a note empty and the row simply renders without one.
 const games = [
-  { title: 'The Legend of Zelda: Breath of the Wild', note: '' },
-  { title: 'Red Dead Redemption 2', note: '' },
-  { title: 'Super Smash Bros. Ultimate', note: '' },
-  { title: 'Hades', note: '' },
-  { title: 'God of War Ragnarok', note: '' },
-  { title: 'God of War', note: '' },
-  { title: 'Super Mario Maker', note: '' },
-  { title: "Marvel's Spider-Man", note: '' },
-  { title: 'Pokemon Black Version 2', note: '' },
-  { title: 'BioShock', note: '' },
-  { title: 'Celeste', note: '' },
-  { title: 'Counter-Strike 2', note: '' },
-  { title: 'The Legend of Zelda: Tears of the Kingdom', note: '' },
-  { title: 'Hollow Knight', note: '' },
-  { title: 'Katana Zero', note: '' },
-  { title: 'Metroid Dread', note: '' },
-  { title: 'Minecraft', note: '' },
-  { title: 'Terraria', note: '' },
-  { title: 'BioShock Infinite: The Complete Edition', note: '' },
-  { title: "Marvel's Spider-Man: Miles Morales", note: '' },
-  { title: 'Batman: Arkham Trilogy', note: '' },
-  { title: 'Bloons TD 6', note: '' },
-  { title: 'Before Your Eyes', note: '' },
-  { title: "BioShock 2: Minerva's Den", note: '' },
-  { title: 'Clash of Clans', note: '' },
+  { title: 'The Legend of Zelda: Breath of the Wild', year: 2017, note: '' },
+  { title: 'Red Dead Redemption 2', year: 2018, note: '' },
+  { title: 'Super Smash Bros. Ultimate', year: 2018, note: '' },
+  { title: 'Hades', year: 2020, note: '' },
+  { title: 'God of War Ragnarok', year: 2022, note: '' },
+  { title: 'God of War', year: 2018, note: '' },
+  { title: 'Super Mario Maker', year: 2015, note: '' },
+  { title: "Marvel's Spider-Man", year: 2018, note: '' },
+  { title: 'Pokemon Black Version 2', year: 2012, note: '' },
+  { title: 'BioShock', year: 2007, note: '' },
+  { title: 'Celeste', year: 2018, note: '' },
+  { title: 'Counter-Strike 2', year: 2023, note: '' },
+  { title: 'The Legend of Zelda: Tears of the Kingdom', year: 2023, note: '' },
+  { title: 'Hollow Knight', year: 2017, note: '' },
+  { title: 'Katana Zero', year: 2019, note: '' },
+  { title: 'Metroid Dread', year: 2021, note: '' },
+  { title: 'Minecraft', year: 2011, note: '' },
+  { title: 'Terraria', year: 2011, note: '' },
+  { title: 'BioShock Infinite: The Complete Edition', year: 2014, note: '' },
+  { title: "Marvel's Spider-Man: Miles Morales", year: 2020, note: '' },
+  { title: 'Batman: Arkham Trilogy', year: 2023, note: '' },
+  { title: 'Bloons TD 6', year: 2018, note: '' },
+  { title: 'Before Your Eyes', year: 2021, note: '' },
+  { title: "BioShock 2: Minerva's Den", year: 2010, note: '' },
+  { title: 'Clash of Clans', year: 2012, note: '' },
 ];
 ---
 
@@ -51,7 +51,9 @@ const games = [
         <li>
           <span class="rank">{String(i + 1).padStart(2, '0')}</span>
           <span class="body">
-            <span class="title">{g.title}</span>
+            <span class="title">
+              <em>{g.title}</em> <span class="year">({g.year})</span>
+            </span>
             {g.note && <span class="note">{g.note}</span>}
           </span>
         </li>
@@ -115,6 +117,13 @@ const games = [
     font-size: 1.02rem;
     font-weight: 500;
     letter-spacing: -0.01em;
+  }
+
+  /* The title is italic, the year beside it is not. */
+  .year {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--dim);
   }
 
   .note {

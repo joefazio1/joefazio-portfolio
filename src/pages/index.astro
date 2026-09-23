@@ -6,12 +6,9 @@ import accTeam from '../assets/acc-team.jpg';
 
 // The board is pinned paper. Every item is a real link, tilted a little and
 // straightening on hover. Nothing is hidden behind an interaction.
-const cards = [
-  { href: '/projects', label: 'Projects', note: 'Five builds' },
-  { href: '/about', label: 'About', note: 'Who I am' },
-  { href: '/resume.pdf', label: 'Resume', note: 'One page, PDF' },
-  { href: '/records', label: 'The Record Store', note: 'Movies, games, music' },
-];
+// The items are written out one by one below, in board order: name card,
+// graduation photo, about, resume, projects, the team photo next to projects,
+// record store. To reorder the board, move a block.
 ---
 
 <Layout
@@ -28,18 +25,6 @@ const cards = [
       </p>
     </div>
 
-    <a class="pinned polaroid" href="/projects/acc-timebank" style="--tilt: 1.8deg">
-      <span class="pin"></span>
-      <Image
-        src={accTeam}
-        alt="The Purple Peak Consulting team with their ACC Timebank poster at JMU."
-        widths={[400, 700]}
-        sizes="(max-width: 40rem) 90vw, 22rem"
-        loading="eager"
-      />
-      <span class="caption">Purple Peak Consulting, ACC Timebank</span>
-    </a>
-
     <div class="pinned polaroid" style="--tilt: -2.4deg">
       <span class="pin"></span>
       <Image
@@ -52,15 +37,41 @@ const cards = [
       <span class="caption">JMU, May 2026</span>
     </div>
 
-    {
-      cards.map((c, i) => (
-        <a class="pinned card-link" href={c.href} style={`--tilt: ${i % 2 ? 1.5 : -1.6}deg`}>
-          <span class="pin"></span>
-          <span class="label">{c.label}</span>
-          <span class="note">{c.note}</span>
-        </a>
-      ))
-    }
+    <a class="pinned card-link" href="/about" style="--tilt: 1.5deg">
+      <span class="pin"></span>
+      <span class="label">About</span>
+      <span class="note">Who I am</span>
+    </a>
+
+    <a class="pinned card-link" href="/resume.pdf" style="--tilt: -1.6deg">
+      <span class="pin"></span>
+      <span class="label">Resume</span>
+      <span class="note">One page, PDF</span>
+    </a>
+
+    <a class="pinned card-link" href="/projects" style="--tilt: 1.5deg">
+      <span class="pin"></span>
+      <span class="label">Projects</span>
+      <span class="note">Five builds</span>
+    </a>
+
+    <a class="pinned polaroid" href="/projects/acc-timebank" style="--tilt: 1.8deg">
+      <span class="pin"></span>
+      <Image
+        src={accTeam}
+        alt="The Purple Peak Consulting team with their ACC Timebank poster at JMU."
+        widths={[400, 700]}
+        sizes="(max-width: 40rem) 90vw, 22rem"
+        loading="eager"
+      />
+      <span class="caption">Purple Peak Consulting, ACC Timebank</span>
+    </a>
+
+    <a class="pinned card-link" href="/records" style="--tilt: -1.6deg">
+      <span class="pin"></span>
+      <span class="label">The Record Store</span>
+      <span class="note">Movies, games, music</span>
+    </a>
   </div>
 </Layout>
 
