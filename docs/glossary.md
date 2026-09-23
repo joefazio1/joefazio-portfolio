@@ -443,3 +443,41 @@ The image-processing library Astro uses under the hood to crop, resize and conve
 
 ### Runbook
 A written procedure for operating and recovering a system, aimed at whoever has to run it later rather than at the person who built it.
+
+### Content hash
+A short string in a built file's name (`headshot.4USbYTB3_Z26vfcl.webp`) calculated from the file's contents. Change the file and the name changes with it.
+
+### Cache busting
+Using a content hash in a filename so that new content always arrives at a new URL, which no browser or CDN can have cached yet.
+
+### Browser cache
+The copy of a file your own browser keeps so it does not download it twice. It is keyed on the URL, so if a file changes but its URL does not, the browser keeps serving the old copy.
+
+### Hard reload
+Reloading a page while telling the browser to ignore its cache (Ctrl+Shift+R). The fix when the site on disk is correct but the screen is not.
+
+## Page layout
+
+### CSS Grid
+A layout system that arranges elements into rows and columns, rather than letting them flow one after another.
+
+### Grid track
+One row or one column of a grid.
+
+### auto-fit
+A grid setting that lets the browser decide how many columns fit at the current width. Flexible, but it gives up control of which item lands where.
+
+### Grid template areas
+Naming each region of a grid and assigning items to those names, so the layout is written out as a small picture in the CSS and items can be rearranged without touching the HTML.
+
+### Media query
+A block of CSS that only applies when a condition is met, usually a minimum screen width.
+
+### Breakpoint
+The width at which a layout changes, named in a media query; this site switches the home board from one column to two at 46rem.
+
+### rem
+A CSS length equal to the page's base font size, so layouts measured in rem scale with the reader's text-size setting instead of ignoring it.
+
+### Progressive enhancement
+Building the plain version first so it works without JavaScript, then layering extras on top for browsers that can run them.
