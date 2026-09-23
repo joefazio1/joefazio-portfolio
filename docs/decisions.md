@@ -779,3 +779,101 @@ The same tradeoff was faced and accepted once before, in the 2026-09-16 entry.
 ### What is next
 Unchanged from the entry above, minus the stale branch and the resume item,
 both now closed.
+
+## 2026-09-23 (albums list, board layout, list copy)
+
+### What changed
+
+The record store:
+
+- Built `/albums`, Joe's Top 25 Albums, from a list Joe supplied as a screenshot.
+  Twenty-five entries, each with the album, the release year, and the artist
+  set under the title as a subheading. The empty `note` field is on every entry,
+  same as the movies and games lists, so writeups drop in later without a
+  rebuild of the page.
+- Flipped the Top 25 Albums sleeve in the crate from a dimmed "coming soon" to
+  a live record. Two sleeves remain dimmed: My Record Collection is still to
+  come.
+- Added a release year to every entry on all three lists. `year` prints
+  whatever string it is given, so a collection can carry more than one year.
+  BioShock Infinite: The Complete Edition reads 2013-2014 because the second
+  Burial at Sea episode arrived a year after the base game, and Batman: Arkham
+  Trilogy reads 2009, 2011, 2015 for the three games it collects.
+- Titles were briefly set in italics and then set back to plain text.
+- Renamed the games list to Top 25 Video Games everywhere: the sleeve, the
+  heading, the browser tab title, both page descriptions, and the note on the
+  home board. "Games" on its own could be read as board games.
+- All three list headings now lead with "Joe's", matching the sleeve that was
+  clicked to reach them. Browser tab titles do not, to avoid printing the name
+  twice in one tab.
+- Rewrote all three intros so each says what the list is and what earns a place
+  on it, rather than describing the ordering. They now sit at 39, 35 and 45
+  words.
+
+The home page:
+
+- Reordered and then restructured the bulletin board. It was a grid of equal
+  cells with the column count left to the browser, which meant the arrangement
+  could not be specified, only influenced. It is now an explicit two-column
+  grid with named areas: the graduation photo on the left spanning three rows
+  beside About, Resume and a new Now card, then Projects and The Record Store
+  on the left with the ACC team photo beside them. Below 46rem it collapses to
+  one column in source order.
+- Added a Now card to the board. The `/now` page existed but nothing on the
+  home page pointed at it.
+- Replaced the about page headshot with a version Joe cleaned up, cropped to
+  the same 4:5 framing as the old one at 900x1125.
+
+### Why
+
+The board arrangement is the part worth recording. `auto-fit` columns are the
+right default when the items are interchangeable, and the wrong one as soon as
+a specific item belongs in a specific place. Named grid areas cost more CSS but
+put the layout in one readable block, and each item carries an `i-` class
+naming its slot, so moving something is a one-line edit to the area map rather
+than a reshuffle of the markup.
+
+On the leading zeros in the list numbering: the convention splits. A vinyl
+label or back cover prints tracks unpadded, while CD players, car decks and MP3
+filenames pad to two digits. The padded form was kept because it matches the
+playlist feel the store is going for, and because the numbers are monospaced,
+so padding keeps every title on the same left edge.
+
+### What broke
+
+Nothing broke, but one thing looked broken for a while. After the headshot was
+replaced, the about page still showed the old picture. The file on disk, the
+production build and the running dev server were all verified correct by
+fetching the image the dev server was actually serving and decoding it. The
+stale copy was in the browser: in development, Astro serves images from a URL
+with no content hash in it, so the URL was identical before and after the swap
+and the browser reused what it already had. A hard reload fixed it. Production
+is not exposed to this, because built image filenames carry a content hash.
+
+Astro also refuses to start a second dev server on another port while one is
+running; it prints the address of the existing one and exits. Testing had to go
+through the server already running on 4321.
+
+### What is next
+
+1. Read every page end to end as a reader, not as the person who wrote it, and
+   cut anything that sounds like it was generated rather than written. The
+   three list intros are the newest copy and the most likely to need it. This
+   is Joe's pass, not one to delegate.
+2. Write the per-entry notes for movies, video games and albums. The field is
+   already on every entry and renders only when filled.
+3. Build My Record Collection and flip the last dimmed sleeve. It should read
+   from a data file Joe edits when he buys a record, not hand-written markup.
+4. Spot-check the release years on all three lists. They were filled in from
+   memory, not looked up.
+5. Decide whether to cut the projects page further.
+6. Decide whether to credit the other developer on the ACC case study.
+7. Decide on CIS Controls v8 in the BRHS resume bullet.
+8. Decide between inline notes and a real blog at `/writing`.
+9. Wire up the parked Letterboxd, Steam and Spotify links once Joe supplies the
+   profile URLs.
+10. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
+11. Still carried over: open VS Code on the `portfolio` folder rather than
+    `portfolio\node_modules`.
+12. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
+    configuration; updating the LinkedIn and resume links to joefazio.dev.
