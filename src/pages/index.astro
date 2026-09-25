@@ -5,7 +5,9 @@ import graduation from '../assets/graduation.jpg';
 import accTeam from '../assets/acc-team.jpg';
 
 // The board is pinned paper. Every item is a real link, tilted a little and
-// straightening on hover. Nothing is hidden behind an interaction.
+// straightening on hover. The graduation photo is the one exception: it is a
+// button that turns over to show the degree on the back. Both faces stay in
+// the page for screen readers, and the same facts are on the resume.
 // Each item carries an `i-` class that names its slot in the grid. The wide
 // layout is two columns: the graduation photo on the left beside about,
 // resume and now, then projects and the record store on the left with the
@@ -29,14 +31,31 @@ import accTeam from '../assets/acc-team.jpg';
 
     <div class="pinned polaroid i-photo" style="--tilt: -2.4deg">
       <span class="pin"></span>
-      <Image
-        src={graduation}
-        alt="Joe Fazio in cap and gown at JMU graduation, pointing toward the crowd."
-        widths={[320, 560]}
-        sizes="(max-width: 40rem) 60vw, 15rem"
-        loading="eager"
-      />
-      <span class="caption">JMU, May 2026</span>
+      <button class="flip" type="button" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front">
+            <Image
+              src={graduation}
+              alt="Joe Fazio in cap and gown at JMU graduation, pointing toward the crowd."
+              widths={[320, 560]}
+              sizes="(max-width: 40rem) 60vw, 15rem"
+              loading="eager"
+            />
+            <span class="caption">JMU, May 2026 <span class="hint">· turn over ↻</span></span>
+          </span>
+          <span class="face back">
+            <span class="school">James Madison University</span>
+            <span class="degree">BBA, Computer Information Systems</span>
+            <span class="line">College of Business</span>
+            <span class="line">May 2026</span>
+            <span class="rule"></span>
+            <span class="line">Cum laude, GPA 3.54</span>
+            <span class="line">President's List, Fall 2022</span>
+            <span class="line">Dean's List, Spring 2024 and Fall 2025</span>
+            <span class="caption hint">turn back ↻</span>
+          </span>
+        </span>
+      </button>
     </div>
 
     <a class="pinned card-link i-about" href="/about" style="--tilt: 1.5deg">
@@ -66,7 +85,7 @@ import accTeam from '../assets/acc-team.jpg';
     <a class="pinned card-link i-records" href="/records" style="--tilt: 1.5deg">
       <span class="pin"></span>
       <span class="label">The Record Store</span>
-      <span class="note">Movies, video games, music</span>
+      <span class="note">What I'm into</span>
     </a>
 
     <a class="pinned polaroid i-acc" href="/projects/acc-timebank" style="--tilt: 1.8deg">
@@ -83,6 +102,17 @@ import accTeam from '../assets/acc-team.jpg';
   </div>
 </Layout>
 
+<script>
+  // Turn the graduation polaroid over. Without JavaScript it stays on the
+  // photo side, and the back is still read out by screen readers.
+  for (const button of document.querySelectorAll<HTMLButtonElement>('.flip')) {
+    button.addEventListener('click', () => {
+      const flipped = button.getAttribute('aria-pressed') === 'true';
+      button.setAttribute('aria-pressed', String(!flipped));
+    });
+  }
+</script>
+
 <style>
   /* Cork: a warm base with two speckle layers scattered over it. */
   .board {
@@ -97,7 +127,9 @@ import accTeam from '../assets/acc-team.jpg';
     grid-template-columns: 1fr;
     gap: 1.75rem;
     align-items: start;
-    margin: 1rem 0 3rem;
+    /* Pull the board up into the main area's top padding, which is sized for
+       page headings the home page does not have. */
+    margin: -1.75rem 0 3rem;
     padding: 2.25rem 1.75rem 2.75rem;
     border-radius: 6px;
     background-color: var(--cork);
@@ -218,6 +250,121 @@ import accTeam from '../assets/acc-team.jpg';
     background: var(--paper-edge);
   }
 
+  /* The graduation polaroid is a button with two faces stacked in one grid
+     cell, so the card is as tall as the photo side. Pressing it turns the
+     inner layer over. */
+  .flip {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+    perspective: 1200px;
+  }
+
+  .flip:focus-visible {
+    outline: 2px solid var(--paper-ink);
+    outline-offset: 4px;
+  }
+
+  .flip-inner {
+    display: grid;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+  }
+
+  .flip[aria-pressed='true'] .flip-inner {
+    transform: rotateY(180deg);
+  }
+
+  /* The frame lives on each face rather than on the pinned wrapper, so the
+     white border turns over with the photo. The wrapper keeps the tilt, the
+     lift and the pin. */
+  .i-photo {
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .face {
+    grid-area: 1 / 1;
+    display: block;
+    padding: 0.7rem 0.7rem 0.3rem;
+    background: var(--paper);
+    box-shadow: 0 3px 7px rgb(60 35 10 / 0.4);
+    transition: box-shadow 0.18s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .back {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    transform: rotateY(180deg);
+  }
+
+  .back .school {
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .back .degree {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .back .line {
+    color: var(--paper-dim);
+    font-size: 0.85rem;
+    line-height: 1.35;
+  }
+
+  .back .rule {
+    width: 3rem;
+    height: 1px;
+    margin: 0.4rem auto;
+    background: var(--paper-edge);
+  }
+
+  .hint {
+    white-space: nowrap;
+  }
+
+  /* Straighten on hover or keyboard focus only. :focus-visible is not set by
+     a mouse click, so the card tilts back as soon as the pointer leaves. */
+  .i-photo:has(.flip:focus-visible) {
+    transform: rotate(0deg) translateY(-4px) scale(1.015);
+    z-index: 3;
+  }
+
+  .i-photo:has(.flip:focus-visible) .face {
+    box-shadow: 0 9px 18px rgb(60 35 10 / 0.45);
+  }
+
+  /* On touch screens a tap leaves :hover stuck on until the next tap
+     elsewhere, so the hover lift is kept to devices with a real pointer. */
+  @media (hover: hover) {
+    .i-photo:hover {
+      transform: rotate(0deg) translateY(-4px) scale(1.015);
+      z-index: 3;
+    }
+
+    .i-photo:hover .face {
+      box-shadow: 0 9px 18px rgb(60 35 10 / 0.45);
+    }
+  }
+
   .caption {
     display: block;
     padding: 0.6rem 0.15rem 0.5rem;
@@ -263,8 +410,14 @@ import accTeam from '../assets/acc-team.jpg';
     }
 
     a.pinned:hover,
-    a.pinned:focus-visible {
+    a.pinned:focus-visible,
+    .i-photo:hover,
+    .i-photo:has(.flip:focus-visible) {
       transform: none;
+    }
+
+    .flip-inner {
+      transition: none;
     }
   }
 
