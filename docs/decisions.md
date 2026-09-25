@@ -877,3 +877,29 @@ through the server already running on 4321.
     `portfolio\node_modules`.
 12. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
     configuration; updating the LinkedIn and resume links to joefazio.dev.
+
+## 2026-09-25 (about page reframe)
+
+### What changed
+
+- Reframed the about page from "wide net" to "master the fundamentals." The job
+  search paragraph now says what the goal is (learn IT fundamentals, help
+  businesses stay secure) and why any of the adjacent roles serves it, instead
+  of listing titles and calling the breadth deliberate.
+- Shortened the last sentence of "What I'm building" to end on "I wanted
+  infrastructure I could explain out loud."
+- Updated the about page meta description to match.
+
+### Why
+
+The openness is the same; the framing is not. A list of five job titles reads
+as unfocused to a hiring manager, while a stated goal with several roads to it
+reads as intentional.
+
+### What broke
+
+Nothing.
+
+### What is next
+
+Unchanged from the entry above.
