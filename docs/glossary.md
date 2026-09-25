@@ -481,3 +481,26 @@ A CSS length equal to the page's base font size, so layouts measured in rem scal
 
 ### Progressive enhancement
 Building the plain version first so it works without JavaScript, then layering extras on top for browsers that can run them.
+
+## Interaction and browser behavior
+
+### Meta description
+A short summary in a page's HTML that search engines and link previews show under the title. Visitors never see it on the page itself.
+
+### Back/forward cache (bfcache)
+A snapshot the browser keeps of a page you just left. Going Back restores the snapshot exactly as it was, without rerunning the page's code, which is why a half-finished animation can still be showing.
+
+### pageshow event
+A signal the browser sends every time a page is displayed, including when it comes back from the back/forward cache. Its `persisted` flag says which case it was.
+
+### :hover, :focus-within and :focus-visible
+CSS conditions for styling. `:hover` means the pointer is over an element. `:focus-within` means something inside it has focus, which a mouse click also causes. `:focus-visible` means focus the user should see, which browsers set for the keyboard and not for a mouse click.
+
+### Hover media query
+`@media (hover: hover)` applies CSS only on devices with a real pointer. Phones fake hover after a tap and leave it stuck on, so hover effects go inside this.
+
+### 3D transform and backface-visibility
+CSS can rotate an element in 3D (`rotateY(180deg)` turns it over like a card). `backface-visibility: hidden` makes each face invisible when turned away, so two faces stacked in the same spot act as the front and back of one card.
+
+### aria-pressed
+An accessibility attribute on a button that tells screen readers whether it is currently switched on, for example whether the polaroid is showing its back.
