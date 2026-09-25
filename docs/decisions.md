@@ -903,3 +903,79 @@ Nothing.
 ### What is next
 
 Unchanged from the entry above.
+
+## 2026-09-25, continued (Now page, home board, record store)
+
+### What changed
+
+- **BRHS framework made consistent.** The Now page said the risk assessment
+  used NIST CSF 2.0 and CIS Controls v8; the projects page said NIST only. Both
+  now say NIST, and the projects entry gives the reason: NIST's outcome-based
+  structure could be fitted to a hospital's workflow, where the CIS checklist
+  would have fought it.
+- **Now page refreshed.** Dropped the claim of daily PowerShell work, dropped
+  naming specific target roles, and said plainly what the site is built with.
+  Updated the "last updated" date.
+- **Missing spaces before links fixed.** Two links on the Now page rendered
+  glued to the word before them ("theBRHS", "pieces.The").
+- **Home board notes reworded** to match the others: Projects reads "What I've
+  worked on" (it said "Five builds", but only two of the five entries are
+  builds), and The Record Store reads "What I'm into".
+- **The graduation polaroid flips.** Clicking it turns the whole card over to
+  show the degree, honors, GPA and dean's list terms, all checked against the
+  official transcript. Cum laude comes from the transcript; the resume does not
+  list it yet.
+- **Home page top gap removed.** The board now sits close under the nav.
+- **Record store Back fix.** Returning to `/records` with the Back button left
+  the clicked record out of its sleeve. It now resets.
+
+### Why
+
+The consistency fixes matter most. Anything a reader can compare across two
+pages, or between a page and the resume, has to agree.
+
+The polaroid is the first thing on the board hidden behind a click. That breaks
+the board's rule that nothing is hidden behind an interaction, so the exception
+is limited: the button is keyboard reachable, both faces stay readable by
+screen readers, and everything on the back is also on the resume.
+
+### What broke
+
+- **Links lost their leading space.** Astro's `compressHTML` removes the line
+  break before an element that starts a new line in the source, instead of
+  turning it into a space. Fixed by starting the link on the same line as the
+  word before it. One of the two was older than today.
+- **Only the photo flipped, not the card.** The white frame belonged to the
+  outer pinned element, which does not rotate. The frame moved onto each face
+  so it turns with them.
+- **The card stayed straight after a click.** The lift was tied to
+  `:focus-within`, and clicking a button focuses it. It now uses
+  `:focus-visible`, which browsers set for keyboard focus but not a mouse
+  click, and the hover lift only applies on devices with a real pointer,
+  because a tap on a phone leaves `:hover` stuck on.
+- **The record stayed out after Back.** The browser restored the page from its
+  back/forward cache exactly as it was left. A `pageshow` listener now puts the
+  records back when that happens.
+- **An old headshot showed in development.** Same browser cache issue as the
+  2026-09-23 entry. Both the dev server and the live site were checked and were
+  serving the correct image.
+
+### What is next
+
+1. Add cum laude to the resume, then copy the new PDF into `public/resume.pdf`.
+2. Bring the resume's BRHS bullet in line with the site: NIST CSF, not NIST and
+   CIS Controls v8.
+3. The home page intro card and meta description still list roles ("support,
+   systems, cloud, security"). Decide whether they should match the About
+   page's "master the fundamentals" framing.
+4. Read every page end to end as a reader and cut anything that sounds generated.
+5. Write the per-entry notes for the three lists.
+6. Build My Record Collection from a data file.
+7. Spot-check the release years on all three lists.
+8. Decide whether to cut the projects page further.
+9. Decide whether to credit the other developer on the ACC case study.
+10. Decide between inline notes and a real blog at `/writing`.
+11. Wire up the Letterboxd, Steam and Spotify links once the URLs are supplied.
+12. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
+13. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
+    configuration; updating the LinkedIn and resume links to joefazio.dev.
