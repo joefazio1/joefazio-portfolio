@@ -71,6 +71,14 @@ const sleeves = [
       }, 520);
     });
   });
+
+  // Going Back (or mouse button 4) can restore this page from the browser's
+  // back/forward cache exactly as it was left, record still out of the
+  // sleeve. When that happens, put every record back.
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    document.querySelectorAll('.item.playing').forEach((el) => el.classList.remove('playing'));
+  });
 </script>
 
 <style>
