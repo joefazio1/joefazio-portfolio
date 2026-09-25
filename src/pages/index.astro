@@ -127,7 +127,9 @@ import accTeam from '../assets/acc-team.jpg';
     grid-template-columns: 1fr;
     gap: 1.75rem;
     align-items: start;
-    margin: 1rem 0 3rem;
+    /* Pull the board up into the main area's top padding, which is sized for
+       page headings the home page does not have. */
+    margin: -1.75rem 0 3rem;
     padding: 2.25rem 1.75rem 2.75rem;
     border-radius: 6px;
     background-color: var(--cork);
@@ -279,9 +281,22 @@ import accTeam from '../assets/acc-team.jpg';
     transform: rotateY(180deg);
   }
 
+  /* The frame lives on each face rather than on the pinned wrapper, so the
+     white border turns over with the photo. The wrapper keeps the tilt, the
+     lift and the pin. */
+  .i-photo {
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+
   .face {
     grid-area: 1 / 1;
     display: block;
+    padding: 0.7rem 0.7rem 0.3rem;
+    background: var(--paper);
+    box-shadow: 0 3px 7px rgb(60 35 10 / 0.4);
+    transition: box-shadow 0.18s ease;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
@@ -291,8 +306,7 @@ import accTeam from '../assets/acc-team.jpg';
     flex-direction: column;
     justify-content: center;
     gap: 0.35rem;
-    padding: 1rem 0.6rem;
-    background: var(--paper);
+    padding: 1rem 1.2rem;
     text-align: center;
     transform: rotateY(180deg);
   }
@@ -327,11 +341,28 @@ import accTeam from '../assets/acc-team.jpg';
     white-space: nowrap;
   }
 
-  .i-photo:hover,
-  .i-photo:focus-within {
+  /* Straighten on hover or keyboard focus only. :focus-visible is not set by
+     a mouse click, so the card tilts back as soon as the pointer leaves. */
+  .i-photo:has(.flip:focus-visible) {
     transform: rotate(0deg) translateY(-4px) scale(1.015);
-    box-shadow: 0 9px 18px rgb(60 35 10 / 0.45);
     z-index: 3;
+  }
+
+  .i-photo:has(.flip:focus-visible) .face {
+    box-shadow: 0 9px 18px rgb(60 35 10 / 0.45);
+  }
+
+  /* On touch screens a tap leaves :hover stuck on until the next tap
+     elsewhere, so the hover lift is kept to devices with a real pointer. */
+  @media (hover: hover) {
+    .i-photo:hover {
+      transform: rotate(0deg) translateY(-4px) scale(1.015);
+      z-index: 3;
+    }
+
+    .i-photo:hover .face {
+      box-shadow: 0 9px 18px rgb(60 35 10 / 0.45);
+    }
   }
 
   .caption {
@@ -381,7 +412,7 @@ import accTeam from '../assets/acc-team.jpg';
     a.pinned:hover,
     a.pinned:focus-visible,
     .i-photo:hover,
-    .i-photo:focus-within {
+    .i-photo:has(.flip:focus-visible) {
       transform: none;
     }
 
