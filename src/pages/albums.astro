@@ -5,16 +5,16 @@ import Layout from '../layouts/Layout.astro';
 // fixed. A blank line inside a note starts a new paragraph.
 const albums = [
   { title: 'Drip or Drown 2', artist: 'Gunna', year: 2019, note:
-    "Just my personal favorite album ever. Wheezy’s production perfectly reflects the submerged in water aesthetic. Glittery and beautiful melodies with amazing trap drums perfectly mesh with Gunna’s effortless flow. I can’t ever get tired of these songs. I will never forget the first time “Who You Foolin” blessed my ears.",
+    "Just my personal favorite album ever. I will never forget the first time “Who You Foolin” blessed my ears. Wheezy’s production perfectly reflects the submerged in water aesthetic. Glittery and beautiful melodies with amazing trap drums perfectly mesh with Gunna’s effortless flow. I can’t ever get tired of these songs.",
   },
   { title: 'Rodeo (Deluxe)', artist: 'Travis Scott', year: 2015, note:
-    "One of the greatest debut albums of all time. Stacked with unanimous classics. I miss this type of hunger from Travis Scott. The theming of the rodeo as the crazy ride to success is amazing and perfect for a debut album.",
+    "One of the greatest debut albums of all time. The theming of the rodeo as the crazy ride to success is amazing and perfect for a debut album. Stacked with unanimous classics. I miss this type of hunger from Travis Scott.",
   },
   { title: 'good kid, m.A.A.d city (Deluxe)', artist: 'Kendrick Lamar', year: 2012, note:
-    "My favorite story driven album. I’m a sucker for nonlinear storytelling. “Sing About Me, I’m Dying of Thirst” and “Art of Peer Pressure” are absolute classics that go down as my two favorite Kendrick songs of all time. Deluxe tracks deviate from the narrative but the songs are still amazing so I have no complaints. I think this album moves up a spot if “Cartoons and Cereal” made the sample clearances. This is just Kendrick in his peak rapping form. That being said it also just has the most replay value for me vs his other albums and has those amazing moments of emotional storytelling wrapped in the cloak of a genuine banger.",
+    "My favorite story driven album. I’m a sucker for nonlinear storytelling. This is just Kendrick in his peak rapping form. “Sing About Me, I’m Dying of Thirst” and “Art of Peer Pressure” are absolute classics that go down as my two favorite Kendrick songs of all time. That being said it also just has the most replay value for me vs his other albums and has those amazing moments of emotional storytelling wrapped in the cloak of a genuine banger. Deluxe tracks deviate from the narrative but the songs are still amazing so I have no complaints. I think this album moves up a spot if “Cartoons and Cereal” made the sample clearances.",
   },
   { title: 'The Life of Pablo', artist: 'Kanye West', year: 2016, note:
-    "Not his most flawless album, but still my favorite of his. One of my most quintessential fall spins. From genuinely fun good music collabs (Chance, Desiigner) that provide a time capsule to 2016, to the forever lasting emotional peaks, to emotional valleys, to absolute production masterclasses, to flawless rapping performances, this album just has it all for me. Such a sonic rollercoaster and I’m always in line for one more ride in the front car.",
+    "Not his most flawless album, but still my favorite of his. From genuinely fun good music collabs (Chance, Desiigner) that provide a time capsule to 2016, to the forever lasting emotional peaks, to emotional valleys, to absolute production masterclasses, to flawless rapping performances, this album just has it all for me. Such a sonic rollercoaster and I’m always in line for one more ride in the front car. One of my most quintessential fall spins.",
   },
   { title: 'So Much Fun (Deluxe)', artist: 'Young Thug', year: 2019, note:
     "Young Thug album with quantity and quality. It is genuinely a fun listen every time and has some of my most replayed spring and summer songs. Features on this album also don’t disappoint.\n\nNot to mention the production. Bright and fun beats that made it pretty much impossible for Thug not to slide on the whole thing. Masterclass beats from Wheezy and Pi’erre.",
@@ -32,7 +32,7 @@ const albums = [
     "Holds a special place in my heart because it pretty much introduced me to rap music. Hearing “Bad and Boujee” and “Slippery” for the first time in middle school pretty much put me onto the whole genre entirely.\n\nThe production on this album immediately got me hooked on trap drums I’ve never gotten tired of. The Migos meshing together and bouncing off each other flawlessly creates so many dynamic moments.",
   },
   { title: 'Slime Season 3', artist: 'Young Thug', year: 2016, note:
-    "Such a peak mixtape. 2016 Thug was a different animal. A tight 28 minute listen packed with so many classics, and a prime example of how Young Thug dominated in the mixtape era. Bold production mixed with Young Thug’s melodic mastery and unmatched delivery creates some of the most catchy songs in his discography. The other Slime Seasons are also amazing, this one is just by far my personal favorite.",
+    "Such a peak mixtape. The other Slime Seasons are also amazing, this one is just by far my personal favorite. A tight 28 minute listen packed with so many classics, and a prime example of how Young Thug dominated in the mixtape era. 2016 Thug was a different animal. Bold production mixed with Young Thug’s melodic mastery and unmatched delivery creates some of the most catchy songs in his discography.",
   },
   { title: 'Die Lit', artist: 'Playboi Carti', year: 2018, note:
     "Amazingly atmospheric beats meet catchy Carti vocals. The sonic chemistry between Pi’erre and Carti just never gets old. My undisputed favorite Playboi Carti album, as it never fails to make me feel genuine happiness.",
@@ -44,7 +44,7 @@ const albums = [
     "Amazing trap jazz album that shows Kendrick in his philosophical prime. The narrative rollout of the poem through the listen, the dazzling production, and Kendrick’s multilayered bars and staple vocal performances create something that is nothing short of spectacular.",
   },
   { title: 'At. Long. Last. ASAP', artist: 'A$AP Rocky', year: 2015, note:
-    "Peak acid trap album. Although other A$AP Rocky albums have higher highs, this album is one I come back to way more consistently. The curated vibe of this album makes a full listen feel like a cohesive masterpiece. Amazing and drugged out production mixed with anything A$AP Rocky is bound to be a classic.",
+    "Peak acid trap album. Amazing and drugged out production mixed with anything A$AP Rocky is bound to be a classic. The curated vibe of this album makes a full listen feel like a cohesive masterpiece. Although other A$AP Rocky albums have higher highs, this album is one I come back to way more consistently.",
   },
   { title: 'The Last Rocket', artist: 'Takeoff', year: 2018, note:
     "Takeoff is my favorite Migo, and this album is Takeoff getting his time to shine without anyone else to hold him back. Explores emotional themes that he doesn’t go to in normal Migos collabs. And all of the glassy melodic trap beats make you feel like you’re trapped in space.",
@@ -56,7 +56,7 @@ const albums = [
     "Yet again, 2016 Thug was truly a different animal. The production blends so many different genre elements into the trap format, creating such a fun album that never gets stale. Thug does things with his voice on this album that totally shouldn’t work, but somehow just do. He named every song after one of his many inspirations. Imagine having a song named “Wyclef Jean” on your album, then getting Wyclef Jean to feature on said album, only to put him on the song “Kanye West.” Not to mention one of the greatest album covers of all time.",
   },
   { title: 'untitled unmastered.', artist: 'Kendrick Lamar', year: 2016, note:
-    "Can’t believe these are throwaways. A mixtape-like compilation of “leftovers” that didn’t fit the narrative of TPAB still makes an album that is so beautiful and makes for a great listen.",
+    "A mixtape-like compilation of “leftovers” that didn’t fit the narrative of TPAB still makes an album that is so beautiful and makes for a great listen. Can’t believe these are throwaways.",
   },
   { title: 'IGOR', artist: 'Tyler, The Creator', year: 2019, note:
     "The overarching storyline is so well done, and fits the production so well. Tyler’s vocal performances all add so many layers. Nothing is better than putting headphones on and getting completely transported to a different world.",
@@ -65,7 +65,7 @@ const albums = [
     "Overbearing and chaotic Kanye production meets braggadocious Kanye lyrics. “Guilt Trip” is top 1. Fight me.",
   },
   { title: 'MUSIC - SORRY 4 DA WAIT', artist: 'Playboi Carti', year: 2025, note:
-    "Released the day I went on a road trip to Nags Head for spring break my junior year of college. Experiencing the long awaited album among friends is so special to me and I grew to love every song. So much vocal variety and diverse production. The “2024” leaks put Carti on the map for me in 2023 and he’s grown to be one of my favorites of all time. This album didn’t disappoint and still doesn’t.",
+    "The “2024” leaks put Carti on the map for me in 2023 and he’s grown to be one of my favorites of all time. Released the day I went on a road trip to Nags Head for spring break my junior year of college. Experiencing the long awaited album among friends is so special to me and I grew to love every song. So much vocal variety and diverse production. This album didn’t disappoint and still doesn’t.",
   },
   { title: 'Alfredo', artist: 'Freddie Gibbs', year: 2020, note:
     "Masterclass Alchemist production and amazing rapping from Freddie is absolute cinema. AMAZING feature list and timeless songs. Tight listen that hits all the right spots.",
@@ -110,8 +110,7 @@ const mentions = [
   <p class="lede">
     My twenty-five favorite albums of all time. The ones I never get tired of,
     ranked on more than just how catchy they are: the production, the
-    narrative, the vibe, the nostalgia, and what they mean to me. Notes are
-    getting added as I write them.
+    narrative, the vibe, the nostalgia, and what they mean to me.
   </p>
 
   <ol class="ranked">
