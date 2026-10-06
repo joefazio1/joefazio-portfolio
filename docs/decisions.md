@@ -979,3 +979,66 @@ screen readers, and everything on the back is also on the resume.
 12. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
 13. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
     configuration; updating the LinkedIn and resume links to joefazio.dev.
+
+## 2026-10-06 (resume refresh, shows list, album notes, light mode)
+
+### What changed
+
+- **New resume published.** `public/resume.pdf` is the current one-page
+  version, which adds joefazio.dev to the header, the KPMG award and cum laude.
+- **ACC technologies list** reads "Google Apps Script, Google Sheets" on both
+  the projects page and the case study. The Python migration script is still
+  described in the case study text and on the resume.
+- **Now page.** Security+ is worded as a plan ("Next: CompTIA Security+")
+  because studying has not started. Date updated.
+- **Top 5 Shows** added to the record store at `/shows`, with a gold sleeve,
+  plus unranked honorable mentions.
+- **Album notes.** All 25 albums have a write-up. They are Joe's own writing:
+  only typos were fixed and sentence order adjusted, nothing reworded. Song
+  titles are in quotes and italic, marked in the data with asterisks.
+- **Honorable mentions** on albums and shows are smaller, two columns on wide
+  screens, and sorted alphabetically by the page so they do not read as ranked.
+  The albums page has a "Back to top" link after #25.
+- **Light mode is stone gray** (`#eeeeeb`) instead of blue-white. Picked from a
+  throwaway comparison page of five palettes.
+- **Dark mode muted text is brighter** (`--dim` from `#93a8c0` to `#b4c4d6`).
+  Small light-blue text on the dark blue background was hard to read in long
+  paragraphs.
+
+### Why
+
+The resume and site had drifted apart, and the site should never show an older
+resume than the one being sent out. The album notes are meant to be read as
+handwritten, so the edits were limited to spelling, grammar and order.
+
+The light background looked unfinished as bright blue-white. The stone gray was
+chosen by comparing real pages, the same way the typeface was.
+
+The home intro card keeps listing role areas. That was reconsidered and kept
+on purpose.
+
+### What broke
+
+- **Escaping in edit scripts.** Twice a `\n` in a Python edit script became a
+  real line break in the page source. Both were caught before commit. Large
+  edits now go through a script file with raw strings.
+- **Merged mid-session.** A pull request was merged while more work was still
+  being pushed, so the branch was recreated on GitHub. Nothing was lost: one
+  branch can carry any number of commits into a single pull request.
+
+### What is next
+
+1. Bring the resume's BRHS bullet in line with the site: NIST CSF 2.0 only, not
+   NIST and CIS Controls v8.
+2. When Security+ studying actually starts, update the Now page heading.
+3. Write the per-entry notes for Movies and Video Games.
+4. Spot-check release years on every list, including the shows and the
+   honorable mentions.
+5. Read every page end to end as a reader and cut anything that sounds generated.
+6. Build My Record Collection from a data file.
+7. Decide whether to cut the projects page further.
+8. Decide between inline notes and a real blog at `/writing`.
+9. Wire up the Letterboxd, Steam and Spotify links once the URLs are supplied.
+10. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
+11. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
+    configuration; updating the LinkedIn and resume links to joefazio.dev.

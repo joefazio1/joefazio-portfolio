@@ -504,3 +504,12 @@ CSS can rotate an element in 3D (`rotateY(180deg)` turns it over like a card). `
 
 ### aria-pressed
 An accessibility attribute on a button that tells screen readers whether it is currently switched on, for example whether the polaroid is showing its back.
+
+### Light mode, dark mode and prefers-color-scheme
+Most devices let the user pick a light or dark appearance. `@media (prefers-color-scheme: dark)` lets a site follow that setting, so this site keeps one set of colors for each.
+
+### CSS custom properties (variables)
+Named values like `--bg` or `--dim`, defined once and reused everywhere. Changing the light palette meant editing five of these in the layout, not every page.
+
+### Contrast ratio
+How different two colors are in brightness, from 1:1 (identical) to 21:1 (black on white). Body text should be at least 4.5:1 to stay readable; small or muted text needs more margin in practice.
