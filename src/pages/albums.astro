@@ -1,83 +1,83 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// My top 25. Every `note` is my own handwritten write-up, kept exactly as I
-// wrote it. A blank line inside a note starts a new paragraph.
+// My top 25. Every `note` is my own handwritten write-up; only typos get
+// fixed. A blank line inside a note starts a new paragraph.
 const albums = [
   { title: 'Drip or Drown 2', artist: 'Gunna', year: 2019, note:
-    "Just my personal favorite album ever. Wheezy production perfectly reflects the and submerged in water ascetic. Glittery and beautiful melodies with amazing trap drums perfectly mesh with gunna effortless flow. I can’t ever get tired of these songs. I will never forget the first time I heard who you foolin bless my ears",
+    "Just my personal favorite album ever. Wheezy’s production perfectly reflects the submerged in water aesthetic. Glittery and beautiful melodies with amazing trap drums perfectly mesh with Gunna’s effortless flow. I can’t ever get tired of these songs. I will never forget the first time “Who You Foolin” blessed my ears.",
   },
-  { title: 'Rodeo', artist: 'Travis Scott', year: 2015, note:
-    "One of the greatest debut albums of all time. Stacked with unanimous classics. I miss this type of hunger from Travis Scott. The theming of this being the rodeo being the crazy ride to success is amazing and perfect for e debut album.",
+  { title: 'Rodeo (Deluxe)', artist: 'Travis Scott', year: 2015, note:
+    "One of the greatest debut albums of all time. Stacked with unanimous classics. I miss this type of hunger from Travis Scott. The theming of the rodeo as the crazy ride to success is amazing and perfect for a debut album.",
   },
-  { title: 'good kid, m.A.A.d city', artist: 'Kendrick Lamar', year: 2012, note:
-    "My favorite story driven album. I’m a sucker for nonlinear story telling. Samidot and art of pure pressure are absolute classics that go down as my two favorite Kendrick songs of all time. Deluxe tracks deviate from the narrative but the songs are still amazing so I have no complaints. This I think this album moves up a spot if cartoons and cereal made the sample clearances. This is just Kendrick is his peak rapping form with. That being said it also just has the most replay value for me vs his other albums and has those amazing  moments of emotional storytelling wrapped in the cloak of a genuine banger.",
+  { title: 'good kid, m.A.A.d city (Deluxe)', artist: 'Kendrick Lamar', year: 2012, note:
+    "My favorite story driven album. I’m a sucker for nonlinear storytelling. “Sing About Me, I’m Dying of Thirst” and “Art of Peer Pressure” are absolute classics that go down as my two favorite Kendrick songs of all time. Deluxe tracks deviate from the narrative but the songs are still amazing so I have no complaints. I think this album moves up a spot if “Cartoons and Cereal” made the sample clearances. This is just Kendrick in his peak rapping form. That being said it also just has the most replay value for me vs his other albums and has those amazing moments of emotional storytelling wrapped in the cloak of a genuine banger.",
   },
   { title: 'The Life of Pablo', artist: 'Kanye West', year: 2016, note:
-    "Not his most flawless album, but still my favorite of his. One of my most quintessential fall spins. From genuinely fun good music collabs (chance, designer) that provide a time capsule to 2016, to the forever lasting emotional peaks, to emotional valleys, to absolute production masterclasses, to flawless rapping performances, this album just has it all for me. Such a sonic rollercoaster and I’m always in line for one more ride in the front car.",
+    "Not his most flawless album, but still my favorite of his. One of my most quintessential fall spins. From genuinely fun good music collabs (Chance, Desiigner) that provide a time capsule to 2016, to the forever lasting emotional peaks, to emotional valleys, to absolute production masterclasses, to flawless rapping performances, this album just has it all for me. Such a sonic rollercoaster and I’m always in line for one more ride in the front car.",
   },
   { title: 'So Much Fun (Deluxe)', artist: 'Young Thug', year: 2019, note:
-    "Young thug album with quantity and quality. Is Genuinely a fun listen to every time and has some of my most replayed spring and summer songs. Features on this album also don’t disappoint.\n\nNot to mention the production. bright and fun beats that made it pretty much impossible for thug not to slide on the whole thing.  Masterclass beats from wheezy and Pierre",
+    "Young Thug album with quantity and quality. It is genuinely a fun listen every time and has some of my most replayed spring and summer songs. Features on this album also don’t disappoint.\n\nNot to mention the production. Bright and fun beats that made it pretty much impossible for Thug not to slide on the whole thing. Masterclass beats from Wheezy and Pi’erre.",
   },
   { title: 'Late Registration', artist: 'Kanye West', year: 2005, note:
-    "Holy angelic production. And don’t forget the perfectly done drums. Amazing topics, Kanye in the midst his lyrical prime never gets old. Another essential fall spin.",
+    "Holy angelic production. And don’t forget the perfectly done drums. Amazing topics, and Kanye in the midst of his lyrical prime never gets old. Another essential fall spin.",
   },
   { title: 'WUNNA (Deluxe)', artist: 'Gunna', year: 2020, note:
-    "Gunna masters the trap production from all different places. It has those laid back flows reminiscent of drip or drown 2, but adds glitteryer, brighter, and bolder production with more ubeat songs to differentiate it. Has its laid back melodic moments that contrast perfectly with upbeat trap. Not to mention not one of the features misses.",
+    "Gunna masters trap production from all different places. It has those laid back flows reminiscent of Drip or Drown 2, but adds more glittery, brighter, and bolder production with more upbeat songs to differentiate it. Has its laid back melodic moments that contrast perfectly with upbeat trap. Not to mention not one of the features misses.",
   },
   { title: 'ASTROWORLD', artist: 'Travis Scott', year: 2018, note:
-    "Travis Scott’s druggy yet stunning, acidic yet ghostly, angelic yet sharp production mixed with some of his most catchy and  beautiful verses amalgamate to be such a amazing album. An album I’ve never been tired of listening to",
+    "Travis Scott’s druggy yet stunning, acidic yet ghostly, angelic yet sharp production mixed with some of his most catchy and beautiful verses amalgamate to be such an amazing album. An album I’ve never been tired of listening to.",
   },
   { title: 'Culture', artist: 'Migos', year: 2017, note:
-    "Holds a special place in my my heart because it pretty much introduced me to rap music. Hearing Bad and boujee and slippery for the first time in middle school, pretty much put me onto the whole genre entirely.\n\nThe production on this album immediately got me hooked to trap drums I’ve never got tired of. It’s the migos meshing together and bouncing off eachother flawlessly creates so many dynamic moments",
+    "Holds a special place in my heart because it pretty much introduced me to rap music. Hearing “Bad and Boujee” and “Slippery” for the first time in middle school pretty much put me onto the whole genre entirely.\n\nThe production on this album immediately got me hooked on trap drums I’ve never gotten tired of. The Migos meshing together and bouncing off each other flawlessly creates so many dynamic moments.",
   },
   { title: 'Slime Season 3', artist: 'Young Thug', year: 2016, note:
-    "Such a peak mixtape. 2016 thug was a different animal. A tight 28 minute listen time is packed with so many classics and prime examples of how young thug. Bold production mixed with young thugs melodic mastery and unmatched delivery creates some of the most catchy songs in his discography.",
+    "Such a peak mixtape. 2016 Thug was a different animal. A tight 28 minute listen packed with so many classics, and a prime example of how Young Thug dominated in the mixtape era. Bold production mixed with Young Thug’s melodic mastery and unmatched delivery creates some of the most catchy songs in his discography. The other Slime Seasons are also amazing, this one is just by far my personal favorite.",
   },
   { title: 'Die Lit', artist: 'Playboi Carti', year: 2018, note:
-    "Amazingly atmospheric beats meet catchy carti vocals. The sonic chemistry between Pierre and Carti just never gets old. My undisputed favorite Playboi Carti album as it never fails to make me feel genuine happiness.",
+    "Amazingly atmospheric beats meet catchy Carti vocals. The sonic chemistry between Pi’erre and Carti just never gets old. My undisputed favorite Playboi Carti album, as it never fails to make me feel genuine happiness.",
   },
   { title: 'HEROES & VILLAINS', artist: 'Metro Boomin', year: 2022, note:
-    "The hero vs villain theming works so well. Metro never fails to produce catchy beats that make it so easy for any rapper to absolutely kill. Not to undermine the efforts of any rapper featured\n\nAlso I’m a sucker for some good Transitions and this album doesn’t disappoint. Holds a special place in my heart for featuring the first posthumous takeoff verse, it being one of takeoffs most carefully crafted verse.",
+    "The hero vs villain theming works so well. Metro never fails to produce catchy beats that make it so easy for any rapper to absolutely kill. Not to undermine the efforts of any rapper featured.\n\nAlso I’m a sucker for some good transitions and this album doesn’t disappoint. Holds a special place in my heart for featuring the first posthumous Takeoff verse, it being one of Takeoff’s most carefully crafted verses.",
   },
   { title: 'To Pimp a Butterfly', artist: 'Kendrick Lamar', year: 2015, note:
-    "Amazing trap jazz album that shows Kendrick in his philosophical prime. The narrative rollout of the poem through the listen, the dazzling production, and Kendrick’s multilayers bars and staple vocal performances create something that is  nothing short of spectacular.",
+    "Amazing trap jazz album that shows Kendrick in his philosophical prime. The narrative rollout of the poem through the listen, the dazzling production, and Kendrick’s multilayered bars and staple vocal performances create something that is nothing short of spectacular.",
   },
   { title: 'At. Long. Last. ASAP', artist: 'A$AP Rocky', year: 2015, note:
-    "Peak acid trap album. Although other asap rocky albums have higher highs, this album is one I come back way more consistently. The curated of the vibe",
+    "Peak acid trap album. Although other A$AP Rocky albums have higher highs, this album is one I come back to way more consistently. The curated vibe of this album makes a full listen feel like a cohesive masterpiece. Amazing and drugged out production mixed with anything A$AP Rocky is bound to be a classic.",
   },
   { title: 'The Last Rocket', artist: 'Takeoff', year: 2018, note:
-    "Takeoff is my favorite migo, and this album is takeoff getting his time to shine without anyone else to hold him back. Explores emotional themes that he doesn’t go to in normal migos collabs. And all of the glassy melodic trap beats make you feel like you’re trapped in space.",
+    "Takeoff is my favorite Migo, and this album is Takeoff getting his time to shine without anyone else to hold him back. Explores emotional themes that he doesn’t go to in normal Migos collabs. And all of the glassy melodic trap beats make you feel like you’re trapped in space.",
   },
   { title: 'A Great Chaos (Deluxe)', artist: 'Ken Carson', year: 2023, note:
-    "Tip to bottom great trap album that mixes amazing rage elements with electric Ken flows. Some of Ken’s best rapping performances, and the deluxe adds even more depth to the chaos vibe. Going to the chaos tour and seeing these songs live cemented this as one of my favorite albums to relisten to",
+    "Top to bottom great trap album that mixes amazing rage elements with electric Ken flows. Some of Ken’s best rapping performances, and the deluxe adds even more depth to the chaos vibe. Going to the Chaos Tour and seeing these songs live cemented this as one of my favorite albums to relisten to.",
   },
   { title: 'Jeffery', artist: 'Young Thug', year: 2016, note:
-    "Yet again, 2016 thug just truly a different animal. The production blends so many different genre elements into the trap format that creates such a fun album that never gets stale. Thug does things with his voice on this album that totally shouldn’t work, but somehow just do. Naming every song of one of his many inspirations. Imagine having a song named “wyclef Jean” on your album, then getting wyclef Jean to feature on said album, only to put him on the song “Kanye west.”Not to mention one if the greatest album covers of all time.",
+    "Yet again, 2016 Thug was truly a different animal. The production blends so many different genre elements into the trap format, creating such a fun album that never gets stale. Thug does things with his voice on this album that totally shouldn’t work, but somehow just do. He named every song after one of his many inspirations. Imagine having a song named “Wyclef Jean” on your album, then getting Wyclef Jean to feature on said album, only to put him on the song “Kanye West.” Not to mention one of the greatest album covers of all time.",
   },
   { title: 'untitled unmastered.', artist: 'Kendrick Lamar', year: 2016, note:
-    "Cant believe these are throwaways. A mixtape like compilation of “leftovers” that didn’t fit the narrative of tpab still make an album that is so beautiful and makes for a great listen.",
+    "Can’t believe these are throwaways. A mixtape-like compilation of “leftovers” that didn’t fit the narrative of TPAB still makes an album that is so beautiful and makes for a great listen.",
   },
   { title: 'IGOR', artist: 'Tyler, The Creator', year: 2019, note:
-    "The overarching story line is so well done, and fits the production so well. Tyler’s vocal performances all add so many layers. Nothing is better than putting headphones on and getting completely transported to a different world.",
+    "The overarching storyline is so well done, and fits the production so well. Tyler’s vocal performances all add so many layers. Nothing is better than putting headphones on and getting completely transported to a different world.",
   },
   { title: 'Yeezus', artist: 'Kanye West', year: 2013, note:
-    "Overbearing and chaotic Kanye production meets braggadocio-us Kanye lyrics. Guilt trip is top 1. fight me.",
+    "Overbearing and chaotic Kanye production meets braggadocious Kanye lyrics. “Guilt Trip” is top 1. Fight me.",
   },
   { title: 'MUSIC - SORRY 4 DA WAIT', artist: 'Playboi Carti', year: 2025, note:
-    "Released the day I went on a road trip to nagshead for spring break my junior year of college. Experiencing the long awaited album among friends is so special to me and I grew to love every song. So much vocal variety and diverse production. “2024” leaks put Carti on the map for me in 2023 and he’s grown to be one of my favorite of all time. This album didn’t disappoint and still doesn’t",
+    "Released the day I went on a road trip to Nags Head for spring break my junior year of college. Experiencing the long awaited album among friends is so special to me and I grew to love every song. So much vocal variety and diverse production. The “2024” leaks put Carti on the map for me in 2023 and he’s grown to be one of my favorites of all time. This album didn’t disappoint and still doesn’t.",
   },
   { title: 'Alfredo', artist: 'Freddie Gibbs', year: 2020, note:
-    "Masterclass alchemist production and amazing rapping from Freddie is absolute cinema. AMAZING feature list and timeless songs. Tight listen that hits all the right spots.",
+    "Masterclass Alchemist production and amazing rapping from Freddie is absolute cinema. AMAZING feature list and timeless songs. Tight listen that hits all the right spots.",
   },
   { title: 'Osama Season', artist: 'OsamaSon', year: 2024, note:
-    "Although I think flex music flextra is his best work, osamaseason wins in terms of listening experience. More consistent track list with all time Osama hits.",
+    "Although I think Flex Musix (Flextra) is his best work, Osama Season wins in terms of listening experience. More consistent tracklist with all time Osama hits.",
   },
   { title: '2 Alivë (Geëk Pack)', artist: 'Yeat', year: 2022, note:
-    "Peak yeat is a monster. Beautiful glitchy and trap heavy production with the early rage elements are a time capsule to senior year of high school. Not a song from this album left my playlist that whole summer. And the deluxe edition adds great Uzi features and a few kore classics",
+    "Peak Yeat is a monster. Beautiful glitchy and trap heavy production with the early rage elements is a time capsule to senior year of high school. Not a song from this album left my playlist that whole summer. And the deluxe edition adds great Uzi features and a few core classics.",
   },
   { title: 'Whole Lotta Red', artist: 'Playboi Carti', year: 2020, note:
-    "Like almost everyone else, the “whole lotta red effect” really hit here. From only liking two songs, to only disliking two songs taking its time to grow on my over the last 6 years. Has some of the highest highs in cartis discography, but some lower lows, making it a lesser listen all the way through, but had to make the top 25 none the less.",
+    "Like almost everyone else, the “Whole Lotta Red effect” really hit here. I went from only liking two songs to only disliking two songs, with it taking its time to grow on me over the last 6 years. Has some of the highest highs in Carti’s discography, but some lower lows, making it a lesser listen all the way through, but it had to make the top 25 nonetheless.",
   },
 ];
 
@@ -87,6 +87,7 @@ const mentions = [
   { title: "Barter 6", artist: "Young Thug", year: 2015 },
   { title: "Tha Carter V", artist: "Lil Wayne", year: 2018 },
   { title: "FLEX MUSIX (FLEXTRA)", artist: "OsamaSon", year: 2023 },
+  { title: "Studio Addict", artist: "Nine Vicious", year: 2023 },
   { title: "LIVE.LOVE.A$AP", artist: "A$AP Rocky", year: 2011 },
   { title: "Ctrl", artist: "SZA", year: 2017 },
   { title: "DAMN.", artist: "Kendrick Lamar", year: 2017 },
