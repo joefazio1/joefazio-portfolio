@@ -11,7 +11,7 @@ const shows = [
   { title: 'Better Call Saul', year: '2015-2022' },
 ];
 
-// Unranked, in no particular order.
+// Unranked. The page sorts these alphabetically, so order here does not matter.
 const mentions = [
   { title: 'Game of Thrones', year: '2011-2019' },
   { title: 'The Office', year: '2005-2013' },
@@ -51,7 +51,9 @@ const mentions = [
 
   <ul class="ranked mentions">
     {
-      mentions.map((s) => (
+      [...mentions]
+        .sort((x, y) => x.title.localeCompare(y.title))
+        .map((s) => (
         <li>
           <span class="title">
             {s.title} <span class="year">({s.year})</span>
@@ -133,5 +135,29 @@ const mentions = [
 
   h2 {
     margin: 0 0 0.5rem;
+  }
+
+  /* Honorable mentions: smaller than the ranked list, two columns when there
+     is room, and sorted alphabetically so they do not read as ranked. */
+  .mentions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    column-gap: 1.75rem;
+  }
+
+  .mentions li {
+    padding: 0.4rem 0;
+  }
+
+  .mentions li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .mentions .title {
+    font-size: 0.9rem;
+  }
+
+  .mentions .artist {
+    font-size: 0.78rem;
   }
 </style>

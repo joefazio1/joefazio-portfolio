@@ -2,19 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 
 // My top 25. Every `note` is my own handwritten write-up; only typos get
-// fixed. A blank line inside a note starts a new paragraph.
+// fixed. Wrap a song title in asterisks, *“Like This”*, to italicize it. A blank line inside a note starts a new paragraph.
 const albums = [
   { title: 'Drip or Drown 2', artist: 'Gunna', year: 2019, note:
-    "Just my personal favorite album ever. I will never forget the first time “Who You Foolin” blessed my ears. Wheezy’s production perfectly reflects the submerged in water aesthetic. Glittery and beautiful melodies with amazing trap drums perfectly mesh with Gunna’s effortless flow. I can’t ever get tired of these songs.",
+    "Just my personal favorite album ever. I will never forget the first time *“Who You Foolin”* blessed my ears. Wheezy’s production perfectly reflects the submerged in water aesthetic. Glittery and beautiful melodies with amazing trap drums perfectly mesh with Gunna’s effortless flow. I can’t ever get tired of these songs.",
   },
   { title: 'Rodeo (Deluxe)', artist: 'Travis Scott', year: 2015, note:
     "One of the greatest debut albums of all time. The theming of the rodeo as the crazy ride to success is amazing and perfect for a debut album. Stacked with unanimous classics. I miss this type of hunger from Travis Scott.",
   },
   { title: 'good kid, m.A.A.d city (Deluxe)', artist: 'Kendrick Lamar', year: 2012, note:
-    "My favorite story driven album. I’m a sucker for nonlinear storytelling. This is just Kendrick in his peak rapping form. “Sing About Me, I’m Dying of Thirst” and “Art of Peer Pressure” are absolute classics that go down as my two favorite Kendrick songs of all time. That being said it also just has the most replay value for me vs his other albums and has those amazing moments of emotional storytelling wrapped in the cloak of a genuine banger. Deluxe tracks deviate from the narrative but the songs are still amazing so I have no complaints. I think this album moves up a spot if “Cartoons and Cereal” made the sample clearances.",
+    "My favorite story driven album. I’m a sucker for nonlinear storytelling. This is just Kendrick in his peak rapping form. *“Sing About Me, I’m Dying of Thirst”* and *“Art of Peer Pressure”* are absolute classics that go down as my two favorite Kendrick songs of all time. That being said it also just has the most replay value for me vs his other albums and has those amazing moments of emotional storytelling wrapped in the cloak of a genuine banger. Deluxe tracks deviate from the narrative but the songs are still amazing so I have no complaints. I think this album moves up a spot if *“Cartoons and Cereal”* made the sample clearances.",
   },
   { title: 'The Life of Pablo', artist: 'Kanye West', year: 2016, note:
-    "Not his most flawless album, but still my favorite of his. From genuinely fun good music collabs (Chance, Desiigner) that provide a time capsule to 2016, to the forever lasting emotional peaks, to emotional valleys, to absolute production masterclasses, to flawless rapping performances, this album just has it all for me. Such a sonic rollercoaster and I’m always in line for one more ride in the front car. One of my most quintessential fall spins.",
+    "Not his most flawless album, but still my favorite of his. From genuinely fun collabs that provide a time capsule to 2016, to the forever lasting emotional peaks, to emotional valleys, to absolute production masterclasses, to flawless rapping performances, this album just has it all for me. Such a sonic rollercoaster and I’m always in line for one more ride in the front car. One of my most quintessential fall spins.",
   },
   { title: 'So Much Fun (Deluxe)', artist: 'Young Thug', year: 2019, note:
     "Young Thug album with quantity and quality. It is genuinely a fun listen every time and has some of my most replayed spring and summer songs. Features on this album also don’t disappoint.\n\nNot to mention the production. Bright and fun beats that made it pretty much impossible for Thug not to slide on the whole thing. Masterclass beats from Wheezy and Pi’erre.",
@@ -29,7 +29,7 @@ const albums = [
     "Travis Scott’s druggy yet stunning, acidic yet ghostly, angelic yet sharp production mixed with some of his most catchy and beautiful verses amalgamate to be such an amazing album. An album I’ve never been tired of listening to.",
   },
   { title: 'Culture', artist: 'Migos', year: 2017, note:
-    "Holds a special place in my heart because it pretty much introduced me to rap music. Hearing “Bad and Boujee” and “Slippery” for the first time in middle school pretty much put me onto the whole genre entirely.\n\nThe production on this album immediately got me hooked on trap drums I’ve never gotten tired of. The Migos meshing together and bouncing off each other flawlessly creates so many dynamic moments.",
+    "Holds a special place in my heart because it pretty much introduced me to rap music. Hearing *“Bad and Boujee”* and *“Slippery”* for the first time in middle school pretty much put me onto the whole genre entirely.\n\nThe production on this album immediately got me hooked on trap drums I’ve never gotten tired of. The Migos meshing together and bouncing off each other flawlessly creates so many dynamic moments.",
   },
   { title: 'Slime Season 3', artist: 'Young Thug', year: 2016, note:
     "Such a peak mixtape. The other Slime Seasons are also amazing, this one is just by far my personal favorite. A tight 28 minute listen packed with so many classics, and a prime example of how Young Thug dominated in the mixtape era. 2016 Thug was a different animal. Bold production mixed with Young Thug’s melodic mastery and unmatched delivery creates some of the most catchy songs in his discography.",
@@ -53,7 +53,7 @@ const albums = [
     "Top to bottom great trap album that mixes amazing rage elements with electric Ken flows. Some of Ken’s best rapping performances, and the deluxe adds even more depth to the chaos vibe. Going to the Chaos Tour and seeing these songs live cemented this as one of my favorite albums to relisten to.",
   },
   { title: 'Jeffery', artist: 'Young Thug', year: 2016, note:
-    "Yet again, 2016 Thug was truly a different animal. The production blends so many different genre elements into the trap format, creating such a fun album that never gets stale. Thug does things with his voice on this album that totally shouldn’t work, but somehow just do. He named every song after one of his many inspirations. Imagine having a song named “Wyclef Jean” on your album, then getting Wyclef Jean to feature on said album, only to put him on the song “Kanye West.” Not to mention one of the greatest album covers of all time.",
+    "Yet again, 2016 Thug was truly a different animal. The production blends so many different genre elements into the trap format, creating such a fun album that never gets stale. Thug does things with his voice on this album that totally shouldn’t work, but somehow just do. He named every song after one of his many inspirations. Imagine having a song named *“Wyclef Jean”* on your album, then getting Wyclef Jean to feature on said album, only to put him on the song *“Kanye West.”* Not to mention one of the greatest album covers of all time.",
   },
   { title: 'untitled unmastered.', artist: 'Kendrick Lamar', year: 2016, note:
     "A mixtape-like compilation of “leftovers” that didn’t fit the narrative of TPAB still makes an album that is so beautiful and makes for a great listen. Can’t believe these are throwaways.",
@@ -62,10 +62,10 @@ const albums = [
     "The overarching storyline is so well done, and fits the production so well. Tyler’s vocal performances all add so many layers. Nothing is better than putting headphones on and getting completely transported to a different world.",
   },
   { title: 'Yeezus', artist: 'Kanye West', year: 2013, note:
-    "Overbearing and chaotic Kanye production meets braggadocious Kanye lyrics. “Guilt Trip” is top 1. Fight me.",
+    "Overbearing and chaotic Kanye production meets braggadocious Kanye lyrics. *“Guilt Trip”* is top one on the album. Fight me.",
   },
   { title: 'MUSIC - SORRY 4 DA WAIT', artist: 'Playboi Carti', year: 2025, note:
-    "The “2024” leaks put Carti on the map for me in 2023 and he’s grown to be one of my favorites of all time. Released the day I went on a road trip to Nags Head for spring break my junior year of college. Experiencing the long awaited album among friends is so special to me and I grew to love every song. So much vocal variety and diverse production. This album didn’t disappoint and still doesn’t.",
+    "The *“2024”* leaks put Carti on the map for me in 2023 and he’s grown to be one of my favorites of all time. Released the day I went on a road trip to Nags Head for spring break my junior year of college. Experiencing the long awaited album among friends is so special to me and I grew to love every song. So much vocal variety and diverse production. This album didn’t disappoint and still doesn’t.",
   },
   { title: 'Alfredo', artist: 'Freddie Gibbs', year: 2020, note:
     "Masterclass Alchemist production and amazing rapping from Freddie is absolute cinema. AMAZING feature list and timeless songs. Tight listen that hits all the right spots.",
@@ -81,7 +81,7 @@ const albums = [
   },
 ];
 
-// Unranked, in no particular order. No notes.
+// Unranked. The page sorts these alphabetically, so order here does not matter. No notes.
 const mentions = [
   { title: "NS+ (ULTRA)", artist: "Destroy Lonely", year: 2022 },
   { title: "Barter 6", artist: "Young Thug", year: 2015 },
@@ -124,18 +124,30 @@ const mentions = [
             </span>
             <span class="artist">{a.artist}</span>
             {a.note &&
-              a.note.split('\n\n').map((para) => <span class="note">{para}</span>)}
+              a.note.split('\n\n').map((para) => (
+                <span class="note">
+                  {para
+                    .split(/(\*[^*]+\*)/)
+                    .map((bit) =>
+                      bit.startsWith('*') ? <em>{bit.slice(1, -1)}</em> : bit
+                    )}
+                </span>
+              ))}
           </span>
         </li>
       ))
     }
   </ol>
 
+  <p class="back"><a href="#">Back to top</a></p>
+
   <h2>Honorable mentions</h2>
 
   <ul class="ranked mentions">
     {
-      mentions.map((a) => (
+      [...mentions]
+        .sort((x, y) => x.title.localeCompare(y.title))
+        .map((a) => (
         <li>
           <span class="body">
             <span class="title">
@@ -223,7 +235,7 @@ const mentions = [
   }
 
   .note {
-    font-size: 0.85rem;
+    font-size: 0.92rem;
     color: var(--dim);
     line-height: 1.55;
     max-width: 40rem;
@@ -240,5 +252,29 @@ const mentions = [
 
   h2 {
     margin: 0 0 0.5rem;
+  }
+
+  /* Honorable mentions: smaller than the ranked list, two columns when there
+     is room, and sorted alphabetically so they do not read as ranked. */
+  .mentions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    column-gap: 1.75rem;
+  }
+
+  .mentions li {
+    padding: 0.4rem 0;
+  }
+
+  .mentions li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .mentions .title {
+    font-size: 0.9rem;
+  }
+
+  .mentions .artist {
+    font-size: 0.78rem;
   }
 </style>
