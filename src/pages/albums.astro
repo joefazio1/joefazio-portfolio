@@ -81,7 +81,7 @@ const albums = [
   },
 ];
 
-// Unranked, in no particular order. No notes.
+// Unranked. The page sorts these alphabetically, so order here does not matter. No notes.
 const mentions = [
   { title: "NS+ (ULTRA)", artist: "Destroy Lonely", year: 2022 },
   { title: "Barter 6", artist: "Young Thug", year: 2015 },
@@ -131,11 +131,15 @@ const mentions = [
     }
   </ol>
 
+  <p class="back"><a href="#">Back to top</a></p>
+
   <h2>Honorable mentions</h2>
 
   <ul class="ranked mentions">
     {
-      mentions.map((a) => (
+      [...mentions]
+        .sort((x, y) => x.title.localeCompare(y.title))
+        .map((a) => (
         <li>
           <span class="body">
             <span class="title">
@@ -223,7 +227,7 @@ const mentions = [
   }
 
   .note {
-    font-size: 0.85rem;
+    font-size: 0.92rem;
     color: var(--dim);
     line-height: 1.55;
     max-width: 40rem;
@@ -240,5 +244,29 @@ const mentions = [
 
   h2 {
     margin: 0 0 0.5rem;
+  }
+
+  /* Honorable mentions: smaller than the ranked list, two columns when there
+     is room, and sorted alphabetically so they do not read as ranked. */
+  .mentions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    column-gap: 1.75rem;
+  }
+
+  .mentions li {
+    padding: 0.4rem 0;
+  }
+
+  .mentions li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .mentions .title {
+    font-size: 0.9rem;
+  }
+
+  .mentions .artist {
+    font-size: 0.78rem;
   }
 </style>
