@@ -8,13 +8,14 @@ const sleeves = [
   { title: "Joe's Top 25 Movies", kicker: 'Top 25', href: '/movies', hue: 'rust' },
   { title: "Joe's Top 25 Video Games", kicker: 'Top 25', href: '/games', hue: 'green' },
   { title: "Joe's Top 25 Albums", kicker: 'Top 25', href: '/albums', hue: 'plum' },
+  { title: "Joe's Top 5 Shows", kicker: 'Top 5', href: '/shows', hue: 'gold' },
   { title: 'My Record Collection', kicker: 'Coming soon', href: null, hue: 'teal' },
 ];
 ---
 
 <Layout
   title="The Record Store | Joe Fazio"
-  description="A crate of Joe Fazio's favorites: top 25 movies, video games and albums, with more to come. Pick a record."
+  description="A crate of Joe Fazio's favorites: top 25 movies, video games and albums, top 5 shows, and more to come. Pick a record."
 >
   <h1>The Record Store</h1>
   <p class="hi">Pick a record.</p>
@@ -233,6 +234,16 @@ const sleeves = [
   }
   .plum .cover::after {
     background: #9a5f97;
+  }
+
+  .gold .vlabel {
+    background: radial-gradient(circle at 35% 30%, #e6c46f, #b8902f);
+  }
+  .gold .kicker {
+    color: #dcb95f;
+  }
+  .gold .cover::after {
+    background: #b8902f;
   }
 
   .teal .vlabel {
