@@ -2,14 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 
 // My top 5, in order. Short because I have not watched enough shows to rank
-// further than that yet; it grows as I do. `note` is a one-line reason, and an
-// empty note renders without one. `year` is the run and prints as written.
+// further than that yet; it grows as I do. `year` is the run, printed as written.
 const shows = [
-  { title: 'Breaking Bad', year: '2008-2013', note: '' },
-  { title: 'Atlanta', year: '2016-2022', note: '' },
-  { title: 'The Sopranos', year: '1999-2007', note: '' },
-  { title: 'Avatar: The Last Airbender', year: '2005-2008', note: '' },
-  { title: 'Better Call Saul', year: '2015-2022', note: '' },
+  { title: 'Breaking Bad', year: '2008-2013' },
+  { title: 'Atlanta', year: '2016-2022' },
+  { title: 'The Sopranos', year: '1999-2007' },
+  { title: 'Avatar: The Last Airbender', year: '2005-2008' },
+  { title: 'Better Call Saul', year: '2015-2022' },
 ];
 
 // Unranked, in no particular order.
@@ -42,7 +41,6 @@ const mentions = [
             <span class="title">
               {s.title} <span class="year">({s.year})</span>
             </span>
-            {s.note && <span class="note">{s.note}</span>}
           </span>
         </li>
       ))
