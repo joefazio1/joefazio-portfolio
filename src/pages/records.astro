@@ -5,17 +5,17 @@ import Layout from '../layouts/Layout.astro';
 // and, when clicked, slides the rest of the way out before the page redirects
 // to the list. `href: null` is a sleeve whose list is not built yet.
 const sleeves = [
+  { title: "Joe's Top 25 Albums", kicker: 'Top 25', href: '/albums', hue: 'plum' },
   { title: "Joe's Top 25 Movies", kicker: 'Top 25', href: '/movies', hue: 'rust' },
   { title: "Joe's Top 25 Video Games", kicker: 'Top 25', href: '/games', hue: 'green' },
-  { title: "Joe's Top 25 Albums", kicker: 'Top 25', href: '/albums', hue: 'plum' },
   { title: "Joe's Top 5 Shows", kicker: 'Top 5', href: '/shows', hue: 'gold' },
-  { title: 'My Record Collection', kicker: 'Coming soon', href: null, hue: 'teal' },
+  { title: "Joe's Record Collection", kicker: 'Vinyl and CD', href: '/collection', hue: 'teal' },
 ];
 ---
 
 <Layout
   title="The Record Store | Joe Fazio"
-  description="A crate of Joe Fazio's favorites: top 25 movies, video games and albums, top 5 shows, and more to come. Pick a record."
+  description="A crate of Joe Fazio's favorites: top 25 albums, movies and video games, top 5 shows, and the record collection. Pick a record."
 >
   <h1>The Record Store</h1>
   <p class="hi">Pick a record.</p>

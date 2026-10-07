@@ -1,16 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import collection from '../data/collection.json';
 
 // My top 25. Every `note` is my own handwritten write-up; only typos get
-// fixed. Wrap a song title in asterisks, *“Like This”*, to italicize it. A blank line inside a note starts a new paragraph.
+// fixed. `owned` is the album's `art` slug in src/data/collection.json when
+// I own it, which links the entry to the record collection and back. Wrap a song title in asterisks, *“Like This”*, to italicize it. A blank line inside a note starts a new paragraph.
 const albums = [
   { title: 'Drip or Drown 2', artist: 'Gunna', year: 2019, note:
     "Just my personal favorite album ever. I will never forget the first time *“Who You Foolin”* blessed my ears. Wheezy’s production perfectly reflects the submerged in water aesthetic. Glittery and beautiful melodies with amazing trap drums perfectly mesh with Gunna’s effortless flow. I can’t ever get tired of these songs.",
   },
-  { title: 'Rodeo (Deluxe)', artist: 'Travis Scott', year: 2015, note:
+  { title: 'Rodeo (Deluxe)', owned: 'rodeo', artist: 'Travis Scott', year: 2015, note:
     "One of the greatest debut albums of all time. The theming of the rodeo as the crazy ride to success is amazing and perfect for a debut album. Stacked with unanimous classics. I miss this type of hunger from Travis Scott.",
   },
-  { title: 'good kid, m.A.A.d city (Deluxe)', artist: 'Kendrick Lamar', year: 2012, note:
+  { title: 'good kid, m.A.A.d city (Deluxe)', owned: 'gkmc', artist: 'Kendrick Lamar', year: 2012, note:
     "My favorite story driven album. I’m a sucker for nonlinear storytelling. This is just Kendrick in his peak rapping form. *“Sing About Me, I’m Dying of Thirst”* and *“Art of Peer Pressure”* are absolute classics that go down as my two favorite Kendrick songs of all time. That being said it also just has the most replay value for me vs his other albums and has those amazing moments of emotional storytelling wrapped in the cloak of a genuine banger. Deluxe tracks deviate from the narrative but the songs are still amazing so I have no complaints. I think this album moves up a spot if *“Cartoons and Cereal”* made the sample clearances.",
   },
   { title: 'The Life of Pablo', artist: 'Kanye West', year: 2016, note:
@@ -19,46 +21,46 @@ const albums = [
   { title: 'So Much Fun (Deluxe)', artist: 'Young Thug', year: 2019, note:
     "Young Thug album with quantity and quality. It is genuinely a fun listen every time and has some of my most replayed spring and summer songs. Features on this album also don’t disappoint.\n\nNot to mention the production. Bright and fun beats that made it pretty much impossible for Thug not to slide on the whole thing. Masterclass beats from Wheezy and Pi’erre.",
   },
-  { title: 'Late Registration', artist: 'Kanye West', year: 2005, note:
+  { title: 'Late Registration', owned: 'late-registration', artist: 'Kanye West', year: 2005, note:
     "Holy angelic production. And don’t forget the perfectly done drums. Amazing topics, and Kanye in the midst of his lyrical prime never gets old. Another essential fall spin.",
   },
   { title: 'WUNNA (Deluxe)', artist: 'Gunna', year: 2020, note:
     "Gunna masters trap production from all different places. It has those laid back flows reminiscent of Drip or Drown 2, but adds more glittery, brighter, and bolder production with more upbeat songs to differentiate it. Has its laid back melodic moments that contrast perfectly with upbeat trap. Not to mention not one of the features misses.",
   },
-  { title: 'ASTROWORLD', artist: 'Travis Scott', year: 2018, note:
+  { title: 'ASTROWORLD', owned: 'astroworld', artist: 'Travis Scott', year: 2018, note:
     "Travis Scott’s druggy yet stunning, acidic yet ghostly, angelic yet sharp production mixed with some of his most catchy and beautiful verses amalgamate to be such an amazing album. An album I’ve never been tired of listening to.",
   },
   { title: 'Culture', artist: 'Migos', year: 2017, note:
     "Holds a special place in my heart because it pretty much introduced me to rap music. Hearing *“Bad and Boujee”* and *“Slippery”* for the first time in middle school pretty much put me onto the whole genre entirely.\n\nThe production on this album immediately got me hooked on trap drums I’ve never gotten tired of. The Migos meshing together and bouncing off each other flawlessly creates so many dynamic moments.",
   },
-  { title: 'Slime Season 3', artist: 'Young Thug', year: 2016, note:
+  { title: 'Slime Season 3', owned: 'slime3', artist: 'Young Thug', year: 2016, note:
     "Such a peak mixtape. The other Slime Seasons are also amazing, this one is just by far my personal favorite. A tight 28 minute listen packed with so many classics, and a prime example of how Young Thug dominated in the mixtape era. 2016 Thug was a different animal. Bold production mixed with Young Thug’s melodic mastery and unmatched delivery creates some of the most catchy songs in his discography.",
   },
-  { title: 'Die Lit', artist: 'Playboi Carti', year: 2018, note:
+  { title: 'Die Lit', owned: 'die-lit', artist: 'Playboi Carti', year: 2018, note:
     "Amazingly atmospheric beats meet catchy Carti vocals. The sonic chemistry between Pi’erre and Carti just never gets old. My undisputed favorite Playboi Carti album, as it never fails to make me feel genuine happiness.",
   },
-  { title: 'HEROES & VILLAINS', artist: 'Metro Boomin', year: 2022, note:
+  { title: 'HEROES & VILLAINS', owned: 'heroes', artist: 'Metro Boomin', year: 2022, note:
     "The hero vs villain theming works so well. Metro never fails to produce catchy beats that make it so easy for any rapper to absolutely kill. Not to undermine the efforts of any rapper featured.\n\nAlso I’m a sucker for some good transitions and this album doesn’t disappoint. Holds a special place in my heart for featuring the first posthumous Takeoff verse, it being one of Takeoff’s most carefully crafted verses.",
   },
-  { title: 'To Pimp a Butterfly', artist: 'Kendrick Lamar', year: 2015, note:
+  { title: 'To Pimp a Butterfly', owned: 'tpab', artist: 'Kendrick Lamar', year: 2015, note:
     "Amazing trap jazz album that shows Kendrick in his philosophical prime. The narrative rollout of the poem through the listen, the dazzling production, and Kendrick’s multilayered bars and staple vocal performances create something that is nothing short of spectacular.",
   },
-  { title: 'At. Long. Last. ASAP', artist: 'A$AP Rocky', year: 2015, note:
+  { title: 'At. Long. Last. ASAP', owned: 'allasap', artist: 'A$AP Rocky', year: 2015, note:
     "Peak acid trap album. Amazing and drugged out production mixed with anything A$AP Rocky is bound to be a classic. The curated vibe of this album makes a full listen feel like a cohesive masterpiece. Although other A$AP Rocky albums have higher highs, this album is one I come back to way more consistently.",
   },
-  { title: 'The Last Rocket', artist: 'Takeoff', year: 2018, note:
+  { title: 'The Last Rocket', owned: 'last-rocket', artist: 'Takeoff', year: 2018, note:
     "Takeoff is my favorite Migo, and this album is Takeoff getting his time to shine without anyone else to hold him back. Explores emotional themes that he doesn’t go to in normal Migos collabs. And all of the glassy melodic trap beats make you feel like you’re trapped in space.",
   },
-  { title: 'A Great Chaos (Deluxe)', artist: 'Ken Carson', year: 2023, note:
+  { title: 'A Great Chaos (Deluxe)', owned: 'great-chaos', artist: 'Ken Carson', year: 2023, note:
     "Top to bottom great trap album that mixes amazing rage elements with electric Ken flows. Some of Ken’s best rapping performances, and the deluxe adds even more depth to the chaos vibe. Going to the Chaos Tour and seeing these songs live cemented this as one of my favorite albums to relisten to.",
   },
   { title: 'Jeffery', artist: 'Young Thug', year: 2016, note:
     "Yet again, 2016 Thug was truly a different animal. The production blends so many different genre elements into the trap format, creating such a fun album that never gets stale. Thug does things with his voice on this album that totally shouldn’t work, but somehow just do. He named every song after one of his many inspirations. Imagine having a song named *“Wyclef Jean”* on your album, then getting Wyclef Jean to feature on said album, only to put him on the song *“Kanye West.”* Not to mention one of the greatest album covers of all time.",
   },
-  { title: 'untitled unmastered.', artist: 'Kendrick Lamar', year: 2016, note:
+  { title: 'untitled unmastered.', owned: 'untitled', artist: 'Kendrick Lamar', year: 2016, note:
     "A mixtape-like compilation of “leftovers” that didn’t fit the narrative of TPAB still makes an album that is so beautiful and makes for a great listen. Can’t believe these are throwaways.",
   },
-  { title: 'IGOR', artist: 'Tyler, The Creator', year: 2019, note:
+  { title: 'IGOR', owned: 'igor', artist: 'Tyler, The Creator', year: 2019, note:
     "The overarching storyline is so well done, and fits the production so well. Tyler’s vocal performances all add so many layers. Nothing is better than putting headphones on and getting completely transported to a different world.",
   },
   { title: 'Yeezus', artist: 'Kanye West', year: 2013, note:
@@ -71,9 +73,9 @@ const albums = [
     "Masterclass Alchemist production and amazing rapping from Freddie is absolute cinema. AMAZING feature list and timeless songs. Tight listen that hits all the right spots.",
   },
   { title: 'Osama Season', artist: 'OsamaSon', year: 2024, note:
-    "Although I think Flex Musix (Flextra) is his best work, Osama Season wins in terms of listening experience. More consistent tracklist with all time Osama hits.",
+    "Although I think Flex Musix (FLXTRA) is his best work, Osama Season wins in terms of listening experience. More consistent tracklist with all time Osama hits.",
   },
-  { title: '2 Alivë (Geëk Pack)', artist: 'Yeat', year: 2022, note:
+  { title: '2 Alivë (Geëk Pack)', owned: '2alive', artist: 'Yeat', year: 2022, note:
     "Peak Yeat is a monster. Beautiful glitchy and trap heavy production with the early rage elements is a time capsule to senior year of high school. Not a song from this album left my playlist that whole summer. And the deluxe edition adds great Uzi features and a few core classics.",
   },
   { title: 'Whole Lotta Red', artist: 'Playboi Carti', year: 2020, note:
@@ -81,21 +83,25 @@ const albums = [
   },
 ];
 
-// Unranked. The page sorts these alphabetically, so order here does not matter. No notes.
+// Which owned albums are CDs, so the link names the right player.
+const cds = new Set(collection.cd.map((r) => r.art));
+
+// Unranked. The page sorts these alphabetically, so order here does not matter. No notes;
+// `owned` works the same as above.
 const mentions = [
   { title: "NS+ (ULTRA)", artist: "Destroy Lonely", year: 2022 },
   { title: "Barter 6", artist: "Young Thug", year: 2015 },
   { title: "Tha Carter V", artist: "Lil Wayne", year: 2018 },
-  { title: "FLEX MUSIX (FLEXTRA)", artist: "OsamaSon", year: 2023 },
+  { title: "Flex Musix (FLXTRA)", artist: "OsamaSon", year: 2023 },
   { title: "Studio Addict", artist: "Nine Vicious", year: 2023 },
   { title: "LIVE.LOVE.A$AP", artist: "A$AP Rocky", year: 2011 },
-  { title: "Ctrl", artist: "SZA", year: 2017 },
-  { title: "DAMN.", artist: "Kendrick Lamar", year: 2017 },
-  { title: "Donuts", artist: "J Dilla", year: 2006 },
+  { title: "Ctrl", owned: "ctrl", artist: "SZA", year: 2017 },
+  { title: "DAMN.", owned: "damn", artist: "Kendrick Lamar", year: 2017 },
+  { title: "Donuts", owned: "donuts", artist: "J Dilla", year: 2006 },
   { title: "The Life of Pi'erre 5", artist: "Pi'erre Bourne", year: 2021 },
-  { title: "Eternal Atake (Deluxe): LUV vs. The World 2", artist: "Lil Uzi Vert", year: 2020 },
+  { title: "Eternal Atake (Deluxe): LUV vs. The World 2", owned: "eternal-atake", artist: "Lil Uzi Vert", year: 2020 },
   { title: "The Life of Pi'erre 4 (Deluxe)", artist: "Pi'erre Bourne", year: 2019 },
-  { title: "Project X", artist: "Ken Carson", year: 2021 },
+  { title: "Project X", owned: "project-x", artist: "Ken Carson", year: 2021 },
   { title: "My Beautiful Dark Twisted Fantasy", artist: "Kanye West", year: 2010 },
 ];
 ---
@@ -116,7 +122,7 @@ const mentions = [
   <ol class="ranked">
     {
       albums.map((a, i) => (
-        <li>
+        <li id={a.owned}>
           <span class="rank">{String(i + 1).padStart(2, '0')}</span>
           <span class="body">
             <span class="title">
@@ -133,6 +139,11 @@ const mentions = [
                     )}
                 </span>
               ))}
+            {a.owned && (
+              <a class="owned" href={`/collection?play=${a.owned}`}>
+                {cds.has(a.owned) ? 'Put it in the CD player' : 'Put it on the turntable'}
+              </a>
+            )}
           </span>
         </li>
       ))
@@ -148,12 +159,17 @@ const mentions = [
       [...mentions]
         .sort((x, y) => x.title.localeCompare(y.title))
         .map((a) => (
-        <li>
+        <li id={a.owned}>
           <span class="body">
             <span class="title">
               {a.title} <span class="year">({a.year})</span>
             </span>
             <span class="artist">{a.artist}</span>
+            {a.owned && (
+              <a class="owned" href={`/collection?play=${a.owned}`}>
+                {cds.has(a.owned) ? 'Put it in the CD player' : 'Put it on the turntable'}
+              </a>
+            )}
           </span>
         </li>
       ))
@@ -164,6 +180,27 @@ const mentions = [
 </Layout>
 
 <style>
+  .owned {
+    align-self: flex-start;
+    margin-top: 0.4rem;
+    font-size: 0.88rem;
+  }
+
+  /* Arriving from the record collection: flash the entry once. */
+  .ranked li:target {
+    animation: arrive 1.6s ease-out;
+  }
+  @keyframes arrive {
+    from {
+      background: color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ranked li:target {
+      animation: none;
+    }
+  }
+
   .back {
     font-size: 0.9rem;
     margin: 0 0 1.25rem;
@@ -186,6 +223,7 @@ const mentions = [
   }
 
   .ranked li {
+    scroll-margin-top: 1.5rem;
     display: flex;
     gap: 1rem;
     align-items: baseline;
