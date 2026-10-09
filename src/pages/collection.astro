@@ -9,8 +9,7 @@ import previews from '../data/previews.json';
 // square. `gift`, `soon` and `single` add a small corner mark, and `top25`
 // or `mention` links the record to its entry on /albums (which links back here with
 // ?play=<art>). `cleanClip` marks a clip Apple flags explicit but that Joe
-// listened to and found clean, so it autoplays like the rest. A record can have
-// more than one clip; they play back to back. The 30-second clips in previews.json come from
+// listened to and found clean, so it autoplays like the rest. The 30-second clips in previews.json come from
 // scripts/fetch_previews.py and stream from Apple only when a visitor picks a
 // record. The wall sorts by artist, the way a record store bin would.
 type Rec = {
@@ -25,7 +24,7 @@ type Rec = {
   cleanClip?: boolean;
 };
 type Preview = { song: string; url: string; apple: string; explicit: boolean };
-const clips = previews as Record<string, Preview | Preview[]>;
+const clips = previews as Record<string, Preview>;
 
 // Fallback colors for records with no art, matching the store's sleeves.
 const hues = ['#9a5f97', '#c05f37', '#4f9a57', '#b8902f', '#2f9296', '#3d5a8a'];
@@ -40,11 +39,9 @@ const prep = async (list: Rec[]) =>
       .map(async (r, i) => {
         const mod = r.art ? covers[`../assets/covers/${r.art}.jpg`] : undefined;
         const img = mod ? await getImage({ src: mod.default, width: 240, format: 'webp' }) : null;
-        const found = r.art ? clips[r.art] : undefined;
-        const list = found ? (Array.isArray(found) ? found : [found]) : [];
-        const tracks = list.map((c) => ({ song: c.song, url: c.url, apple: c.apple, explicit: c.explicit && !r.cleanClip }));
+        const clip = r.art ? clips[r.art] : undefined;
         const tag = r.soon ? 'On the way' : r.single ? '12-inch' : '';
-        return { ...r, src: img?.src ?? '', hue: hues[i % hues.length], tracks, tag };
+        return { ...r, src: img?.src ?? '', hue: hues[i % hues.length], clip, tag };
       })
   );
 const walls = [
@@ -165,7 +162,10 @@ const giftNote = 'This one was a gift! :)';
               data-artist={r.artist}
               data-src={r.src}
               data-hue={r.hue}
-              data-clips={r.tracks.length ? JSON.stringify(r.tracks) : undefined}
+              data-song={r.clip?.song}
+              data-clip={r.clip?.url}
+              data-apple={r.clip?.apple}
+              data-explicit={r.clip?.explicit && !r.cleanClip ? 'true' : undefined}
               data-gift={r.gift ? 'true' : undefined}
               data-top={r.top25 || r.mention ? r.art : undefined}
               data-mention={r.mention ? 'true' : undefined}
@@ -203,30 +203,16 @@ const giftNote = 'This one was a gift! :)';
   } catch {}
   let volume = Number(slider.value) / 100;
 
-  type Track = { song: string; url: string; apple: string; explicit: boolean };
   type Device = {
     el: HTMLElement;
     btns: HTMLButtonElement[];
     audio: HTMLAudioElement | null;
     timers: number[];
     fading: boolean;
-    // The loaded record's clips, which one is up, and the record itself.
-    tracks: Track[];
-    index: number;
-    tile: HTMLElement | null;
   };
   const make = (sel: string): Device => {
     const el = document.querySelector<HTMLElement>(sel)!;
-    return {
-      el,
-      btns: [...el.querySelectorAll<HTMLButtonElement>('.pp')],
-      audio: null,
-      timers: [],
-      fading: false,
-      tracks: [],
-      index: 0,
-      tile: null,
-    };
+    return { el, btns: [...el.querySelectorAll<HTMLButtonElement>('.pp')], audio: null, timers: [], fading: false };
   };
   const tt = make('.tt');
   const cdp = make('.cdp');
@@ -259,7 +245,7 @@ const giftNote = 'This one was a gift! :)';
       else b.innerHTML = on ? '&#10074;&#10074;' : '&#9654;';
       b.setAttribute('aria-label', on ? 'Pause' : 'Play');
     });
-    if (d === cdp) lcdTrack.textContent = on ? String(d.index + 1).padStart(2, '0') : 'PAUSE';
+    if (d === cdp) lcdTrack.textContent = on ? '01' : 'PAUSE';
   };
 
   const pause = (d: Device) => {
@@ -271,22 +257,11 @@ const giftNote = 'This one was a gift! :)';
   const resume = (d: Device) => {
     if (!d.audio) return;
     pause(other(d));
-    // Play after the last clip ends starts the record over from the first.
-    if (d.audio.ended && d.tracks.length > 1 && d.tile) {
-      d.index = 0;
-      caption(d, d.tile);
-      cue(d, d.tile);
-    } else if (d.audio.ended) d.audio.currentTime = 0;
+    if (d.audio.ended) d.audio.currentTime = 0;
     d.fading = false;
     d.audio.volume = volume;
     d.audio.play().catch(() => {});
     setPlaying(d, true);
-  };
-
-  // What the CD display scrolls: title, artist and the current song.
-  const lcdLine = (t: HTMLElement) => {
-    const tr = cdp.tracks[cdp.index];
-    return `${t.dataset.title}  /  ${t.dataset.artist}${tr ? `  /  ${tr.song}` : ''}`.toUpperCase();
   };
 
   // Song line and links under the device.
@@ -298,44 +273,16 @@ const giftNote = 'This one was a gift! :)';
     if (t.dataset.top) top.href = `/albums#${t.dataset.top}`;
     top.textContent = t.dataset.mention ? 'See it in my Top 25 honorable mentions' : 'See it in my Top 25 Albums';
     song.textContent = '';
-    const tr = d.tracks[d.index];
-    link.hidden = !tr;
-    if (!tr) {
+    link.hidden = !t.dataset.clip;
+    if (!t.dataset.clip) {
       song.textContent = 'No preview for this one';
       return;
     }
-    link.href = tr.apple;
+    link.href = t.dataset.apple!;
     const em = document.createElement('em');
-    em.textContent = `“${tr.song}”`;
+    em.textContent = `“${t.dataset.song}”`;
     song.append(em);
-    if (d.tracks.length > 1) song.append(` (${d.index + 1} of ${d.tracks.length})`);
-    if (tr.explicit) song.append(', explicit. Press Play to hear it.');
-  };
-
-  // Put the current clip in the device, ready to play. When it ends, the
-  // next clip on the record follows; after the last one, the device stops.
-  const cue = (d: Device, t: HTMLElement) => {
-    const a = new Audio(d.tracks[d.index].url);
-    d.audio = a;
-    a.addEventListener('ended', () => {
-      if (d.audio !== a) return;
-      if (d.index + 1 >= d.tracks.length) return setPlaying(d, false);
-      d.index += 1;
-      caption(d, t);
-      const next = cue(d, t);
-      if (d === cdp) lcdText.textContent = lcdLine(t);
-      if (d.tracks[d.index].explicit) return setPlaying(d, false);
-      next.volume = volume;
-      next.play().catch(() => {});
-      setPlaying(d, true);
-    });
-    if (d === cdp) {
-      a.addEventListener('timeupdate', () => {
-        const s = Math.floor(a.currentTime);
-        lcdTime.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-      });
-    }
-    return a;
+    if (t.dataset.explicit) song.append(', explicit. Press Play to hear it.');
   };
 
   // Load a clip into a device. Clean clips picked from the wall start inside
@@ -348,20 +295,25 @@ const giftNote = 'This one was a gift! :)';
     d.audio?.pause();
     d.audio = null;
     pause(other(d));
-    d.tracks = t.dataset.clips ? (JSON.parse(t.dataset.clips) as Track[]) : [];
-    d.index = 0;
-    d.tile = t;
     caption(d, t);
     d.btns.forEach((b) => {
       b.hidden = false;
-      b.disabled = !d.tracks.length;
+      b.disabled = !t.dataset.clip;
     });
-    if (!d.tracks.length) {
+    if (!t.dataset.clip) {
       setPlaying(d, true);
       return;
     }
-    const a = cue(d, t);
-    if (d.tracks[0].explicit || !auto) {
+    const a = new Audio(t.dataset.clip);
+    d.audio = a;
+    a.addEventListener('ended', () => setPlaying(d, false));
+    if (d === cdp) {
+      a.addEventListener('timeupdate', () => {
+        const s = Math.floor(a.currentTime);
+        lcdTime.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+      });
+    }
+    if (t.dataset.explicit || !auto) {
       setPlaying(d, false);
       return;
     }
@@ -406,7 +358,8 @@ const giftNote = 'This one was a gift! :)';
     later(cdp, () => cdp.el.classList.remove('open'), 1900);
     later(cdp, () => {
       cdp.el.classList.add('playing');
-      lcdText.textContent = lcdLine(t);
+      const song = t.dataset.song ? `  /  ${t.dataset.song}` : '';
+      lcdText.textContent = `${t.dataset.title}  /  ${t.dataset.artist}${song}`.toUpperCase();
     }, 2700);
   };
 

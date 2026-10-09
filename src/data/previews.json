@@ -221,34 +221,18 @@
     "apple": "https://music.apple.com/us/album/picasso/1572352289?i=1572352485&uo=4",
     "explicit": false
   },
-  "gkmc": [
-    {
-      "song": "Sing About Me, I'm Dying of Thirst",
-      "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cb/8e/2b/cb8e2be0-e69c-cbfa-4bc3-c04b61d1dacd/mzaf_8108259578980050952.plus.aac.p.m4a",
-      "apple": "https://music.apple.com/us/album/sing-about-me-im-dying-of-thirst/1440860389?i=1440860410&uo=4",
-      "explicit": false
-    },
-    {
-      "song": "The Art of Peer Pressure",
-      "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/53/e2/4f/53e24f23-6287-d472-5378-7b4685ed734c/mzaf_3297415900762033644.plus.aac.p.m4a",
-      "apple": "https://music.apple.com/us/album/the-art-of-peer-pressure/1440860389?i=1440860399&uo=4",
-      "explicit": false
-    }
-  ],
-  "rodeo": [
-    {
-      "song": "I Can Tell",
-      "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/93/bb/7c/93bb7ceb-1c0b-030a-b4f7-684da76cdc65/mzaf_14874523023977064415.plus.aac.p.m4a",
-      "apple": "https://music.apple.com/us/album/i-can-tell/1456179762?i=1456179775&uo=4",
-      "explicit": false
-    },
-    {
-      "song": "Oh My Dis Side (feat. Quavo)",
-      "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fa/30/f3/fa30f3b5-0f9d-610a-adb5-4ff20f027bae/mzaf_14243555527615646650.plus.aac.p.m4a",
-      "apple": "https://music.apple.com/us/album/oh-my-dis-side-feat-quavo/1456179762?i=1456179764&uo=4",
-      "explicit": false
-    }
-  ],
+  "gkmc": {
+    "song": "Sing About Me, I'm Dying of Thirst",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cb/8e/2b/cb8e2be0-e69c-cbfa-4bc3-c04b61d1dacd/mzaf_8108259578980050952.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/sing-about-me-im-dying-of-thirst/1440860389?i=1440860410&uo=4",
+    "explicit": false
+  },
+  "rodeo": {
+    "song": "Oh My Dis Side (feat. Quavo)",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fa/30/f3/fa30f3b5-0f9d-610a-adb5-4ff20f027bae/mzaf_14243555527615646650.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/oh-my-dis-side-feat-quavo/1456179762?i=1456179764&uo=4",
+    "explicit": false
+  },
   "savage-mode-2": {
     "song": "Intro",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c3/27/85/c327851a-c9e1-7513-3da9-6fa39b617268/mzaf_11649759534741670307.plus.aac.p.m4a",

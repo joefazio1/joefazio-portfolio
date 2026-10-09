@@ -9,8 +9,7 @@ record. Records already in previews.json are skipped, so delete an entry (or
 change its `song`) to look it up again.
 
 Which song: the record's `song` field if it has one, otherwise the album's
-most popular track by Deezer's play-count rank. `song` can also be a list,
-played back to back on the site; its entry in previews.json is then a list. Clean edits are preferred;
+most popular track by Deezer's play-count rank. Clean edits are preferred;
 a clip is marked `explicit` only when Apple has no clean version of the song.
 """
 
@@ -102,8 +101,8 @@ def apple_albums(record):
     return sorted(found, key=lambda a: a.get("collectionExplicitness") != "cleaned")
 
 
-def find_preview(record, song=None):
-    song = song or record.get("song") or top_track(record)
+def find_preview(record):
+    song = record.get("song") or top_track(record)
     if not song:
         return None, "no album match"
     albums = apple_albums(record)
@@ -135,19 +134,14 @@ def main():
         slug = record.get("art")
         if not slug or slug in previews:
             continue
-        songs = record["song"] if isinstance(record.get("song"), list) else [None]
-        found_all = []
-        for song in songs:
-            time.sleep(3)
-            found, why = find_preview(record, song)
-            if found:
-                found_all.append(found)
-                flag = "  EXPLICIT" if found["explicit"] else ""
-                print(f"{slug:20} {found['song']}{flag}")
-            else:
-                print(f"{slug:20} NOT FOUND ({why})")
-        if found_all:
-            previews[slug] = found_all if len(songs) > 1 else found_all[0]
+        time.sleep(3)
+        found, why = find_preview(record)
+        if found:
+            previews[slug] = found
+            flag = "  EXPLICIT" if found["explicit"] else ""
+            print(f"{slug:20} {found['song']}{flag}")
+        else:
+            print(f"{slug:20} NOT FOUND ({why})")
     OUT.write_text(json.dumps(previews, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
