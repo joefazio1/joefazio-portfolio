@@ -569,3 +569,113 @@ When something on a page is clicked, the click passes up through every element t
 
 ### position: sticky
 A CSS setting that lets an element scroll normally until it reaches a set distance from the top of the screen, then stay put. The About photo column uses it so the photo stays in view while the text scrolls.
+
+## PowerShell scripting
+
+### Windows PowerShell 5.1 vs PowerShell 7
+5.1 is the version built into Windows and found on almost every work PC; 7 is the newer version installed separately. The scripts here are written for 5.1 so they run anywhere without installing anything.
+
+### Automation
+Turning a task done by hand into a file a computer can run on its own, the same way every time, on a schedule if needed.
+
+### Cmdlet
+One of PowerShell's built-in commands, always named Verb-Noun, such as `Get-Service` or `Rename-Item`.
+
+### Object (PowerShell)
+What a cmdlet returns: structured data with named parts, not plain text. A drive comes back as an object carrying its letter, size and free space.
+
+### Property and method
+A property is a piece of data on an object (`Status`, `SizeRemaining`); a method is an action the object can perform (`Stop()`). A health check only reads properties.
+
+### Get-Member
+The cmdlet that lists every property and method an object has. It is the first thing to run on anything unfamiliar.
+
+### Pipeline
+The `|` symbol, which hands the objects from one command to the next, so small commands chain into one larger one.
+
+### Where-Object
+Filters the pipeline, keeping only the objects that pass a test. Filtering on a property that does not exist returns nothing and raises no error, so a typo fails silently.
+
+### Select-Object
+Picks which properties of each object to keep, and can add new ones (see calculated property).
+
+### Comparison operators
+PowerShell writes comparisons as words: `-eq` equals, `-ne` not equal, `-lt` less than, `-gt` greater than. `-and` joins two conditions.
+
+### Script block
+Code inside curly braces `{ }` that is handed to a cmdlet to run once per object.
+
+### $_
+Inside a script block, the object currently coming through the pipeline.
+
+### Variable
+A named container for a value. In PowerShell the name always starts with `$`, such as `$watch`.
+
+### Array
+A list of values held in one variable, written with commas between them.
+
+### Parameter
+An option handed to a cmdlet, written with a leading dash, such as `-Name` on `Get-Service`.
+
+### Hashtable
+A set of name = value pairs written as `@{ Name = 'FreeGB' }`.
+
+### Calculated property
+A column that `Select-Object` computes instead of copying. It is written as a hashtable with a `Name` for the heading and an `Expression` script block for the value, which is how raw bytes become gigabytes and percent free.
+
+### 1GB (size constants)
+PowerShell understands `1KB`, `1MB`, `1GB` and `1TB` as numbers, so dividing a byte count by `1GB` converts it to gigabytes.
+
+### [math]::Round
+A built-in function that rounds a number to a chosen number of decimal places.
+
+### .ps1 script
+A text file of PowerShell commands that run from top to bottom. The extension ends in the digit one; a file saved as `.psl` with a letter L will not run.
+
+### .\ (running a script)
+"In the current folder." PowerShell requires it before a script name so that it never runs a file from the current folder just because its name was typed.
+
+### Tab completion
+Pressing Tab after the first few letters of a command or filename so PowerShell fills in the rest, which also confirms the name really exists.
+
+### Get-ChildItem
+Lists what is in a folder. `ls` and `dir` are short names for the same cmdlet.
+
+### Windows service
+A background program Windows runs without a window, such as the print spooler or the antivirus engine.
+
+### Startup type (service)
+Whether a service starts with Windows (Automatic), only when asked (Manual) or never (Disabled). Many Automatic services start, finish a job and stop again, so "Automatic but stopped" does not mean broken.
+
+### False positive
+An alert about something that is not actually wrong. Too many of them and people stop reading the report.
+
+### Watchlist vs ignore list
+Two ways to decide what a check reports. A watchlist names the things that matter and checks only those; an ignore list checks everything except known-harmless items. The health check uses a watchlist.
+
+### Threshold
+The line a check draws: below this value, raise a warning. The health check warns when a drive has less than 10 percent free.
+
+### Format-Table
+Draws objects as a table at that point in the script. It must come last in a pipeline, because what it outputs is drawing instructions, not data that can be filtered further.
+
+### Mixed output in one table
+PowerShell picks a table's columns from the first object a script outputs. A later object of a different kind has none of those columns and is drawn as a blank row, so each section needs its own `Format-Table`.
+
+### if / else
+A decision in code: if the condition is true, run the first block; otherwise run the `else` block.
+
+### Empty counts as false
+In an `if`, a variable holding nothing is treated as false and one holding anything as true, so `if ($stopped)` reads as "if anything is stopped."
+
+### Single vs double quotes
+Double quotes fill in variables, so `"$minPercentFree%"` prints `10%`. Single quotes print the text exactly as typed.
+
+### Testing against a known failure
+Pointing a check at something known to be wrong, to prove it can fire. Adding a service that is always stopped to the watchlist is how the hidden blank-row problem was found.
+
+### Task Scheduler
+The tool built into Windows for running a program or script at set times.
+
+### Active Directory
+The Microsoft system that stores a company's user accounts and computers. Windows Home cannot run it.

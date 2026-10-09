@@ -1211,3 +1211,73 @@ is the work the resume line describes, so the site now says so too.
 11. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
 12. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
     configuration; updating the LinkedIn and resume links to joefazio.dev.
+
+## 2026-10-09, continued (first PowerShell script)
+
+### What changed
+
+- **Started the PowerShell work the Now page describes.** A new folder,
+  `C:\Users\jdfaz\dev\powershell-scripts`, separate from this site, holds the
+  first script, `Get-HealthCheck.ps1`. It is a local git repository with one
+  commit and has not been pushed to GitHub yet.
+- **What the script does.** It lists every drive with free space, total size
+  and percent free, warns about any drive under 10 percent free, and warns if
+  any service on a short watchlist (antivirus, print spooler, DNS client,
+  event log) is not running. Each section prints either a warning with the
+  details or a plain "OK" line, so an empty result is never ambiguous.
+- **Nothing on the site changed.** The glossary gained a PowerShell section.
+
+### Why
+
+- **Windows PowerShell 5.1, not 7.** 5.1 is built into Windows and is what most
+  work PCs have, so the scripts run anywhere without an install.
+- **A watchlist, not "every Automatic service that is stopped."** That broader
+  test flagged eight services on a healthy machine, all of them updaters and
+  on-demand Windows services that are meant to start, finish and stop. A named
+  list of services that matter never cries wolf and is easy to justify.
+- **Settings at the top.** The watchlist and the 10 percent threshold are
+  variables on the first two lines, so they can be changed without reading the
+  logic.
+- **Percent, not a fixed size.** 10 percent was chosen as the threshold; on a
+  931 GB drive that is about 93 GB, which is early but safe.
+
+### What broke
+
+- **The file was saved as `.psl`** (letter L) instead of `.ps1`, so PowerShell
+  could not find it. The editor showing "Plain Text" was the clue. Renamed.
+- **A stopped service was found but not shown.** PowerShell took the table
+  columns from the first thing the script printed, the drives, and drew the
+  service as a blank row. This only came to light because the check was tested
+  against a service known to be stopped. Giving each section its own
+  `Format-Table` fixed it.
+- **The first try at the service warning tested the wrong variable,** the
+  watchlist itself instead of the list of stopped services, which would have
+  warned on every run. Caught before it was run.
+- **A stopped service printed twice** during the last test, because the old
+  one-line service check was still at the bottom of the file under its
+  replacement. Deleted before the first commit.
+
+### What is next
+
+1. Rename the local branch from `master` to `main` so it matches this site's
+   repository.
+2. Add a README, create the public `powershell-scripts` repository on GitHub
+   and push.
+3. Schedule the script with Task Scheduler and have it write to a log file.
+4. Second script: a log parser. Third: bulk user operations from a CSV file,
+   with the approach still to decide because Windows Home has no Active
+   Directory.
+5. Link the repository from the Now page once it has something in it.
+6. Replace the Phillies stand-in with a photo of the real record, and add a
+   photo and the exact label title for the Raaz Da Rukkuz 12-inch.
+7. Remove the "On the way" tag from Project X when it arrives.
+8. When Security+ studying actually starts, update the Now page heading.
+9. Write the per-entry notes for Movies and Video Games.
+10. Spot-check release years on every list, including the honorable mentions.
+11. Read every page end to end as a reader and cut anything that sounds generated.
+12. Decide whether to cut the projects page further.
+13. Decide between inline notes and a real blog at `/writing`.
+14. Wire up the Letterboxd, Steam and Spotify links once the URLs are supplied.
+15. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
+16. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
+    configuration; updating the LinkedIn and resume links to joefazio.dev.
