@@ -543,3 +543,29 @@ Build time is when Astro turns the source into the finished site, on a computer 
 
 ### Explicit and clean edits
 Music stores flag songs with explicit lyrics and often sell a clean edit with those words removed. Apple's data says which is which, which lets the preview script prefer clean versions.
+
+## Drawings, native code and testing
+
+### SVG (Scalable Vector Graphics)
+A way to draw pictures as shapes and lines described in text, so they stay sharp at any size and can be colored with CSS. The Record Store sleeve drawings and the album page record icons are SVG.
+
+### Component
+A reusable piece of a page kept in its own file and dropped in wherever it is needed, like `SleeveArt.astro` for the sleeve drawings or `Spin.astro` for the record icon.
+
+### Native binary (native binding)
+A program compiled for one specific kind of computer, such as Windows on an Intel or AMD chip, as opposed to code that runs anywhere. Astro reads `.astro` files with a native binary, a `.node` file inside `node_modules`.
+
+### Smart App Control
+A Windows 11 security feature that blocks programs it does not recognize as trusted. It blocked Astro's native compiler binary on 2026-10-09, which stopped local builds.
+
+### WebAssembly (WASM)
+A portable format for compiled code that runs inside Node or a browser rather than directly on Windows. Astro ships a WebAssembly copy of its compiler as a fallback, and that copy is what builds the site locally while Smart App Control blocks the native one.
+
+### Headless browser
+A browser running with no window, driven from the command line. Microsoft Edge in headless mode took the screenshots used to check each layout in light mode, dark mode and at phone width.
+
+### Event propagation
+When something on a page is clicked, the click passes up through every element that contains it. Stopping it partway (`stopPropagation`) is how tapping the gift badge shows its note without also playing the record it sits on.
+
+### position: sticky
+A CSS setting that lets an element scroll normally until it reaches a set distance from the top of the screen, then stay put. The About photo column uses it so the photo stays in view while the text scrolls.

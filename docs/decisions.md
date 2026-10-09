@@ -1132,3 +1132,82 @@ Pages.
 12. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
 13. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
     configuration; updating the LinkedIn and resume links to joefazio.dev.
+
+## 2026-10-09 (illustrated sleeves, collection picks, About layout)
+
+### What changed
+
+- **Illustrated Record Store sleeves.** The plain colored sleeve fronts are now
+  drawn covers: pen lines over a block of the sleeve's color printed slightly
+  off register, on grainy cream paper with a soft wash. Headphones for Albums,
+  a controller for Video Games, a crate of records for the Record Collection,
+  a clapperboard for Movies and a TV with rabbit ears for Shows. The drawings
+  live in one component, `src/components/SleeveArt.astro`, as inline SVG.
+- **New sleeve order:** Albums, Video Games, Record Collection, Movies, Shows.
+- **Albums page:** the "Put it on the turntable" text links became a small
+  record (or CD) icon beside the year, with the label on hover and keyboard
+  focus. Honorable mentions now line up in even rows. The icon is a reusable
+  component, `src/components/Spin.astro`.
+- **Record collection:** the gift note shows only on the gift badge, on hover
+  or tap, and tapping the badge no longer plays the record. The empty
+  turntable now says to pick a record "from the wall below." Seven preview
+  songs changed; all are clean edits.
+- **About page:** the photo moved into its own column with an offset color
+  block behind it, matching the sleeves, and stays in view while the text
+  scrolls on a wide screen. One clause was cut from the intro.
+- **BRHS wording:** the projects and Now pages now say both NIST CSF 2.0 and CIS
+  Controls v8 were assessed against the client before NIST was chosen, which
+  matches the resume.
+- **Top 5 Shows** reordered, the Now page lost a filler sentence, and
+  `public/resume.pdf` is the updated resume.
+
+### Why
+
+The sleeves were the last plain part of the Record Store. Every design was
+picked from throwaway comparison pages over several rounds rather than argued
+for in advance, and each round's page was deleted once a choice was made. The
+offset color block came from the sleeves and was reused on the About photo so
+the two parts of the site share one visual idea.
+
+The BRHS change is about accuracy: comparing two frameworks before picking one
+is the work the resume line describes, so the site now says so too.
+
+### What broke
+
+- **Local builds were blocked by Windows.** Smart App Control started refusing
+  to load the compiled file Astro uses to read `.astro` pages, the same file
+  that had worked two days earlier. Reinstalling did not help. The workaround
+  installs Astro's WebAssembly version of the compiler locally, which Windows
+  does not block:
+  `npm install --no-save --force @astrojs/compiler-binding-wasm32-wasi@0.4.1`.
+  It is not in `package.json`, so GitHub Actions and Cloudflare are unaffected,
+  but a fresh `npm install` or `npm ci` removes it and the command needs
+  running again. Turning Smart App Control off was the alternative and was
+  left alone.
+- **A global style leaked into test pages.** The site styles every `header`
+  element as the navigation bar, so test layouts built with `<header>` picked
+  up its padding, border and wrapping. Plain `div`s fixed it.
+- **The dev server served stale styles** after large edits to a page, which
+  made one round of screenshots show the previous design. Restarting the dev
+  server fixed it.
+- **Two songs per record was built and then dropped.** Records briefly played
+  two preview songs back to back. One song per record read better, so the
+  player went back to its earlier, simpler code.
+
+### What is next
+
+1. Replace the Phillies stand-in with a photo of the real record, and add a
+   photo and the exact label title for the Raaz Da Rukkuz 12-inch.
+2. Remove the "On the way" tag from Project X when it arrives.
+3. Write a first PowerShell script (a disk space and service health check) and
+   start the public repository the Now page promises.
+4. When Security+ studying actually starts, update the Now page heading.
+5. Write the per-entry notes for Movies and Video Games.
+6. Spot-check release years on every list, including the honorable mentions.
+7. Read every page end to end as a reader and cut anything that sounds generated.
+8. Decide whether to cut the projects page further.
+9. Decide between inline notes and a real blog at `/writing`.
+10. Wire up the Letterboxd, Steam and Spotify links once the URLs are supplied.
+11. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
+12. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
+    configuration; updating the LinkedIn and resume links to joefazio.dev.
