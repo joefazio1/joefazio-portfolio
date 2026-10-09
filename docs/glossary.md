@@ -513,3 +513,33 @@ Named values like `--bg` or `--dim`, defined once and reused everywhere. Changin
 
 ### Contrast ratio
 How different two colors are in brightness, from 1:1 (identical) to 21:1 (black on white). Body text should be at least 4.5:1 to stay readable; small or muted text needs more margin in practice.
+
+### API (Application Programming Interface)
+A way for one program to ask another for data in a fixed format. The iTunes Search API answers a web address like `itunes.apple.com/search?term=...` with album and song details instead of a web page.
+
+### JSON
+A plain-text data format of named values, lists and nested groups, readable by people and by nearly every programming language. The record collection and the saved preview links are JSON files.
+
+### HTTP status codes
+The three-digit number a server sends back with every response. 200 means OK, 404 means not found, and 429 means "too many requests, slow down".
+
+### Rate limiting
+A server capping how many requests one client may make in a short time, to protect itself. Apple rate-limits its search API, so the preview script pauses between calls and retries after a 429.
+
+### Query string
+The part of a web address after `?`, carrying values to the page, as in `/collection?play=gkmc`. The collection page reads it to load that record.
+
+### URL fragment and :target
+The part of a web address after `#`, which jumps to the element with that `id`, as in `/albums#gkmc`. CSS `:target` styles whichever element the fragment points at, which is how the arriving entry gets highlighted.
+
+### localStorage
+A small store of text values a website can keep in the visitor's own browser. The volume slider saves its position there. It stays on that one device and never reaches the server.
+
+### Autoplay policy
+Browsers refuse to start sound until the visitor has interacted with the page, such as with a click. That is why a record opened from a link loads paused and waits for Play.
+
+### Build time vs run time
+Build time is when Astro turns the source into the finished site, on a computer or on Cloudflare. Run time is when a visitor's browser loads it. The collection reads its data at build time, so visitors never wait on an outside service.
+
+### Explicit and clean edits
+Music stores flag songs with explicit lyrics and often sell a clean edit with those words removed. Apple's data says which is which, which lets the preview script prefer clean versions.

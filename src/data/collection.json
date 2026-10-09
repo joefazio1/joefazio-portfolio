@@ -1,16 +1,16 @@
 {
   "vinyl": [
-    { "title": "good kid, m.A.A.d city (Deluxe)", "artist": "Kendrick Lamar", "art": "gkmc", "top25": true, "match": "good kid, m.A.A.d city (Deluxe Version)", "gift": true, "song": "Money Trees" },
-    { "title": "untitled unmastered.", "artist": "Kendrick Lamar", "art": "untitled", "top25": true, "song": "untitled 02 l 06.23.2014." },
+    { "title": "good kid, m.A.A.d city (Deluxe)", "artist": "Kendrick Lamar", "art": "gkmc", "top25": true, "match": "good kid, m.A.A.d city (Deluxe Version)", "gift": true, "song": "Sing About Me, I'm Dying of Thirst" },
+    { "title": "untitled unmastered.", "artist": "Kendrick Lamar", "art": "untitled", "top25": true, "song": "untitled 08 l 09.06.2014." },
     { "title": "DAMN.", "artist": "Kendrick Lamar", "art": "damn", "mention": true, "song": "HUMBLE." },
     { "title": "To Pimp a Butterfly (10th Anniversary)", "artist": "Kendrick Lamar", "art": "tpab", "top25": true, "gift": true, "song": "Alright" },
     { "title": "ASTROWORLD", "artist": "Travis Scott", "art": "astroworld", "top25": true, "song": "ASTROTHUNDER" },
-    { "title": "Rodeo", "artist": "Travis Scott", "art": "rodeo", "top25": true, "song": "3500" },
+    { "title": "Rodeo", "artist": "Travis Scott", "art": "rodeo", "top25": true, "song": "Oh My Dis Side" },
     { "title": "Donuts", "artist": "J Dilla", "art": "donuts", "mention": true, "song": "Don't Cry" },
     { "title": "Heroes & Villains", "artist": "Metro Boomin", "art": "heroes", "top25": true, "song": "Feel The Fiyaaaah" },
-    { "title": "Savage Mode II", "artist": "21 Savage & Metro Boomin", "art": "savage-mode-2", "song": "Glock in My Lap" },
+    { "title": "Savage Mode II", "artist": "21 Savage & Metro Boomin", "art": "savage-mode-2", "song": "Intro" },
     { "title": "The Last Rocket", "artist": "Takeoff", "art": "last-rocket", "top25": true, "song": "Casper" },
-    { "title": "Only Built for Infinity Links", "artist": "Quavo & Takeoff", "art": "obfil", "song": "To The Bone" },
+    { "title": "Only Built for Infinity Links", "artist": "Quavo & Takeoff", "art": "obfil", "song": "Nothing Changed" },
     { "title": "DS4EVER", "artist": "Gunna", "art": "ds4ever", "song": "pushin P" },
     { "title": "One of Wun", "artist": "Gunna", "art": "one-of-wun", "song": "on one tonight" },
     { "title": "Drip Harder", "artist": "Lil Baby & Gunna", "art": "drip-harder", "song": "Drip Too Hard" },
@@ -21,7 +21,7 @@
     { "title": "A Great Chaos", "artist": "Ken Carson", "art": "great-chaos", "top25": true, "song": "Fighting My Demons" },
     { "title": "Project X", "artist": "Ken Carson", "art": "project-x", "mention": true, "soon": true, "song": "Run + Ran" },
     { "title": "Eternal Atake", "artist": "Lil Uzi Vert", "art": "eternal-atake", "mention": true, "song": "You Better Move", "cleanClip": true },
-    { "title": "2 Alivë (Geëk Pack)", "artist": "Yeat", "art": "2alive", "top25": true, "song": "Kant die" },
+    { "title": "2 Alivë (Geëk Pack)", "artist": "Yeat", "art": "2alive", "top25": true, "song": "Jump" },
     { "title": "IGOR", "artist": "Tyler, the Creator", "art": "igor", "top25": true, "song": "IGOR'S THEME" },
     { "title": "Die Lit", "artist": "Playboi Carti", "art": "die-lit", "top25": true, "gift": true, "song": "Shoota" },
     { "title": "Slime Season 3", "artist": "Young Thug", "art": "slime3", "top25": true, "song": "Digits" },
@@ -43,6 +43,6 @@
   "cd": [
     { "title": "Wolf", "artist": "Tyler, the Creator", "art": "wolf", "match": "Wolf + Instrumentals", "song": "Answer (Instrumental)" },
     { "title": "DAMN. (Collectors Edition)", "artist": "Kendrick Lamar", "art": "damn-collectors", "match": "DAMN. COLLECTORS EDITION.", "song": "PRIDE." },
-    { "title": "Culture III", "artist": "Migos", "art": "culture3", "song": "Avalanche" }
+    { "title": "Culture III", "artist": "Migos", "art": "culture3", "song": "Picasso" }
   ]
 }

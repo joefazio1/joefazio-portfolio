@@ -1,16 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SleeveArt from '../components/SleeveArt.astro';
 
 // A crate of records. Each sleeve is a subject; a record peeks out of the top
 // and, when clicked, slides the rest of the way out before the page redirects
-// to the list. `href: null` is a sleeve whose list is not built yet.
+// to the list. `href: null` is a sleeve whose list is not built yet. `art`
+// names the drawing in SleeveArt; `hue` colors the drawing, the kicker and
+// the record label.
 const sleeves = [
-  { title: "Joe's Top 25 Albums", kicker: 'Top 25', href: '/albums', hue: 'plum' },
-  { title: "Joe's Top 25 Movies", kicker: 'Top 25', href: '/movies', hue: 'rust' },
-  { title: "Joe's Top 25 Video Games", kicker: 'Top 25', href: '/games', hue: 'green' },
-  { title: "Joe's Top 5 Shows", kicker: 'Top 5', href: '/shows', hue: 'gold' },
-  { title: "Joe's Record Collection", kicker: 'Vinyl and CD', href: '/collection', hue: 'teal' },
-];
+  { title: "Joe's Top 25 Albums", kicker: 'Top 25', href: '/albums', art: 'albums', hue: '#9a5f97' },
+  { title: "Joe's Top 25 Video Games", kicker: 'Top 25', href: '/games', art: 'games', hue: '#4f9a57' },
+  { title: "Joe's Record Collection", kicker: 'Vinyl and CD', href: '/collection', art: 'collection', hue: '#2f9296' },
+  { title: "Joe's Top 25 Movies", kicker: 'Top 25', href: '/movies', art: 'movies', hue: '#c05f37' },
+  { title: "Joe's Top 5 Shows", kicker: 'Top 5', href: '/shows', art: 'shows', hue: '#b8902f' },
+] as const;
 ---
 
 <Layout
@@ -26,12 +29,13 @@ const sleeves = [
         sleeves.map((s) =>
           s.href ? (
             <li>
-              <a class={`item ${s.hue}`} href={s.href}>
+              <a class="item" href={s.href} style={`--hue:${s.hue}`}>
                 <span class="sleeve">
                   <span class="vinyl" aria-hidden="true">
                     <span class="vlabel" />
                   </span>
                   <span class="cover">
+                    <SleeveArt name={s.art} />
                     <span class="kicker">{s.kicker}</span>
                     <span class="title">{s.title}</span>
                   </span>
@@ -40,9 +44,10 @@ const sleeves = [
             </li>
           ) : (
             <li>
-              <div class={`item soon ${s.hue}`}>
+              <div class="item soon" style={`--hue:${s.hue}`}>
                 <span class="sleeve">
                   <span class="cover">
+                    <SleeveArt name={s.art} />
                     <span class="kicker">{s.kicker}</span>
                     <span class="title">{s.title}</span>
                   </span>
@@ -156,35 +161,29 @@ const sleeves = [
     height: 34%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--hue) 65%, #fff), var(--hue));
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
   }
 
-  /* THE COVER: an opaque jacket that hides most of the record. */
+  /* THE COVER: grainy cream paper with a soft wash of the sleeve's color,
+     opaque so it hides most of the record. The grain is generated noise,
+     inlined as an SVG so it costs no extra request. */
   .cover {
     position: relative;
     z-index: 2;
     aspect-ratio: 1;
     border-radius: 5px;
-    background: #14161c;
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.2 0 0 0 0 0.15 0 0 0 0 0.1 0 0 0 0.16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+      radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--hue) 38%, transparent) 0, transparent 62%),
+      radial-gradient(circle at 85% 10%, rgba(224, 169, 46, 0.22) 0, transparent 40%),
+      #efe6d3;
     box-shadow: 0 8px 18px rgba(13, 27, 42, 0.26);
     padding: 0.85rem 0.9rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-  }
-
-  /* A hue glow in the corner so each jacket reads differently. */
-  .cover::after {
-    content: '';
-    position: absolute;
-    right: -30%;
-    bottom: -30%;
-    width: 80%;
-    height: 80%;
-    border-radius: 50%;
-    opacity: 0.5;
-    filter: blur(6px);
   }
 
   .kicker {
@@ -194,6 +193,7 @@ const sleeves = [
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    color: color-mix(in srgb, var(--hue) 75%, #15161a);
   }
 
   .title {
@@ -202,58 +202,7 @@ const sleeves = [
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.2;
-    color: #f2f5f9;
-  }
-
-  /* Per-subject hues, used on the record label, the kicker and the glow. */
-  .rust .vlabel {
-    background: radial-gradient(circle at 35% 30%, #e39a72, #c05f37);
-  }
-  .rust .kicker {
-    color: #e0956b;
-  }
-  .rust .cover::after {
-    background: #c05f37;
-  }
-
-  .green .vlabel {
-    background: radial-gradient(circle at 35% 30%, #8bc48f, #4f9a57);
-  }
-  .green .kicker {
-    color: #7cbd82;
-  }
-  .green .cover::after {
-    background: #4f9a57;
-  }
-
-  .plum .vlabel {
-    background: radial-gradient(circle at 35% 30%, #c99ac6, #9a5f97);
-  }
-  .plum .kicker {
-    color: #c297bf;
-  }
-  .plum .cover::after {
-    background: #9a5f97;
-  }
-
-  .gold .vlabel {
-    background: radial-gradient(circle at 35% 30%, #e6c46f, #b8902f);
-  }
-  .gold .kicker {
-    color: #dcb95f;
-  }
-  .gold .cover::after {
-    background: #b8902f;
-  }
-
-  .teal .vlabel {
-    background: radial-gradient(circle at 35% 30%, #6fc0c4, #2f9296);
-  }
-  .teal .kicker {
-    color: #5fb3b7;
-  }
-  .teal .cover::after {
-    background: #2f9296;
+    color: #15161a;
   }
 
   /* Hover and keyboard focus lift the record partway out. */
@@ -290,7 +239,7 @@ const sleeves = [
     box-shadow: 0 6px 14px rgba(13, 27, 42, 0.18);
   }
   .item.soon .title {
-    color: #c6cedb;
+    color: #4a4d55;
   }
 
   @media (prefers-reduced-motion: reduce) {

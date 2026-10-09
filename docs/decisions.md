@@ -1042,3 +1042,93 @@ on purpose.
 10. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
 11. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
     configuration; updating the LinkedIn and resume links to joefazio.dev.
+
+## 2026-10-07 (the record collection)
+
+### What changed
+
+- **My Record Collection is live at `/collection`.** Vinyl goes on a turntable,
+  CDs go into a tray-loading CD player, and every record sits on a wall of
+  cover thumbnails sorted by artist. The sleeve in the record store now links
+  to it, and the sleeves are ordered Albums, Movies, Video Games, Shows,
+  Collection.
+- **The records are data, not markup.** Every record is one line in
+  `src/data/collection.json` (title, artist, cover, song, and flags for gifts,
+  records on the way, and the 12-inch single). The page reads it at build time.
+- **30-second song previews.** `scripts/fetch_previews.py` looks up each
+  record's song in Apple's free iTunes Search API and saves the preview clip
+  links to `src/data/previews.json`. It runs by hand when the collection
+  changes. Visitors' browsers stream the clip from Apple only when they pick a
+  record, and Apple Music is credited and linked under the stereo and for each
+  song.
+- **Clean by default.** The script prefers each album's clean edit. Clips Apple
+  marks explicit load paused and wait for the visitor to press Play, unless the
+  clip was listened to and found clean (`cleanClip` in the data).
+- **Players.** Each has its own Play/Pause and stays loaded when paused;
+  starting one pauses the other. A volume slider starts at 15% and is
+  remembered in the visitor's browser.
+- **Albums cross-link.** Top 25 entries and honorable mentions that are in the
+  collection link to `/collection?play=<record>`, which loads that record, and
+  the collection links back to the entry.
+- **Covers** are in `src/assets/covers/`, from Apple and Deezer, so Astro emits
+  small WebP versions. One stand-in (The Phantastic Phillies) is a collector's
+  photo until a photo of the real copy replaces it.
+- **Albums page:** "Flex Musix (FLXTRA)" styling corrected.
+
+### Why
+
+The collection is the personal side of the site, and making it something to
+play with says more than a list would. Keeping the records in a data file means
+adding one is a one-line change plus a script run, with no page editing.
+
+The previews stream from Apple rather than being hosted here, because hosting
+music would be copyright infringement while linking Apple's official previews,
+with credit, is what Apple allows. Lookups happen once, by hand, and the result
+is committed, so the live site never depends on Apple's search being up, and
+builds on Cloudflare never call an outside API.
+
+The site is linked from job applications, so the clips lean clean and anything
+explicit needs a deliberate click.
+
+Running cost is still $0: the iTunes Search API needs no key, the clips come
+from Apple's servers, and the thumbnails are small static files on Cloudflare
+Pages.
+
+### What broke
+
+- **Fuzzy search picked wrong albums.** Searching by name returned singles,
+  remixes and tribute albums. The fix was looking up the artist's ID first and
+  then reading that artist's actual catalog and tracklists.
+- **Rate limiting.** Apple answered HTTP 429 (too many requests) during bulk
+  lookups. The script now waits between calls and backs off and retries.
+- **Splitting artist names.** Taking the first listed artist by splitting on
+  commas and "&" broke "Tyler, the Creator" and "Mumford & Sons". The script
+  now tries the full credit first.
+- **Paused animations.** A record loaded paused froze its drop-in animation on
+  the first, invisible frame, and a paused CD froze its scrolling text off
+  screen. Fixed by animating the drop and the spin on separate elements, and by
+  stopping the scroll entirely when paused.
+- **Decorative controls felt broken.** Speed buttons, a pitch slider and extra
+  CD transport keys that did nothing were removed. Every visible button works.
+
+### What is next
+
+1. Illustrated record store sleeves: replace the plain colored sleeve fronts
+   with designs that look like real album covers, chosen from a throwaway
+   comparison page.
+2. Replace the Phillies stand-in with a photo of the real record, and add a
+   photo and the exact label title for the Raaz Da Rukkuz 12-inch.
+3. Remove the "On the way" tag from Project X when it arrives.
+4. Bring the resume's BRHS bullet in line with the site: NIST CSF 2.0 only, not
+   NIST and CIS Controls v8.
+5. When Security+ studying actually starts, update the Now page heading.
+6. Write the per-entry notes for Movies and Video Games.
+7. Spot-check release years on every list, including the shows and the
+   honorable mentions.
+8. Read every page end to end as a reader and cut anything that sounds generated.
+9. Decide whether to cut the projects page further.
+10. Decide between inline notes and a real blog at `/writing`.
+11. Wire up the Letterboxd, Steam and Spotify links once the URLs are supplied.
+12. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
+13. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
+    configuration; updating the LinkedIn and resume links to joefazio.dev.

@@ -1,16 +1,4 @@
 {
-  "gkmc": {
-    "song": "Money Trees (feat. Jay Rock)",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/be/7f/2f/be7f2fe2-41dd-6b9a-4957-a10ac5c62989/mzaf_17460900856492630846.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/money-trees-feat-jay-rock/1440860389?i=1440860400&uo=4",
-    "explicit": false
-  },
-  "untitled": {
-    "song": "untitled 02 l 06.23.2014.",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/dd/53/bc/dd53bcae-1482-79ee-e743-cfec6b33a963/mzaf_9422409675780907375.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/untitled-02-l-06-23-2014/1440832945?i=1440832956&uo=4",
-    "explicit": false
-  },
   "damn": {
     "song": "HUMBLE.",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1f/2e/37/1f2e37be-bdd0-d770-6ea4-091011a6aade/mzaf_2360827885900940865.plus.aac.p.m4a",
@@ -29,12 +17,6 @@
     "apple": "https://music.apple.com/us/album/astrothunder/1421658111?i=1421658653&uo=4",
     "explicit": false
   },
-  "rodeo": {
-    "song": "3500 (feat. Future & 2 Chainz)",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/4f/8e/2c/4f8e2ca1-1ac6-c2ff-5707-3bd751ca5f1f/mzaf_4523682676243862811.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/3500-feat-future-2-chainz/1456179762?i=1456179765&uo=4",
-    "explicit": false
-  },
   "donuts": {
     "song": "Don't Cry",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d6/6e/8f/d66e8fb9-a2db-6a46-11dc-65feebcafabb/mzaf_13391691656049244074.plus.aac.p.m4a",
@@ -47,22 +29,10 @@
     "apple": "https://music.apple.com/us/album/feel-the-fiyaaaah-feat-takeoff/1657583857?i=1657584265&uo=4",
     "explicit": false
   },
-  "savage-mode-2": {
-    "song": "Glock in My Lap",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f2/02/af/f202af8f-e04b-1533-ded6-79f7ca060fe6/mzaf_9040108288751511795.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/glock-in-my-lap/1534263780?i=1534264267&uo=4",
-    "explicit": false
-  },
   "last-rocket": {
     "song": "Casper",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/41/db/76/41db76be-779b-c3fe-6078-3f48061b5635/mzaf_18256909887610972390.plus.aac.p.m4a",
     "apple": "https://music.apple.com/us/album/casper/1441519661?i=1441519672&uo=4",
-    "explicit": false
-  },
-  "obfil": {
-    "song": "To The Bone",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/08/f5/54/08f55453-ca93-59eb-22a4-683e30643340/mzaf_9992478831886000125.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/to-the-bone/1646288204?i=1646288712&uo=4",
     "explicit": false
   },
   "ds4ever": {
@@ -111,12 +81,6 @@
     "song": "Run + Ran",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/bf/4d/d0/bf4dd0bc-cd10-0d55-77e5-1ddeaab8a919/mzaf_10183930791741518650.plus.aac.p.m4a",
     "apple": "https://music.apple.com/us/album/run-ran/1679849306?i=1679849325&uo=4",
-    "explicit": false
-  },
-  "2alive": {
-    "song": "Kant dië",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f0/63/62/f06362a1-71fb-8eba-9135-d806267b93e4/mzaf_7094070502582664644.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/kant-di%C3%AB/1612542990?i=1612543455&uo=4",
     "explicit": false
   },
   "igor": {
@@ -171,12 +135,6 @@
     "song": "PRIDE.",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d5/6b/20/d56b2008-4c5e-6e22-7d33-52cc8b82b71c/mzaf_5072718909939245382.plus.aac.p.m4a",
     "apple": "https://music.apple.com/us/album/pride/1440907513?i=1440907875&uo=4",
-    "explicit": false
-  },
-  "culture3": {
-    "song": "Avalanche",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ec/e2/6f/ece26f49-2c84-eafc-77ab-0b954697da8b/mzaf_17074655983090566299.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/avalanche/1572352289?i=1572352291&uo=4",
     "explicit": false
   },
   "slime3": {
@@ -237,6 +195,48 @@
     "song": "Free the Ruler",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/3d/6a/30/3d6a306a-1bfe-bc82-bff0-08d2e8ad1ace/mzaf_10042441327415177596.plus.aac.p.m4a",
     "apple": "https://music.apple.com/us/album/free-the-ruler/1706552054?i=1706552968&uo=4",
+    "explicit": false
+  },
+  "untitled": {
+    "song": "untitled 08 l 09.06.2014.",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/a2/85/8f/a2858f85-80a5-2205-be01-08f869e10c5d/mzaf_2238778051898373297.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/untitled-08-l-09-06-2014/1440832945?i=1440833180&uo=4",
+    "explicit": false
+  },
+  "obfil": {
+    "song": "Nothing Changed",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5e/4d/2f/5e4d2f34-0af4-0e7a-9bf9-0d26e27ff07e/mzaf_6960101676922405141.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/nothing-changed/1646288204?i=1646289263&uo=4",
+    "explicit": false
+  },
+  "2alive": {
+    "song": "Jump",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/12/9f/4f/129f4fbf-2543-d7d0-9d89-0d76ea22cedd/mzaf_5437263743897056315.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/jump/1612542990?i=1612543408&uo=4",
+    "explicit": false
+  },
+  "culture3": {
+    "song": "Picasso",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5e/08/77/5e0877e8-3850-c07f-a549-7a275dca9393/mzaf_1306496425534436108.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/picasso/1572352289?i=1572352485&uo=4",
+    "explicit": false
+  },
+  "gkmc": {
+    "song": "Sing About Me, I'm Dying of Thirst",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cb/8e/2b/cb8e2be0-e69c-cbfa-4bc3-c04b61d1dacd/mzaf_8108259578980050952.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/sing-about-me-im-dying-of-thirst/1440860389?i=1440860410&uo=4",
+    "explicit": false
+  },
+  "rodeo": {
+    "song": "Oh My Dis Side (feat. Quavo)",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fa/30/f3/fa30f3b5-0f9d-610a-adb5-4ff20f027bae/mzaf_14243555527615646650.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/oh-my-dis-side-feat-quavo/1456179762?i=1456179764&uo=4",
+    "explicit": false
+  },
+  "savage-mode-2": {
+    "song": "Intro",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c3/27/85/c327851a-c9e1-7513-3da9-6fa39b617268/mzaf_11649759534741670307.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/intro/1534263780?i=1534263782&uo=4",
     "explicit": false
   }
 }

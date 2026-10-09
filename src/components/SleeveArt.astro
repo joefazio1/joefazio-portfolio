@@ -1,0 +1,164 @@
+---
+// The drawing on a Record Store sleeve: pen lines over a block of the
+// sleeve's color, printed slightly off, like a two-color print run. Each
+// drawing is centered on (50, 50) in a 100 x 100 box. The color comes from
+// the --hue custom property set on the sleeve.
+//   o = outline, w = outline filled with paper (hides what is behind it),
+//   f = solid ink, h = spot color, t = thin line, gr = groove on a dark disc
+interface Props {
+  name: 'albums' | 'games' | 'collection' | 'movies' | 'shows';
+}
+
+const art = {
+  // Headphones: big cushions inside, thinner cups outside.
+  albums: `
+    <g transform="translate(0 1)">
+      <path class="w" d="M11.5 54 C11.5 0.7 88.5 0.7 88.5 54 L82.5 54 C82.5 8.7 17.5 8.7 17.5 54 Z"/>
+      <path class="t" d="M14.5 51 C14.5 4.7 85.5 4.7 85.5 51"/>
+      <rect class="h o" x="15" y="48" width="14" height="36" rx="7"/>
+      <rect class="h o" x="71" y="48" width="14" height="36" rx="7"/>
+      <rect class="w" x="10" y="51" width="9" height="30" rx="4.5"/>
+      <rect class="w" x="81" y="51" width="9" height="30" rx="4.5"/>
+    </g>`,
+  // A controller in the Xbox layout: left stick high, D-pad low; buttons
+  // high, right stick low.
+  games: `
+    <g transform="translate(0 -2)">
+      <path class="w" d="M32 28 C25 28 21 30 19 35 C15 45 12 60 13 69 C14 76 21 78 25 73 L33 63 C37 60 41 59 45 59 H55 C59 59 63 60 67 63 L75 73 C79 78 86 76 87 69 C88 60 85 45 81 35 C79 30 75 28 68 28 C62 27 57 29 50 29 C43 29 38 27 32 28 Z"/>
+      <circle class="o" cx="31" cy="41" r="5.5"/>
+      <circle class="t" cx="31" cy="41" r="2.6"/>
+      <rect class="f" x="34.5" y="49.2" width="11" height="3.6" rx="0.8"/>
+      <rect class="f" x="38.2" y="45.5" width="3.6" height="11" rx="0.8"/>
+      <circle class="o" cx="60" cy="51" r="4.6"/>
+      <circle class="t" cx="60" cy="51" r="2.2"/>
+      <circle class="h" cx="69" cy="36.2" r="2.4"/>
+      <circle class="f" cx="73.8" cy="41" r="2.4"/>
+      <circle class="h" cx="69" cy="45.8" r="2.4"/>
+      <circle class="f" cx="64.2" cy="41" r="2.4"/>
+      <circle class="o" cx="50" cy="38" r="2.6"/>
+      <circle class="f" cx="44.5" cy="45" r="1.1"/>
+      <circle class="f" cx="55.5" cy="45" r="1.1"/>
+    </g>`,
+  // Record sleeves standing in a crate, one record peeking out.
+  collection: `
+    <rect class="w" x="19" y="30" width="28" height="28" transform="rotate(-9 33 44)"/>
+    <rect class="h o" x="34" y="25" width="28" height="28" transform="rotate(3 48 39)"/>
+    <circle class="f" cx="67" cy="36" r="14"/>
+    <circle class="gr" cx="67" cy="36" r="10.5"/>
+    <circle class="gr" cx="67" cy="36" r="7.5"/>
+    <circle class="h" cx="67" cy="36" r="4.2"/>
+    <rect class="w" x="54" y="38" width="28" height="28" transform="rotate(7 68 52)"/>
+    <rect class="w" x="15" y="52" width="70" height="28" rx="2"/>
+    <rect class="h o" x="15" y="68" width="70" height="5"/>
+    <rect class="o" x="40" y="57" width="20" height="5" rx="2.5"/>`,
+  // A clapperboard, the top bar swung open.
+  movies: `
+    <g transform="translate(0 5)">
+      <rect class="w" x="20" y="40" width="60" height="36" rx="2"/>
+      <rect class="w" x="20" y="40" width="60" height="8"/>
+      <path class="h" d="M27 40 h8 l-5 8 h-8z M43 40 h8 l-5 8 h-8z M59 40 h8 l-5 8 h-8z M75 40 h5 v2 l-4 6 h-5z"/>
+      <rect class="o" x="20" y="40" width="60" height="8"/>
+      <g transform="rotate(-16 20 39)">
+        <rect class="w" x="20" y="30" width="60" height="8"/>
+        <path class="h" d="M27 30 h8 l-5 8 h-8z M43 30 h8 l-5 8 h-8z M59 30 h8 l-5 8 h-8z M75 30 h5 v2 l-4 6 h-5z"/>
+        <rect class="o" x="20" y="30" width="60" height="8"/>
+      </g>
+      <circle class="f" cx="22.5" cy="39" r="1.6"/>
+      <path class="t" d="M26 57 h48 M26 64 h48 M44 52 v18"/>
+    </g>`,
+  // An old TV with rabbit ears.
+  shows: `
+    <path class="o" d="M50 34 L37 18 M50 34 L64 16"/>
+    <circle class="f" cx="37" cy="18" r="1.8"/>
+    <circle class="f" cx="64" cy="16" r="1.8"/>
+    <path class="o" d="M28 78 l-3 6 M72 78 l3 6"/>
+    <rect class="w" x="18" y="34" width="64" height="44" rx="7"/>
+    <path class="w" d="M44 34 a6 6 0 0 1 12 0"/>
+    <rect class="h o" x="24" y="40" width="40" height="32" rx="5"/>
+    <path class="t" d="M29 46 q4 -2 9 -2"/>
+    <circle class="o" cx="73" cy="47" r="3"/>
+    <circle class="o" cx="73" cy="57" r="3"/>
+    <path class="t" d="M69 65 h8 M69 68 h8 M69 71 h8"/>`,
+};
+
+const svg = `<svg viewBox="0 0 100 100" aria-hidden="true">${art[Astro.props.name]}</svg>`;
+---
+
+<span class="pic" aria-hidden="true">
+  <span class="ghost" set:html={svg} />
+  <span class="lines" set:html={svg} />
+</span>
+
+<style>
+  /* The drawing sits centered in the space between kicker and title. */
+  .pic {
+    --ink: #22232a;
+    --paper: #efe6d3;
+    position: absolute;
+    inset: 9% 3% 21% 3%;
+  }
+  .ghost,
+  .lines {
+    position: absolute;
+    inset: 0;
+  }
+  .ghost :global(svg),
+  .lines :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Pen lines. */
+  .lines :global(.o),
+  .lines :global(.w),
+  .lines :global(.t) {
+    stroke: var(--ink);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .lines :global(.o) {
+    fill: none;
+    stroke-width: 1.8;
+  }
+  .lines :global(.w) {
+    fill: var(--paper);
+    stroke-width: 1.8;
+  }
+  .lines :global(.t) {
+    fill: none;
+    stroke-width: 0.7;
+  }
+  .lines :global(.f) {
+    fill: var(--ink);
+  }
+  .lines :global(.h),
+  .lines :global(.h.o) {
+    fill: var(--hue);
+  }
+  .lines :global(.gr) {
+    fill: none;
+    stroke: var(--paper);
+    stroke-width: 0.5;
+    opacity: 0.45;
+  }
+
+  /* The block of color behind the lines, printed slightly off register. */
+  .ghost {
+    transform: translate(4%, 3.5%);
+    opacity: 0.45;
+  }
+  .ghost :global(*) {
+    fill: var(--hue);
+    stroke: var(--hue);
+    stroke-width: 1.8;
+  }
+  .ghost :global(.t),
+  .ghost :global(.gr) {
+    display: none;
+  }
+  /* Open curves stay lines, not fills. */
+  .ghost :global(path.o) {
+    fill: none;
+    stroke-width: 2.6;
+  }
+</style>

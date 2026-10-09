@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import collection from '../data/collection.json';
+import Spin from '../components/Spin.astro';
 
 // My top 25. Every `note` is my own handwritten write-up; only typos get
 // fixed. `owned` is the album's `art` slug in src/data/collection.json when
@@ -127,6 +128,7 @@ const mentions = [
           <span class="body">
             <span class="title">
               {a.title} <span class="year">({a.year})</span>
+              {a.owned && <Spin slug={a.owned} cd={cds.has(a.owned)} />}
             </span>
             <span class="artist">{a.artist}</span>
             {a.note &&
@@ -139,11 +141,6 @@ const mentions = [
                     )}
                 </span>
               ))}
-            {a.owned && (
-              <a class="owned" href={`/collection?play=${a.owned}`}>
-                {cds.has(a.owned) ? 'Put it in the CD player' : 'Put it on the turntable'}
-              </a>
-            )}
           </span>
         </li>
       ))
@@ -163,13 +160,9 @@ const mentions = [
           <span class="body">
             <span class="title">
               {a.title} <span class="year">({a.year})</span>
+              {a.owned && <Spin slug={a.owned} cd={cds.has(a.owned)} />}
             </span>
             <span class="artist">{a.artist}</span>
-            {a.owned && (
-              <a class="owned" href={`/collection?play=${a.owned}`}>
-                {cds.has(a.owned) ? 'Put it in the CD player' : 'Put it on the turntable'}
-              </a>
-            )}
           </span>
         </li>
       ))
@@ -180,12 +173,6 @@ const mentions = [
 </Layout>
 
 <style>
-  .owned {
-    align-self: flex-start;
-    margin-top: 0.4rem;
-    font-size: 0.88rem;
-  }
-
   /* Arriving from the record collection: flash the entry once. */
   .ranked li:target {
     animation: arrive 1.6s ease-out;
@@ -245,6 +232,7 @@ const mentions = [
   }
 
   .body {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 0.15rem;
