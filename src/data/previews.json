@@ -1,10 +1,4 @@
 {
-  "gkmc": {
-    "song": "Money Trees (feat. Jay Rock)",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/be/7f/2f/be7f2fe2-41dd-6b9a-4957-a10ac5c62989/mzaf_17460900856492630846.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/money-trees-feat-jay-rock/1440860389?i=1440860400&uo=4",
-    "explicit": false
-  },
   "damn": {
     "song": "HUMBLE.",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/1f/2e/37/1f2e37be-bdd0-d770-6ea4-091011a6aade/mzaf_2360827885900940865.plus.aac.p.m4a",
@@ -33,12 +27,6 @@
     "song": "Feel The Fiyaaaah (feat. Takeoff)",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/dd/0e/f0/dd0ef0b7-4ef6-e72e-6747-f4196c12eb44/mzaf_18440085435583536550.plus.aac.p.m4a",
     "apple": "https://music.apple.com/us/album/feel-the-fiyaaaah-feat-takeoff/1657583857?i=1657584265&uo=4",
-    "explicit": false
-  },
-  "savage-mode-2": {
-    "song": "Glock in My Lap",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/f2/02/af/f202af8f-e04b-1533-ded6-79f7ca060fe6/mzaf_9040108288751511795.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/glock-in-my-lap/1534263780?i=1534264267&uo=4",
     "explicit": false
   },
   "last-rocket": {
@@ -215,12 +203,6 @@
     "apple": "https://music.apple.com/us/album/untitled-08-l-09-06-2014/1440832945?i=1440833180&uo=4",
     "explicit": false
   },
-  "rodeo": {
-    "song": "I Can Tell",
-    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/93/bb/7c/93bb7ceb-1c0b-030a-b4f7-684da76cdc65/mzaf_14874523023977064415.plus.aac.p.m4a",
-    "apple": "https://music.apple.com/us/album/i-can-tell/1456179762?i=1456179775&uo=4",
-    "explicit": false
-  },
   "obfil": {
     "song": "Nothing Changed",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/5e/4d/2f/5e4d2f34-0af4-0e7a-9bf9-0d26e27ff07e/mzaf_6960101676922405141.plus.aac.p.m4a",
@@ -237,6 +219,40 @@
     "song": "Picasso",
     "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/5e/08/77/5e0877e8-3850-c07f-a549-7a275dca9393/mzaf_1306496425534436108.plus.aac.p.m4a",
     "apple": "https://music.apple.com/us/album/picasso/1572352289?i=1572352485&uo=4",
+    "explicit": false
+  },
+  "gkmc": [
+    {
+      "song": "Sing About Me, I'm Dying of Thirst",
+      "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/cb/8e/2b/cb8e2be0-e69c-cbfa-4bc3-c04b61d1dacd/mzaf_8108259578980050952.plus.aac.p.m4a",
+      "apple": "https://music.apple.com/us/album/sing-about-me-im-dying-of-thirst/1440860389?i=1440860410&uo=4",
+      "explicit": false
+    },
+    {
+      "song": "The Art of Peer Pressure",
+      "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/53/e2/4f/53e24f23-6287-d472-5378-7b4685ed734c/mzaf_3297415900762033644.plus.aac.p.m4a",
+      "apple": "https://music.apple.com/us/album/the-art-of-peer-pressure/1440860389?i=1440860399&uo=4",
+      "explicit": false
+    }
+  ],
+  "rodeo": [
+    {
+      "song": "I Can Tell",
+      "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/93/bb/7c/93bb7ceb-1c0b-030a-b4f7-684da76cdc65/mzaf_14874523023977064415.plus.aac.p.m4a",
+      "apple": "https://music.apple.com/us/album/i-can-tell/1456179762?i=1456179775&uo=4",
+      "explicit": false
+    },
+    {
+      "song": "Oh My Dis Side (feat. Quavo)",
+      "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/fa/30/f3/fa30f3b5-0f9d-610a-adb5-4ff20f027bae/mzaf_14243555527615646650.plus.aac.p.m4a",
+      "apple": "https://music.apple.com/us/album/oh-my-dis-side-feat-quavo/1456179762?i=1456179764&uo=4",
+      "explicit": false
+    }
+  ],
+  "savage-mode-2": {
+    "song": "Intro",
+    "url": "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c3/27/85/c327851a-c9e1-7513-3da9-6fa39b617268/mzaf_11649759534741670307.plus.aac.p.m4a",
+    "apple": "https://music.apple.com/us/album/intro/1534263780?i=1534263782&uo=4",
     "explicit": false
   }
 }

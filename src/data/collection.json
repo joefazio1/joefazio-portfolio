@@ -1,14 +1,14 @@
 {
   "vinyl": [
-    { "title": "good kid, m.A.A.d city (Deluxe)", "artist": "Kendrick Lamar", "art": "gkmc", "top25": true, "match": "good kid, m.A.A.d city (Deluxe Version)", "gift": true, "song": "Money Trees" },
+    { "title": "good kid, m.A.A.d city (Deluxe)", "artist": "Kendrick Lamar", "art": "gkmc", "top25": true, "match": "good kid, m.A.A.d city (Deluxe Version)", "gift": true, "song": ["Sing About Me, I'm Dying of Thirst", "The Art of Peer Pressure"] },
     { "title": "untitled unmastered.", "artist": "Kendrick Lamar", "art": "untitled", "top25": true, "song": "untitled 08 l 09.06.2014." },
     { "title": "DAMN.", "artist": "Kendrick Lamar", "art": "damn", "mention": true, "song": "HUMBLE." },
     { "title": "To Pimp a Butterfly (10th Anniversary)", "artist": "Kendrick Lamar", "art": "tpab", "top25": true, "gift": true, "song": "Alright" },
     { "title": "ASTROWORLD", "artist": "Travis Scott", "art": "astroworld", "top25": true, "song": "ASTROTHUNDER" },
-    { "title": "Rodeo", "artist": "Travis Scott", "art": "rodeo", "top25": true, "song": "I Can Tell" },
+    { "title": "Rodeo", "artist": "Travis Scott", "art": "rodeo", "top25": true, "song": ["I Can Tell", "Oh My Dis Side"] },
     { "title": "Donuts", "artist": "J Dilla", "art": "donuts", "mention": true, "song": "Don't Cry" },
     { "title": "Heroes & Villains", "artist": "Metro Boomin", "art": "heroes", "top25": true, "song": "Feel The Fiyaaaah" },
-    { "title": "Savage Mode II", "artist": "21 Savage & Metro Boomin", "art": "savage-mode-2", "song": "Glock in My Lap" },
+    { "title": "Savage Mode II", "artist": "21 Savage & Metro Boomin", "art": "savage-mode-2", "song": "Intro" },
     { "title": "The Last Rocket", "artist": "Takeoff", "art": "last-rocket", "top25": true, "song": "Casper" },
     { "title": "Only Built for Infinity Links", "artist": "Quavo & Takeoff", "art": "obfil", "song": "Nothing Changed" },
     { "title": "DS4EVER", "artist": "Gunna", "art": "ds4ever", "song": "pushin P" },
