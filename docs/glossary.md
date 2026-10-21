@@ -383,6 +383,15 @@ A prioritised list of 18 specific safeguards, ordered so the first ones block th
 ### Choosing between NIST CSF and CIS Controls
 They are not rivals and they overlap heavily. The practical split: NIST CSF is the better fit for assessing and communicating current posture to leadership, CIS Controls for sequencing the remediation work afterwards.
 
+### Security header
+An instruction the server sends along with every page, telling the browser how to behave, for example "only ever connect to this site over HTTPS" or "do not let other sites show this page inside a frame." On Cloudflare Pages they are set in a `public/_headers` file.
+
+### Content-Security-Policy (CSP)
+A security header that lists where a page is allowed to load scripts, styles and images from, so code injected from anywhere else is refused.
+
+### Wrangler
+Cloudflare's command-line tool for building, testing and deploying Workers and Pages projects from a terminal or a GitHub Actions workflow.
+
 ## Windows and local development
 
 ### PowerShell execution policy
