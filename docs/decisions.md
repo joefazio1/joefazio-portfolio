@@ -1281,3 +1281,59 @@ is the work the resume line describes, so the site now says so too.
 15. Still carried over: confirm Node 24 in the Cloudflare Pages build log.
 16. Later: deploying from Actions with Wrangler; Terraform for the Cloudflare
     configuration; updating the LinkedIn and resume links to joefazio.dev.
+
+## 2026-10-20 (list updates)
+
+### What changed
+
+- **Video Games is now a Top 20.** The page, the tab title, the description
+  and the Record Store sleeve all say Top 20. The ranking was reordered.
+  Hades and Hades II are one entry, and so are God of War and God of War
+  Ragnarok, each with both years.
+- **17 of the 20 games have notes,** written by Joe. Only spelling and
+  capitalization were corrected, at his request. Notes can now run to more
+  than one paragraph (Arkham Trilogy, BioShock Infinite), the same way album
+  notes already could.
+- **Video Games gained an honorable mentions section,** sorted alphabetically
+  with no notes, matching Albums: Balatro, Before Your Eyes, BioShock 2 and
+  Minerva's Den, Bloons TD 6, Clash of Clans, Halo 2, and Pokemon Platinum
+  and SoulSilver.
+- **Albums:** Rodeo and good kid, m.A.A.d city are now listed as the standard
+  editions, not the deluxe ones, and the gkmc note explains why. Tha Carter V
+  left the honorable mentions and Trapped on Cleveland 3 (Lil Keed) joined
+  them.
+- Shipped as pull request #31 and checked on the live site.
+
+### Why
+
+- **20, not 25.** The new ranking had 22 games once Bloons TD 6 and Clash of
+  Clans moved down. Merging the two God of War games and moving Before Your
+  Eyes to honorable mentions brought it to a clean 20, rather than padding the
+  list to fill a number.
+- **Standard editions of Rodeo and gkmc,** because the gkmc bonus tracks step
+  outside the album's story.
+
+### What broke
+
+- Nothing. The build passed, there are no em dashes in `src/`, and the live
+  pages show the new lists.
+
+### What is next
+
+The next additions, in the order recommended:
+
+1. **Security headers.** Add `public/_headers` with HSTS,
+   Content-Security-Policy and the other standard headers, and grade the site
+   on securityheaders.com before and after.
+2. **Publish the PowerShell repository:** rename `master` to `main`, write a
+   README, push it to GitHub, and link it from the Now page.
+3. **A visitor counter on Workers and KV,** the site's first backend code.
+4. Notes for Hades, God of War and Spider-Man, then the Movies notes.
+5. Loose ends: the Phillies and Raaz Da Rukkuz photos; the Letterboxd, Steam
+   and Spotify links; a spot-check of release years, including the ones added
+   today (Trapped on Cleveland 3, Balatro, Hades II, Halo 2, Platinum,
+   SoulSilver).
+6. Carried over: Project X's "On the way" tag, the Security+ wording on the
+   Now page, the Node 24 check in the Pages build log, cutting the projects
+   page, inline notes versus a `/writing` blog, then deploying from Actions
+   with Wrangler and Terraform for the Cloudflare configuration.
