@@ -1,47 +1,71 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// My top 25, in rough order. `note` is a one-line reason, filled in over time.
-// Leave a note empty and the row simply renders without one.
+// My top 20, in rough order. `note` is a short reason, filled in over time.
+// Leave a note empty and the row simply renders without one. A blank line
+// inside a note starts a new paragraph.
 // `year` prints as written, so a collection can carry more than one year.
 const games = [
-  { title: 'The Legend of Zelda: Breath of the Wild', year: 2017, note: '' },
-  { title: 'Red Dead Redemption 2', year: 2018, note: '' },
-  { title: 'Super Smash Bros. Ultimate', year: 2018, note: '' },
-  { title: 'Hades', year: 2020, note: '' },
-  { title: 'God of War Ragnarok', year: 2022, note: '' },
-  { title: 'God of War', year: 2018, note: '' },
-  { title: 'Super Mario Maker', year: 2015, note: '' },
+  { title: 'The Legend of Zelda: Breath of the Wild', year: 2017, note:
+    "Most fun I’ve ever had playing a game. So many cool areas to explore for hours on end. Just a genuine masterpiece. Wish I could play this game for the first time again." },
+  { title: 'Red Dead Redemption 2', year: 2018, note:
+    "One of my favorite stories. So much immersion and character. Masterpiece." },
+  { title: 'Super Smash Bros. Ultimate', year: 2018, note:
+    "The definitive Smash Bros. experience. By far the game I have the most hours in. Went to in-person tournaments and played for the esports team weekly at JMU. I love and hate every part of this game. Nothing will humble you more than being the best out of your friend group, and getting dunked on at your first tournament. The game gives you so much freedom and movement options to express yourself. Also the easiest Smash game for beginners to get into." },
+  { title: 'Hades and Hades II', year: '2020, 2025', note: '' },
+  { title: 'God of War and God of War Ragnarok', year: '2018, 2022', note: '' },
   { title: "Marvel's Spider-Man", year: 2018, note: '' },
-  { title: 'Pokemon Black Version 2', year: 2012, note: '' },
-  { title: 'BioShock', year: 2007, note: '' },
-  { title: 'Celeste', year: 2018, note: '' },
-  { title: 'Counter-Strike 2', year: 2023, note: '' },
-  { title: 'The Legend of Zelda: Tears of the Kingdom', year: 2023, note: '' },
-  { title: 'Hollow Knight', year: 2017, note: '' },
-  { title: 'Katana Zero', year: 2019, note: '' },
-  { title: 'Metroid Dread', year: 2021, note: '' },
-  { title: 'Minecraft', year: 2011, note: '' },
-  { title: 'Terraria', year: 2011, note: '' },
-  { title: 'BioShock Infinite: The Complete Edition', year: '2013-2014', note: '' },
-  { title: "Marvel's Spider-Man: Miles Morales", year: 2020, note: '' },
-  { title: 'Batman: Arkham Trilogy', year: '2009, 2011, 2015', note: '' },
-  { title: 'Bloons TD 6', year: 2018, note: '' },
-  { title: 'Before Your Eyes', year: 2021, note: '' },
-  { title: "BioShock 2: Minerva's Den", year: 2010, note: '' },
-  { title: 'Clash of Clans', year: 2012, note: '' },
+  { title: 'Pokemon Black Version 2', year: 2012, note:
+    "The Pokemon game I’ve put the most hours into and holds a special place in my heart. The first Pokemon game I ever played. This is my Pokemon representative on the list because I have to shine light on other games other than the DS era Pokemon games." },
+  { title: 'BioShock', year: 2007, note:
+    "Greatest and my favorite video gaming story. Gameplay is fun but lacks depth of modern games." },
+  { title: 'Super Mario Maker', year: 2015, note:
+    "One of the greatest gaming communities to ever exist in my opinion. The story of 0% team. Mario Maker anniversary levels. Kaizo community. Beats out Super Mario Maker 2 because the game has a certain charm I love so much. And sometimes less is more." },
+  { title: 'Celeste', year: 2018, note:
+    "Amazing gameplay, amazing story. Addicting death loops. And always feels fresh. Beating the B-sides and the Farewell DLC is one of my most prized gaming accomplishments." },
+  { title: 'Counter-Strike 2', year: 2023, note:
+    "I sadly never had the opportunity to play CS:GO, but CS2 scratches the competitive cavity I lost when I stopped competing in Smash Ultimate." },
+  { title: 'The Legend of Zelda: Tears of the Kingdom', year: 2023, note:
+    "Added so much content compared to BotW, but added too much without adding as much depth. Still had a great story and fantastic exploration and gameplay. I still consider it a masterpiece, just with some flaws that make it impossible to place higher than BotW." },
+  { title: 'Minecraft', year: 2011, note:
+    "Boundless possibilities. So amazing to see what the game has become. Still a game you can come back to today and have a genuine fun time with." },
+  { title: 'Katana Zero', year: 2019, note:
+    "Amazing death loop mechanics. Such a complex yet engaging story. Only complaint is that it was too short. Can’t wait for the DLC." },
+  { title: 'Hollow Knight', year: 2017, note:
+    "The best Metroidvania I’ve ever played. Movement is so responsive and the game has so much charm. Love the lore of this game and wish I had the time and motivation to keep playing through the hard DLC and extra boss fights." },
+  { title: 'Metroid Dread', year: 2021, note:
+    "Holds a special place in my heart for being my first Metroidvania. E.M.M.I. encounter areas are so eerie and terrifying to traverse, and the mechanics are buttery smooth. Difficulty was just hard enough to keep it feeling like a challenge, and rewarding to beat without having me stuck on a boss for days." },
+  { title: 'Terraria', year: 2011, note:
+    "Great boss fights, so much depth, so many different things to do, so much to get lost in. I’m just sad I didn’t play it when I was younger." },
+  { title: 'BioShock Infinite: The Complete Edition', year: '2013-2014', note:
+    "Such a large and twisted story. Super fun shooter that puts a twist on the classic BioShock plasmids and gun gameplay.\n\nDLC added these cool concepts and gameplay to the already complex story." },
+  { title: "Marvel's Spider-Man: Miles Morales", year: 2020, note:
+    "Didn’t like the story as much as Spider-Man PS4, but the snowy atmosphere has a special place in my heart. Still has that classic Spider-Man gameplay, with some extra quirks that make it more dynamic than the first." },
+  { title: 'Batman: Arkham Trilogy', year: '2009, 2011, 2015', note:
+    "I can’t ever decide which of the 3 is my favorite. In my mind these games fit together like a gankyil (3-winged yin yang symbol).\n\nAsylum had the atmosphere and was an amazing first idea, but has some gameplay flaws limited by the times it was released.\n\nCity had the best story, amazing bosses, improved gameplay, and a solid open world.\n\nKnight had the best gameplay, Batmobile addition was sick, and a super underrated story with unmatched scale." },
+];
+
+// Unranked. The page sorts these alphabetically, so order here does not matter. No notes.
+const mentions = [
+  { title: 'Balatro', year: 2024 },
+  { title: 'Before Your Eyes', year: 2021 },
+  { title: "BioShock 2 and Minerva's Den", year: 2010 },
+  { title: 'Bloons TD 6', year: 2018 },
+  { title: 'Clash of Clans', year: 2012 },
+  { title: 'Halo 2', year: 2004 },
+  { title: 'Pokemon Platinum and SoulSilver', year: '2008, 2009' },
 ];
 ---
 
 <Layout
-  title="Top 25 Video Games | Joe Fazio"
-  description="Joe Fazio's twenty-five favorite video games of all time."
+  title="Top 20 Video Games | Joe Fazio"
+  description="Joe Fazio's twenty favorite video games of all time."
 >
   <p class="back"><a href="/records">Back to The Record Store</a></p>
 
-  <h1>Joe's Top 25 Video Games</h1>
+  <h1>Joe's Top 20 Video Games</h1>
   <p class="lede">
-    My twenty-five favorite video games of all time. Subjective, and ranked on
+    My twenty favorite video games of all time. Subjective, and ranked on
     more than just the gameplay: the story, the nostalgia, and what they left
     with me. Notes are getting added as I write them.
   </p>
@@ -55,12 +79,35 @@ const games = [
             <span class="title">
               {g.title} <span class="year">({g.year})</span>
             </span>
-            {g.note && <span class="note">{g.note}</span>}
+            {g.note &&
+              g.note.split('\n\n').map((para) => (
+                <span class="note">{para}</span>
+              ))}
           </span>
         </li>
       ))
     }
   </ol>
+
+  <p class="back"><a href="#">Back to top</a></p>
+
+  <h2>Honorable mentions</h2>
+
+  <ul class="ranked mentions">
+    {
+      [...mentions]
+        .sort((x, y) => x.title.localeCompare(y.title))
+        .map((g) => (
+          <li>
+            <span class="body">
+              <span class="title">
+                {g.title} <span class="year">({g.year})</span>
+              </span>
+            </span>
+          </li>
+        ))
+    }
+  </ul>
 
   <p class="back"><a href="/records">Back to The Record Store</a></p>
 </Layout>
@@ -130,5 +177,34 @@ const games = [
     font-size: 0.85rem;
     color: var(--dim);
     line-height: 1.55;
+  }
+
+  /* Space between paragraphs of the same note. */
+  .note + .note {
+    margin-top: 0.4rem;
+  }
+
+  h2 {
+    margin: 0 0 0.5rem;
+  }
+
+  /* Honorable mentions: smaller than the ranked list, two columns when there
+     is room, and sorted alphabetically so they do not read as ranked. */
+  .mentions {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    column-gap: 1.75rem;
+  }
+
+  .mentions li {
+    padding: 0.4rem 0;
+  }
+
+  .mentions li:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .mentions .title {
+    font-size: 0.9rem;
   }
 </style>
