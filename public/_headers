@@ -1,0 +1,17 @@
+# Security headers. Cloudflare Pages reads this file at deploy and attaches
+# these to every response. The dev server ignores it, so check a deployed copy.
+# Cloudflare already sends X-Content-Type-Options and Referrer-Policy.
+#
+# Strict-Transport-Security: only ever reach this site over HTTPS. Starting
+#   at one day while it is new; raise to 31536000 (one year) once nothing
+#   has broken.
+# X-Frame-Options: no other site may show these pages inside a frame
+#   (clickjacking). SAMEORIGIN still lets the site frame itself, which test
+#   pages have used.
+# Permissions-Policy: the site never uses these features, so nothing on it
+#   can ask for them.
+
+/*
+  Strict-Transport-Security: max-age=86400; includeSubDomains
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
