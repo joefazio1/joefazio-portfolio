@@ -3,12 +3,14 @@ import { Font } from 'astro:assets';
 
 // The shared shell for every page. Pages supply a title, an optional
 // description, and their content; everything else lives here once.
+// `wide` gives a page a broader sheet on big screens (the record store).
 interface Props {
   title: string;
   description?: string;
+  wide?: boolean;
 }
 
-const { title, description = 'Joe Fazio: IT and infrastructure work.' } = Astro.props;
+const { title, description = 'Joe Fazio: IT and infrastructure work.', wide = false } = Astro.props;
 
 // Every page in the nav, in order. Adding a page means adding one line here.
 const nav = [
@@ -40,6 +42,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
+    <div class:list={['sheet', { wide }]}>
     <header>
       <a class="wordmark" href="/">joe fazio</a>
       <nav aria-label="Main">
@@ -72,6 +75,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <li><a href="/resume.pdf">resume</a></li>
       </ul>
     </footer>
+    </div>
 
     <style is:global>
       /* Navy is the anchor. Brass warms it, sea green is the quiet
@@ -96,6 +100,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           --accent: #e3a85c;
           --accent-2: #6fb5ba;
         }
+      }
+
+      /* The desk the page sits on: a darker shade of whichever background. */
+      :root {
+        --desk: color-mix(in srgb, var(--bg) 72%, black);
       }
 
       * {
@@ -126,6 +135,50 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         width: 100%;
         max-width: 42rem;
         margin: 0 auto;
+      }
+
+      .sheet {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+
+      /* Wide screens: the page becomes a sheet on a dotted desk instead of a
+         narrow column floating in empty space. Phones keep the plain column. */
+      @media (min-width: 60rem) {
+        body {
+          padding: 3rem 1.5rem;
+          background:
+            radial-gradient(
+                circle,
+                color-mix(in srgb, var(--fg) 14%, transparent) 1px,
+                transparent 1.6px
+              )
+              0 0 / 22px 22px,
+            var(--desk);
+        }
+
+        .sheet {
+          width: 100%;
+          max-width: 49rem;
+          margin: 0 auto;
+          padding: 0 3.5rem;
+          background: var(--bg);
+          border-radius: 12px;
+          box-shadow:
+            0 0 0 1px var(--rule),
+            0 14px 44px rgba(0, 0, 0, 0.35);
+        }
+
+        .sheet.wide {
+          max-width: 68rem;
+        }
+
+        .sheet.wide > header,
+        .sheet.wide > main,
+        .sheet.wide > footer {
+          max-width: none;
+        }
       }
 
       header {
