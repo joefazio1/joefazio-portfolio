@@ -17,6 +17,7 @@ const sleeves = [
 ---
 
 <Layout
+  wide
   title="The Record Store | Joe Fazio"
   description="A crate of Joe Fazio's favorites: top 25 albums and movies, top 20 video games, top 5 shows, and the record collection. Pick a record."
 >
@@ -101,7 +102,7 @@ const sleeves = [
   /* THE CRATE: a shallow bin the sleeves stand in. */
   .crate {
     position: relative;
-    padding: 3.5rem 1.35rem 1.6rem;
+    padding: 3.5rem 2rem 2rem;
     border: 1px solid var(--rule);
     border-bottom-width: 4px;
     border-radius: 12px;
@@ -115,7 +116,7 @@ const sleeves = [
     padding: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.5rem 1.25rem;
+    gap: 2.5rem 2rem;
     align-items: end;
   }
 
@@ -199,7 +200,7 @@ const sleeves = [
   .title {
     position: relative;
     z-index: 1;
-    font-size: 1rem;
+    font-size: 0.88rem;
     font-weight: 700;
     line-height: 1.2;
     color: #15161a;

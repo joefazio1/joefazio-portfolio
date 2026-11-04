@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
 
 // My top 5, in order. Short because I have not watched enough shows to rank
 // further than that yet; it grows as I do. `year` is the run, printed as written.
@@ -15,8 +16,12 @@ const shows = [
 const mentions = [
   { title: 'Game of Thrones', year: '2011-2019' },
   { title: 'The Office', year: '2005-2013' },
-  { title: 'The Bear', year: '2022-present' },
+  { title: 'The Bear', year: '2022-2026' },
 ];
+
+// Posters for the ranked five come from TMDB via scripts/fetch_posters.py.
+const posters = import.meta.glob<{ default: ImageMetadata }>('../assets/posters/*.jpg', { eager: true });
+const slug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 ---
 
 <Layout
@@ -37,6 +42,13 @@ const mentions = [
       shows.map((s, i) => (
         <li>
           <span class="rank">{String(i + 1).padStart(2, '0')}</span>
+          <Image
+            class="poster"
+            src={posters[`../assets/posters/${slug(s.title)}.jpg`].default}
+            alt=""
+            widths={[90, 180]}
+            sizes="4.5rem"
+          />
           <span class="body">
             <span class="title">
               {s.title} <span class="year">({s.year})</span>
@@ -62,6 +74,11 @@ const mentions = [
       ))
     }
   </ul>
+
+  <p class="credit">
+    Posters from TMDB. This site uses the TMDB API but is not endorsed or
+    certified by TMDB.
+  </p>
 
   <p class="back"><a href="/records">Back to The Record Store</a></p>
 </Layout>
@@ -91,7 +108,7 @@ const mentions = [
   .ranked li {
     display: flex;
     gap: 1rem;
-    align-items: baseline;
+    align-items: center;
     padding: 0.7rem 0;
     border-bottom: 1px solid var(--rule);
   }
@@ -107,6 +124,13 @@ const mentions = [
     font-weight: 600;
     color: var(--accent);
     padding-top: 0.1rem;
+  }
+
+  .ranked :global(.poster) {
+    flex: 0 0 4.5rem;
+    width: 4.5rem;
+    height: auto;
+    border-radius: 3px;
   }
 
   .body {
@@ -135,6 +159,11 @@ const mentions = [
 
   h2 {
     margin: 0 0 0.5rem;
+  }
+
+  .credit {
+    font-size: 0.8rem;
+    color: var(--dim);
   }
 
   /* Honorable mentions: smaller than the ranked list, two columns when there
