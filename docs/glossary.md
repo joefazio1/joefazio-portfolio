@@ -389,6 +389,27 @@ An instruction the server sends along with every page, telling the browser how t
 ### Content-Security-Policy (CSP)
 A security header that lists where a page is allowed to load scripts, styles and images from, so code injected from anywhere else is refused.
 
+### Strict-Transport-Security (HSTS)
+A security header telling browsers to only ever connect to the site over HTTPS for a set time (`max-age`, in seconds). Browsers remember it, so it starts short and is raised once it is proven safe.
+
+### includeSubDomains
+An HSTS option that applies the HTTPS-only rule to every subdomain too, such as `www.joefazio.dev`.
+
+### Clickjacking
+An attack where another site loads your page inside an invisible frame and tricks visitors into clicking things on it. The X-Frame-Options header blocks it.
+
+### X-Frame-Options
+A security header saying whether other sites may show this page inside a frame. `SAMEORIGIN` allows only the site itself.
+
+### Permissions-Policy
+A security header listing browser features the site never uses (camera, microphone, location), so nothing on the page can ask for them.
+
+### Report-only mode (CSP)
+Sending a Content-Security-Policy as `Content-Security-Policy-Report-Only`, so the browser warns about what it would block without blocking it. Used to test a policy before enforcing it.
+
+### securityheaders.com grade
+A free scanner that reads a site's headers and grades them A+ to F. joefazio.dev went from D to B on 2026-11-04.
+
 ### Wrangler
 Cloudflare's command-line tool for building, testing and deploying Workers and Pages projects from a terminal or a GitHub Actions workflow.
 
@@ -526,6 +547,15 @@ How different two colors are in brightness, from 1:1 (identical) to 21:1 (black 
 ### API (Application Programming Interface)
 A way for one program to ask another for data in a fixed format. The iTunes Search API answers a web address like `itunes.apple.com/search?term=...` with album and song details instead of a web page.
 
+
+### API key
+A code that identifies who is calling an API. TMDB's free key lives in the gitignored `.env` file, so it never reaches the public repo.
+
+### Rate limiting (HTTP 429)
+A service refusing requests because too many arrived too quickly. Apple's catalog did this during the poster search; the fix is to slow down and retry.
+
+### TMDB (The Movie Database)
+A free community database of movies and TV shows with an API. The site's movie and show posters come from it, credited on each page.
 ### JSON
 A plain-text data format of named values, lists and nested groups, readable by people and by nearly every programming language. The record collection and the saved preview links are JSON files.
 
@@ -552,6 +582,12 @@ Build time is when Astro turns the source into the finished site, on a computer 
 
 ### Explicit and clean edits
 Music stores flag songs with explicit lyrics and often sell a clean edit with those words removed. Apple's data says which is which, which lets the preview script prefer clean versions.
+
+### Stacking context
+A group of elements the browser layers together. A shape meant to sit behind the page sheet was painted in front of it because the sheet had become its own stacking context.
+
+### Media query (min-width)
+A CSS rule that only applies when the screen is at least a given width. The desk layout uses `min-width: 60rem`, so phones keep the plain column.
 
 ## Drawings, native code and testing
 

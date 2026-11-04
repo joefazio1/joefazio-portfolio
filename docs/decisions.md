@@ -1337,3 +1337,89 @@ The next additions, in the order recommended:
    Now page, the Node 24 check in the Pages build log, cutting the projects
    page, inline notes versus a `/writing` blog, then deploying from Actions
    with Wrangler and Terraform for the Cloudflare configuration.
+
+## 2026-11-04 (posters, the desk layout, first security headers)
+
+### What changed
+
+- **Game notes finished.** Hades, God of War and Spider-Man have notes, and
+  Red Dead Redemption 2, Smash Ultimate, Black 2 and BioShock were updated.
+  Joe wrote them; the only edits were spelling, punctuation and the order of
+  sentences, which he approved one by one.
+- **Movies reordered** to Joe's new ranking, and the Movies and Shows lists
+  gained small poster thumbnails beside each ranked entry. Honorable mentions
+  stay text only. The Bear's run is now 2022-2026.
+- **Posters come from TMDB** (The Movie Database) through a new script,
+  `scripts/fetch_posters.py`. It reads the ranked list on each page, finds
+  the poster, and saves it to `src/assets/posters/`, where Astro resizes it.
+  The live site never calls TMDB. The free API key lives in a gitignored
+  `.env` file. Both pages carry the credit line TMDB's terms ask for.
+- **Every page now sits on a desk.** On wide screens the header, content and
+  footer are one rounded sheet on a darker, dotted background. Content keeps
+  its old width. Phones are unchanged. Pages can opt into a wider sheet with
+  a `wide` prop on the Layout, and the Record Store uses it, with more space
+  between sleeves and smaller sleeve titles.
+- **Three security headers** in a new `public/_headers` file:
+  Strict-Transport-Security (one day for now), X-Frame-Options and
+  Permissions-Policy. securityheaders.com went from D to B.
+- Shipped as pull requests #33 (site updates) and #34 (headers), both
+  checked on the live site: all routes return 200, the headers are present,
+  and `/resume.pdf` is byte-identical.
+
+### Why
+
+- **TMDB over the alternatives.** Apple's catalog, which supplies the
+  collection's song previews, returned nothing for movies. Wikipedia's poster
+  files are hosted under a fair use exception that does not carry over to
+  another site. TMDB is free, made for this, and only asks for a credit line.
+- **Thumbnails beside the list, not a poster wall,** so the notes Joe will
+  write for each movie still have a place under the title. Picked from a
+  throwaway comparison page with three layouts.
+- **The desk,** because on a desktop the old narrow column left most of the
+  screen as empty navy. A wider column made lines too long to read and a side
+  nav moved things around. Keeping the column but giving it a surface to sit
+  on fixes the empty look without changing how the pages read. Picked from
+  six variations on a throwaway page.
+- **HSTS at one day first.** HSTS makes browsers refuse plain HTTP for the
+  set time, and they remember it. Starting short means a mistake cannot lock
+  visitors out for a year. It goes up once nothing has broken.
+- **The headers were tested before they went live.** Cloudflare Pages builds
+  a preview copy of every branch, so the headers were read off the preview
+  URL before the pull request was merged.
+
+### What broke
+
+- The first poster search matched WALL-E to a short with a similar name. The
+  script now prefers an exact title match and then the most popular result.
+- Two desk variations rendered wrong: a shape meant to sit behind the page
+  was painted in front of it. That is a layering (stacking context) issue,
+  fixed by not making the sheet its own layer.
+- The dev server served stale CSS after the layout change, as noted before.
+  Restarting it fixed it.
+- securityheaders.com warns that a one-day HSTS max-age is too short (it
+  wants at least 30 days). That is expected during the ramp up.
+
+### What is next
+
+1. **The Record Store still looks crammed** (Joe, end of session). The
+   sleeves and their titles need more room. Try bigger sleeves, more padding
+   inside the crate, or fewer per row, on a comparison page.
+2. **Raise HSTS** to `max-age=31536000` on or after 2026-11-06 if nothing has
+   broken. One number in `public/_headers`.
+3. **Content-Security-Policy,** the last missing header (B to A). List what
+   every page loads first (Astro's scripts and styles, the self-hosted fonts,
+   the Apple preview audio, images), ship it as
+   `Content-Security-Policy-Report-Only`, check the browser console on every
+   page, then enforce it.
+4. **Publish the PowerShell repository** and link it from the Now page.
+5. **A visitor counter on Workers and KV.**
+6. **Movie notes,** Joe's to write. The Spider-Man note can say "traversal
+   mechanics" instead of "mechanism" if Joe wants; it was left as written.
+7. Loose ends: the Phillies and Raaz Da Rukkuz photos; the Letterboxd, Steam
+   and Spotify links; the release year spot-check; an empty, untracked
+   `bad-take` file in the repo folder (a leftover, safe to delete); TMDB
+   shows a different Rocky poster than the one Joe had, swappable if he
+   wants a specific one.
+8. Carried over: Project X's "On the way" tag, the Security+ wording, the
+   Node 24 check in the Pages build log, cutting the projects page, then
+   Wrangler deploys and Terraform.
